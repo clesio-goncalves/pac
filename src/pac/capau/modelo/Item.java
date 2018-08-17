@@ -15,12 +15,6 @@ public class Item {
 	@Size(max = 50)
 	private String tipo;
 
-	@Size(max = 50)
-	private String tipo_material;
-
-	@Size(max = 50)
-	private String tipo_servico;
-
 	@NotNull
 	private String descricao;
 

@@ -8,6 +8,8 @@
 <head>
 <title>Cadastrar Demanda</title>
 <c:import url="../componentes/cabecalho.jsp" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/demanda.css" />">
 <div class="jumbotron">
 	<div class="container">
 		<h1 class="display-3">Cadastrar Demanda</h1>
@@ -16,150 +18,213 @@
 	</div>
 </div>
 <div class="container">
-	<form action="adiciona" method="POST">
+	<form id="regForm" action="adiciona" method="POST">
 
-		<h3>INFORMAÇÕES DO ITEM</h3>
-		<hr>
+		<!-- One "tab" for each step in the form: -->
+		<div class="tab">
 
-		<!-- Tipo do item: -->
-		<div class="form-group">
-			<label for="tipo_item" class="col-form-label">Tipo do item*</label>
-			<div class="custom-control custom-radio">
-				<input type="radio" id="customRadio1" name="tipo_item"
-					class="custom-control-input" checked="" required> <label
-					class="custom-control-label" for="customRadio1">Material</label>
-			</div>
-			<div class="custom-control custom-radio">
-				<input type="radio" id="customRadio2" name="tipo_item"
-					class="custom-control-input"> <label
-					class="custom-control-label" for="customRadio2">Serviços</label>
-			</div>
-			<div class="custom-control custom-radio">
-				<input type="radio" id="customRadio3" name="tipo_item"
-					class="custom-control-input"> <label
-					class="custom-control-label" for="customRadio3">Obras</label>
-			</div>
-			<div class="custom-control custom-radio">
-				<input type="radio" id="customRadio4" name="tipo_item"
-					class="custom-control-input"> <label
-					class="custom-control-label" for="customRadio4">Serviços de
-					Engenharia</label>
-			</div>
-		</div>
+			<h3 align="center">Informações do Item</h3>
 
-		<!-- Código do item -->
-		<div class="form-group">
-			<label for="codigo_item" class="col-form-label">Código do item*</label> <input
-				type="text" class="form-control" name="orgao" MAXLENGTH="255"
-				required autofocus
-				value="Instituto Federal do Piaui - Campus Paulistana">
-		</div>
-
-		<!-- Setor Requisitante (Unidade/Setor/Departamento): -->
-		<div class="form-group">
-			<label for="setor" class="col-form-label">Setor Requisitante
-				(Unidade/Setor/Departamento)*</label> <select class="custom-select"
-				name="setor.id" required>
-				<!-- percorre perfil montando as linhas da tabela -->
-				<c:forEach var="setor" items="${setores}">
-					<option value="${setor.id}">${setor.nome}</option>
-				</c:forEach>
-			</select>
-		</div>
-
-		<!-- Responsável pela demanda: -->
-		<div class="form-group">
-			<label for="nome" class="col-form-label">Nome/Responsável
-				pela demanda*</label> <input type="text" class="form-control" name="nome"
-				MAXLENGTH="255" required>
-		</div>
-
-		<div class="row">
-			<div class="col-6">
-
-				<!-- SIAPE -->
-				<div class="form-group">
-					<label for="siape" class="col-form-label">SIAPE*</label> <input
-						type="number" class="form-control" name="siape" MAXLENGTH="10"
-						required onkeypress='return SomenteNumero(event)'>
+			<!-- Tipo do item: -->
+			<div class="form-group">
+				<label for="tipo" class="col-form-label">Tipo do item*</label>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio1" name="tipo"
+						class="custom-control-input" checked="" required> <label
+						class="custom-control-label" for="customRadio1">Material
+						de Consumo</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio2" name="tipo"
+						class="custom-control-input" required> <label
+						class="custom-control-label" for="customRadio2">Material
+						Permanente</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio3" name="tipo"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="customRadio3">Serviço
+						NÃO Continuado</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio4" name="tipo"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="customRadio4">Serviço
+						Continuado</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio5" name="tipo"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="customRadio5">Serviço de
+						Prazo Indeterminado**</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio6" name="tipo"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="customRadio6">Obras</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio7" name="tipo"
+						class="custom-control-input"> <label
+						class="custom-control-label" for="customRadio7">Serviços
+						de Engenharia</label>
 				</div>
 			</div>
-			<div class="col-6">
-				<!-- telefone -->
-				<div class="form-group">
-					<label for="telefone" class="col-form-label">Telefone*</label>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><span
-								class="glyphicon glyphicon-earphone"></span></span>
-						</div>
-						<input type="text" class="form-control" name="telefone"
-							id="telefone" MAXLENGTH="20" required
-							pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
+
+			<div class="row">
+				<div class="col-3">
+					<!-- Código do item -->
+					<div class="form-group">
+						<label for="codigo" class="col-form-label">Código do item*</label>
+						<input type="text" class="form-control" name="codigo"
+							MAXLENGTH="10" required oninput="this.className = 'form-control'"
+							onkeypress='return SomenteNumero(event)'>
+					</div>
+				</div>
+
+				<div class="col-9">
+					<!-- Descrição -->
+					<div class="form-group">
+						<label for="descricao" class="col-form-label">Descrição*</label> <input
+							type="text" class="form-control" name="descricao" MAXLENGTH="255"
+							required oninput="this.className = 'form-control'">
 					</div>
 				</div>
 			</div>
-		</div>
+			
+			<!-- Descrição Detalhada -->
+			<div class="form-group">
+				<label for="descricao_detalhada">Descrição Detalhada*</label>
+				<textarea class="form-control" id="descricao_detalhada"
+					name="descricao_detalhada" rows="3"
+					oninput="this.className = 'form-control'" required></textarea>
+			</div>
 
-
-
-		<!-- EMAIL -->
-		<div class="form-group">
-			<label for="email" class="col-form-label">E-mail*</label>
-			<div class="input-group mb-3">
-				<div class="input-group-prepend">
-					<span class="input-group-text">@</span>
+			<div class="row">
+				<div class="col-6">
+					<!-- Unidade de Fornecimento -->
+					<div class="form-group">
+						<label for="unidade_fornecimento" class="col-form-label">Unidade
+							de fornecimento*</label><input type="text" class="form-control"
+							name="unidade_fornecimento" MAXLENGTH="255" required
+							oninput="this.className = 'form-control'">
+					</div>
 				</div>
-				<input type="email" class="form-control" name="email" MAXLENGTH="50"
-					required>
+
+				<div class="col-6">
+					<!-- Quantidade -->
+					<div class="form-group">
+						<label for="quantidade" class="col-form-label">Quantidade*</label><input
+							type="text" class="form-control" name="quantidade" MAXLENGTH="10"
+							required oninput="this.className = 'form-control'"
+							onkeypress='return SomenteNumero(event)'>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-6">
+					<!-- Valor unitário estimado (R$) -->
+					<div class="form-group">
+						<label for="valor_unitario_estimado" class="col-form-label">Valor
+							unitário estimado (R$)*</label>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">R$</span>
+							</div>
+							<input type="text" class="form-control"
+								name="valor_unitario_estimado" MAXLENGTH="10" required
+								oninput="this.className = 'form-control'">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-6">
+					<!-- Valor total estimado (R$) -->
+					<div class="form-group">
+						<label for="valor_total_estimado" class="col-form-label">Valor
+							total estimado (R$)*</label>
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">R$</span>
+							</div>
+							<input type="text" class="form-control"
+								name="valor_total_estimado" MAXLENGTH="10" disabled="disabled">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Informações Orçamentárias -->
+			<div class="form-group">
+				<label for="informacoes_orcamentarias" class="col-form-label">Informações
+					Orçamentárias*</label> <input type="text" class="form-control"
+					name="informacoes_orcamentarias" MAXLENGTH="255" required
+					oninput="this.className = 'form-control'">
+			</div>
+
+			<!-- Vincular ao grupo -->
+			<div class="form-group">
+				<label for="vincular_grupo" class="col-form-label">Vincular
+					ao grupo*</label> <input type="text" class="form-control"
+					name="vincular_grupo" MAXLENGTH="255" required
+					oninput="this.className = 'form-control'">
+			</div>
+			<div>
+				<p>(*) Campos obrigatórios</p>
+				<p>(**) Nota: para serviços que podem ter vigência indeterminada
+					nos termos da Orientação Normativa AGU n° 36, de 2011, dentre eles:
+					energia elétrica, água e esgoto, serviços postais da ECT e ajustes
+					firmados com a Imprensa Nacional.</p>
 			</div>
 		</div>
 
-		<!-- SENHA -->
-		<div class="form-group">
-			<label for="senha" class="col-form-label">Senha*</label> <input
-				type="password" class="form-control" name="senha" id="senha"
-				MAXLENGTH="50" required>
+		<div class="tab">
+			Contact Info:
+			<p>
+				<input placeholder="E-mail..." oninput="this.className = ''">
+			</p>
+			<p>
+				<input placeholder="Phone..." oninput="this.className = ''">
+			</p>
 		</div>
 
-		<!-- REPETIR SENHA -->
-		<div class="form-group">
-			<label for="repetir_senha" class="col-form-label">Repetir
-				Senha*</label> <input type="password" class="form-control"
-				name="repetir_senha" id="repetir_senha" MAXLENGTH="50" required>
+		<div class="tab">
+			Birthday:
+			<p>
+				<input placeholder="dd" oninput="this.className = ''">
+			</p>
+			<p>
+				<input placeholder="mm" oninput="this.className = ''">
+			</p>
+			<p>
+				<input placeholder="yyyy" oninput="this.className = ''">
+			</p>
 		</div>
 
-		<!-- PERFIL -->
-		<div class="form-group">
-			<label for="perfil" class="col-form-label">Perfil*</label> <select
-				class="custom-select" name="perfil.id" required>
-				<!-- percorre perfil montando as linhas da tabela -->
-				<c:forEach var="perfil" items="${perfis}">
-					<option value="${perfil.id}">${perfil.nome}</option>
-				</c:forEach>
-			</select>
+		<div class="tab">
+			Login Info:
+			<p>
+				<input placeholder="Username..." oninput="this.className = ''">
+			</p>
+			<p>
+				<input placeholder="Password..." oninput="this.className = ''">
+			</p>
 		</div>
 
-		<!-- ATIVO -->
-		<div class="form-group">
-			<div class="custom-control custom-checkbox">
-				<input type="checkbox" class="custom-control-input"
-					id="customCheck1" name="ativo" checked="checked"> <label
-					class="custom-control-label" for="customCheck1">Ativo</label>
+		<div style="overflow: auto;">
+			<div style="float: right;">
+				<button type="button" class="btn btn-secondary" id="prevBtn"
+					onclick="nextPrev(-1)">Voltar</button>
+				<button type="button" class="btn btn-primary" id="nextBtn"
+					onclick="nextPrev(1)">Avançar</button>
 			</div>
 		</div>
 
-		<security:csrfInput />
-
-		<!-- OBTIGATÓRIO -->
-		<label for="obrigatorio">(*) Campos obrigatórios</label>
-		<div>
-			<button type="reset" class="btn btn-secondary btn-lg">
-				<span class="glyphicon glyphicon-trash"></span> Limpar
-			</button>
-			<button type="submit" class="btn btn-primary btn-lg">
-				<span class="glyphicon glyphicon-saved"></span> Salvar
-			</button>
+		<!-- Circles which indicates the steps of the form: -->
+		<div style="text-align: center; margin-top: 40px;">
+			<span class="step"></span> <span class="step"></span> <span
+				class="step"></span> <span class="step"></span>
 		</div>
 	</form>
 </div>
@@ -167,10 +232,6 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/SomenteNumero.js" />"></script>
 <script type="text/javascript"
-	src="<c:url value="/resources/js/jquery.mask.min.js" />"></script>
-<script src="<c:url value="/resources/js/confirma_senha.js" />"></script>
-<script type="text/javascript">
-	$("#telefone").mask("(00) 90000-0000");
-</script>
+	src="<c:url value="/resources/js/demanda.js" />"></script>
 
 <c:import url="../componentes/rodape.jsp" />

@@ -1,57 +1,73 @@
-// Tooltips Initialization
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
 
-// Steppers
-$(document).ready(function () {
-  var navListItems = $('div.setup-panel-2 div a'),
-          allWells = $('.setup-content-2'),
-          allNextBtn = $('.nextBtn-2'),
-          allPrevBtn = $('.prevBtn-2');
+function showTab(n) {
+	// This function will display the specified tab of the form ...
+	var x = document.getElementsByClassName("tab");
+	x[n].style.display = "block";
+	// ... and fix the Previous/Next buttons:
+	if (n == 0) {
+		document.getElementById("prevBtn").style.display = "none";
+	} else {
+		document.getElementById("prevBtn").style.display = "inline";
+	}
+	if (n == (x.length - 1)) {
+		document.getElementById("nextBtn").innerHTML = "Salvar";
+	} else {
+		document.getElementById("nextBtn").innerHTML = "Avancar";
+	}
+	// ... and run a function that displays the correct step indicator:
+	fixStepIndicator(n)
+}
 
-  allWells.hide();
+function nextPrev(n) {
+	// This function will figure out which tab to display
+	var x = document.getElementsByClassName("tab");
+	// Exit the function if any field in the current tab is invalid:
+	if (n == 1 && !validateForm())
+		return false;
+	// Hide the current tab:
+	x[currentTab].style.display = "none";
+	// Increase or decrease the current tab by 1:
+	currentTab = currentTab + n;
+	// if you have reached the end of the form... :
+	if (currentTab >= x.length) {
+		// ...the form gets submitted:
+		document.getElementById("regForm").submit();
+		return false;
+	}
+	// Otherwise, display the correct tab:
+	showTab(currentTab);
+}
 
-  navListItems.click(function (e) {
-      e.preventDefault();
-      var $target = $($(this).attr('href')),
-              $item = $(this);
+function validateForm() {
+	// This function deals with validation of the form fields
+	var x, y, i, valid = true;
+	x = document.getElementsByClassName("tab");
+	y = x[currentTab].getElementsByTagName("*");
+	// A loop that checks every input field in the current tab:
+	for (i = 0; i < y.length; i++) {
+		// If a field is empty...
+		if (y[i].value == "") {
+			// add an "invalid" class to the field:
+			y[i].className += " invalid";
+			// and set the current valid status to false:
+			valid = false;
+		}
+	}
+	// If the valid status is true, mark the step as finished and valid:
+	if (valid) {
+		document.getElementsByClassName("step")[currentTab].className += " finish";
+	}
+	return valid; // return the valid status
+}
 
-      if (!$item.hasClass('disabled')) {
-          navListItems.removeClass('btn-amber').addClass('btn-blue-grey');
-          $item.addClass('btn-amber');
-          allWells.hide();
-          $target.show();
-          $target.find('input:eq(0)').focus();
-      }
-  });
-
-  allPrevBtn.click(function(){
-      var curStep = $(this).closest(".setup-content-2"),
-          curStepBtn = curStep.attr("id"),
-          prevStepSteps = $('div.setup-panel-2 div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
-
-          prevStepSteps.removeAttr('disabled').trigger('click');
-  });
-
-  allNextBtn.click(function(){
-      var curStep = $(this).closest(".setup-content-2"),
-          curStepBtn = curStep.attr("id"),
-          nextStepSteps = $('div.setup-panel-2 div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-          curInputs = curStep.find("input[type='text'],input[type='url']"),
-          isValid = true;
-
-      $(".form-group").removeClass("has-error");
-      for(var i=0; i< curInputs.length; i++){
-          if (!curInputs[i].validity.valid){
-              isValid = false;
-              $(curInputs[i]).closest(".form-group").addClass("has-error");
-          }
-      }
-
-      if (isValid)
-          nextStepSteps.removeAttr('disabled').trigger('click');
-  });
-
-  $('div.setup-panel-2 div a.btn-amber').trigger('click');
-});
+function fixStepIndicator(n) {
+	// This function removes the "active" class of all steps...
+	var i, x = document.getElementsByClassName("step");
+	for (i = 0; i < x.length; i++) {
+		x[i].className = x[i].className.replace(" active", "");
+	}
+	// ... and adds the "active" class to the current step:
+	x[n].className += " active";
+}
