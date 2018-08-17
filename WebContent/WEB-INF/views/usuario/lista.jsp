@@ -1,19 +1,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Listar Usu√°rios</title>
+<title>Listar Usu·rios</title>
 <c:import url="../componentes/css_data_table.jsp" />
 <c:import url="../componentes/cabecalho.jsp" />
 
 <div class="container">
 
 	<div class="card border-light mb-3">
-		<div class="card-header">Listagem de Usu√°rios</div>
+		<div class="card-header">Listagem de Usu·rios</div>
 
 		<!-- Table -->
 		<div class="card-body">
@@ -27,7 +25,7 @@
 						<th>SIAPE</th>
 						<th>E-mail</th>
 						<th>Telefone</th>
-						<th>A√ß√µes</th>
+						<th>AÁıes</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -59,7 +57,7 @@
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title">Exclus√£o do usu√°rio</h5>
+													<h5 class="modal-title">Exclus„o do usu·rio</h5>
 													<button type="button" class="close" data-dismiss="modal"
 														aria-label="Close">
 														<span aria-hidden="true">&times;</span>
@@ -67,7 +65,7 @@
 												</div>
 												<div class="modal-body">
 													<p>
-														Deseja realmente excluir o usu√°rio <br>ID
+														Deseja realmente excluir o usu·rio <br>ID
 														(${usuario.id}) -> ${usuario.email}?
 													</p>
 												</div>

@@ -91,6 +91,7 @@ public class UsuarioController {
 	@RequestMapping("/edita")
 	public String edita(Long id, Model model) {
 
+		model.addAttribute("setores", dao_setor.lista());
 		model.addAttribute("usuario", dao.buscaPorId(id));
 		model.addAttribute("perfis", dao_perfil.lista());
 		return "usuario/edita";

@@ -44,7 +44,7 @@ function validateForm() {
 	// This function deals with validation of the form fields
 	var x, y, i, valid = true;
 	x = document.getElementsByClassName("tab");
-	y = x[currentTab].getElementsByTagName("*");
+	y = x[currentTab].getElementsByClassName("required");
 	// A loop that checks every input field in the current tab:
 	for (i = 0; i < y.length; i++) {
 		// If a field is empty...
@@ -71,3 +71,22 @@ function fixStepIndicator(n) {
 	// ... and adds the "active" class to the current step:
 	x[n].className += " active";
 }
+
+$(function() {
+	$(".data").datepicker(
+			{
+				dateFormat : 'dd/mm/yy',
+				dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+						'Sexta', 'Sábado' ],
+				dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D' ],
+				dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
+						'Sáb', 'Dom' ],
+				monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+						'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+						'Outubro', 'Novembro', 'Dezembro' ],
+				monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+						'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+				nextText : 'Próximo',
+				prevText : 'Anterior'
+			});
+});

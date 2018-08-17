@@ -1,26 +1,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cadastrar UsuÃ¡rio</title>
+<title>Cadastrar Usuário</title>
 <c:import url="../componentes/cabecalho.jsp" />
 <div class="jumbotron">
 	<div class="container">
-		<h1 class="display-3">Cadastrar UsuÃ¡rio</h1>
-		<p class="lead">Preencha o formulÃ¡rio abaixo para realizar o
-			cadastro do usuÃ¡rio no sistema.</p>
+		<h1 class="display-3">Cadastrar Usuário</h1>
+		<p class="lead">Preencha o formulário abaixo para realizar o
+			cadastro do usuário no sistema.</p>
 	</div>
 </div>
 <div class="container">
 	<form action="adiciona" method="POST">
 
-		<!-- Ã“rgÃ£o/Entidade: -->
+		<!-- Órgão/Entidade: -->
 		<div class="form-group">
-			<label for="orgao" class="col-form-label">Ã“rgÃ£o/Entidade*</label> <input
+			<label for="orgao" class="col-form-label">Órgão/Entidade*</label> <input
 				type="text" class="form-control" name="orgao" MAXLENGTH="255"
 				required autofocus
 				value="Instituto Federal do Piaui - Campus Paulistana">
@@ -38,9 +36,9 @@
 			</select>
 		</div>
 
-		<!-- ResponsÃ¡vel pela demanda: -->
+		<!-- Responsável pela demanda: -->
 		<div class="form-group">
-			<label for="nome" class="col-form-label">Nome/ResponsÃ¡vel
+			<label for="nome" class="col-form-label">Nome/Responsável
 				pela demanda*</label> <input type="text" class="form-control" name="nome"
 				MAXLENGTH="255" required>
 		</div>
@@ -66,13 +64,12 @@
 						</div>
 						<input type="text" class="form-control" name="telefone"
 							id="telefone" MAXLENGTH="20" required
-							pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
+							pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}"
+							data-mask="(00) 90000-0000">
 					</div>
 				</div>
 			</div>
 		</div>
-
-
 
 		<!-- EMAIL -->
 		<div class="form-group">
@@ -122,8 +119,8 @@
 
 		<security:csrfInput />
 
-		<!-- OBTIGATÃ“RIO -->
-		<label for="obrigatorio">(*) Campos obrigatÃ³rios</label>
+		<!-- OBTIGATÓRIO -->
+		<label for="obrigatorio">(*) Campos obrigatórios</label>
 		<div>
 			<button type="reset" class="btn btn-secondary btn-lg">
 				<span class="glyphicon glyphicon-trash"></span> Limpar
@@ -140,8 +137,5 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.mask.min.js" />"></script>
 <script src="<c:url value="/resources/js/confirma_senha.js" />"></script>
-<script type="text/javascript">
-	$("#telefone").mask("(00) 90000-0000");
-</script>
 
 <c:import url="../componentes/rodape.jsp" />

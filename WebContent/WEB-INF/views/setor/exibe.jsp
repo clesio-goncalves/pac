@@ -1,8 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +47,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Exclus√£o do setor</h5>
+					<h5 class="modal-title">Exclus„o do setor</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -60,7 +58,7 @@
 						Deseja realmente excluir o setor<br> ID (${setor.id}) ->
 						${setor.nome}?
 					</p>
-					<strong>A exclus√£o n√£o √© permitida caso haja usu√°rios
+					<strong>A exclus„o n„o È permitida caso haja usu·rios
 						vinculados a este setor</strong> <br>
 				</div>
 				<div class="modal-footer">

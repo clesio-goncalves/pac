@@ -1,8 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +11,8 @@
 <div class="jumbotron">
 	<div class="container">
 		<h1 class="display-3">Editar Setor</h1>
-		<p class="lead">Preencha o formul√°rio abaixo para realizar a
-			altera√ß√£o do setor no sistema.</p>
+		<p class="lead">Preencha o formul·rio abaixo para realizar a
+			alteraÁ„o do setor no sistema.</p>
 	</div>
 </div>
 <div class="container">
@@ -32,8 +30,8 @@
 
 		<security:csrfInput />
 
-		<!-- OBTIGAT√ìRIO -->
-		<label for="obrigatorio">(*) Campo obrigat√≥rio</label>
+		<!-- OBTIGAT”RIO -->
+		<label for="obrigatorio">(*) Campo obrigatÛrio</label>
 		<div>
 			<a href="<c:url value="/setor/lista" />"
 				class="btn btn-secondary btn-lg"> <span
