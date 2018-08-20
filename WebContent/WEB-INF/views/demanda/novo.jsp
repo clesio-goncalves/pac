@@ -20,7 +20,6 @@
 <div class="container">
 	<form id="regForm" action="adiciona" method="POST">
 
-		<!-- One "tab" for each step in the form: -->
 		<div class="tab">
 
 			<h3 align="center">Informações do Item</h3>
@@ -189,60 +188,199 @@
 				<label for="grau_prioridade" class="col-form-label">Grau de
 					prioridade da aquisição*</label>
 				<div class="custom-control custom-radio">
-					<input type="radio" id="customRadio1" name="grau_prioridade"
+					<input type="radio" id="customRadio8" name="grau_prioridade"
 						class="custom-control-input required" checked="" required>
-					<label class="custom-control-label" for="customRadio1">Baixa</label>
+					<label class="custom-control-label" for="customRadio8">Baixa</label>
 				</div>
 				<div class="custom-control custom-radio">
-					<input type="radio" id="customRadio2" name="grau_prioridade"
+					<input type="radio" id="customRadio9" name="grau_prioridade"
 						class="custom-control-input" required> <label
-						class="custom-control-label" for="customRadio2">Média</label>
+						class="custom-control-label" for="customRadio9">Média</label>
 				</div>
 				<div class="custom-control custom-radio">
-					<input type="radio" id="customRadio3" name="grau_prioridade"
+					<input type="radio" id="customRadio10" name="grau_prioridade"
 						class="custom-control-input"> <label
-						class="custom-control-label" for="customRadio3">Alta</label>
+						class="custom-control-label" for="customRadio10">Alta</label>
 				</div>
 			</div>
 
 			<!-- Data estimada para a necessidade do item -->
-			<div class="form-group">
-				<label for="data_estimada" class="col-form-label">Data
-					estimada para a necessidade do item*</label> <input type="text"
-					class="form-control data" name="data_estimada"
-					oninput="this.className = 'form-control'" data-mask="99/99/9999">
+			<div class="row">
+				<div class="form-group col-6">
+					<label for="data_estimada" class="col-form-label">Data
+						estimada para a necessidade do item*</label> <input type="text"
+						class="form-control data required" name="data_estimada"
+						oninput="this.className = 'form-control'" data-mask="99/99/9999"
+						required>
+				</div>
 			</div>
 
+			<!-- Informações adicionais -->
+			<div class="form-group">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input"
+						id="customCheck1" name="contratacao_emergencial"> <label
+						class="custom-control-label" for="customCheck1">Contratação
+						emergencial ou remanescente (Lei n° 8.666/93, art. 24, incisos IV
+						e XI)</label>
+				</div>
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input"
+						id="customCheck2" name="dispensa" checked> <label
+						class="custom-control-label" for="customCheck2">Dispensa
+						nos termos da Lei n° 8.666/93, art. 24, incisos I e II</label>
+				</div>
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input"
+						id="customCheck3" name="renovacao_contrato"> <label
+						class="custom-control-label" for="customCheck3">Renovação
+						de contrato no exercício subsequente, na forma do art. 57 da Lei
+						nº 8.666, de 1993</label>
+				</div>
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input"
+						id="customCheck4" name="capacitacao_servidores"> <label
+						class="custom-control-label" for="customCheck4">Necessidade
+						de capacitação de servidores</label>
+				</div>
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input"
+						id="customCheck5" name="vinculacao_outro_item"> <label
+						class="custom-control-label" for="customCheck5">Vinculação
+						ou dependência com outro item</label>
+				</div>
+			</div>
 
-			<p>
-				<input placeholder="E-mail..." oninput="this.className = ''">
-			</p>
-			<p>
-				<input placeholder="Phone..." oninput="this.className = ''">
-			</p>
+			<!-- Vinculação ou dependência com outro item -->
+			<div class="row">
+				<div class="form-group col-6">
+					<label for="data_estimada" class="col-form-label">Outro
+						item a ser vinculado*</label> <input type="text"
+						class="form-control required" name="outro_item_vinculado"
+						oninput="this.className = 'form-control'" required maxlength="255">
+				</div>
+			</div>
+			<div>
+				<p>(*) Campos obrigatórios</p>
+			</div>
 		</div>
 
 		<div class="tab">
-			Birthday:
-			<p>
-				<input placeholder="dd" oninput="this.className = ''">
-			</p>
-			<p>
-				<input placeholder="mm" oninput="this.className = ''">
-			</p>
-			<p>
-				<input placeholder="yyyy" oninput="this.className = ''">
-			</p>
-		</div>
 
-		<div class="tab">
-			Login Info:
-			<p>
-				<input placeholder="Username..." oninput="this.className = ''">
-			</p>
-			<p>
-				<input placeholder="Password..." oninput="this.className = ''">
-			</p>
+			<h3 align="center">Estudos Preliminares</h3>
+			<hr />
+
+			<!-- 1. Necessidade da contratação* -->
+			<div class="form-group">
+				<label for="necessidade_contratacao" class="col-form-label">1.
+					Necessidade da contratação*</label>
+				<textarea class="form-control required"
+					name="necessidade_contratacao" rows="3"
+					oninput="this.className = 'form-control'" required></textarea>
+			</div>
+
+			<!-- 2. Referência a outros instrumentos de planejamento do órgão ou entidade, se houver -->
+			<div class="form-group">
+				<label for="ref_outros_instrumentos" class="col-form-label">2.
+					Referência a outros instrumentos de planejamento do órgão ou
+					entidade, se houver</label> <input type="text" class="form-control"
+					name="ref_outros_instrumentos" MAXLENGTH="255"
+					oninput="this.className = 'form-control'">
+			</div>
+
+			<!-- 3. Requisitos da contratação -->
+			<div class="form-group">
+				<label for="requisitos_contratacao" class="col-form-label">3.
+					Requisitos da contratação</label> <input type="text" class="form-control"
+					name="requisitos_contratacao" MAXLENGTH="255"
+					oninput="this.className = 'form-control'">
+			</div>
+
+			<!-- 4. Estimativa das quantidades, acompanhadas das memórias de cálculo e dos documentos que lhe dão suporte* -->
+			<div class="form-group">
+				<label for="estimativa_quantidades" class="col-form-label">4.
+					Estimativa das quantidades, acompanhadas das memórias de cálculo e
+					dos documentos que lhe dão suporte*</label> <input type="text"
+					class="form-control required" name="estimativa_quantidades"
+					MAXLENGTH="10" oninput="this.className = 'form-control'"
+					onkeypress='return SomenteNumero(event)' required>
+			</div>
+
+			<!-- 5. Levantamento de mercado e justificativa da escolha do tipo de solução a contratar -->
+			<div class="form-group">
+				<label for="levantamento_mercado" class="col-form-label">5.
+					Levantamento de mercado e justificativa da escolha do tipo de
+					solução a contratar</label> <input type="text" class="form-control"
+					name="levantamento_mercado" MAXLENGTH="255"
+					oninput="this.className = 'form-control'">
+			</div>
+
+			<!-- 6. Definição do método para estimativas de preços ou dos meios de previsão de preços referenciais* -->
+			<div class="form-group">
+				<label for="metodo_estimativa_preco" class="col-form-label">6.
+					Definição do método para estimativas de preços ou dos meios de
+					previsão de preços referenciais*</label> <input type="text"
+					class="form-control required" name="metodo_estimativa_preco"
+					MAXLENGTH="255" oninput="this.className = 'form-control'" required>
+			</div>
+
+			<!-- 7. Descrição da solução como um todo -->
+			<div class="form-group">
+				<label for="descricao_solucao" class="col-form-label">7.
+					Descrição da solução como um todo</label>
+				<textarea class="form-control" name="descricao_solucao" rows="3"
+					oninput="this.className = 'form-control'"></textarea>
+			</div>
+
+			<!-- 8. Justificativas para o parcelamento ou não da solução, quando necessária para a individualização do objeto* -->
+			<div class="form-group">
+				<label for="justificativa_parcelamento" class="col-form-label">8.
+					Justificativas para o parcelamento ou não da solução, quando
+					necessária para a individualização do objeto*</label>
+				<textarea class="form-control required"
+					name="justificativa_parcelamento" rows="3"
+					oninput="this.className = 'form-control'" required></textarea>
+			</div>
+
+			<!-- 9. Demonstrativo dos resultados pretendidos em termos de economicidade e de melhor aproveitamento dos recursos humanos, materiais ou financeiros disponíveis -->
+			<div class="form-group">
+				<label for="resultados_pretendidos" class="col-form-label">9.
+					Demonstrativo dos resultados pretendidos em termos de economicidade
+					e de melhor aproveitamento dos recursos humanos, materiais ou
+					financeiros disponíveis</label> <input type="text" class="form-control"
+					name="resultados_pretendidos" MAXLENGTH="255"
+					oninput="this.className = 'form-control'">
+			</div>
+
+			<!-- 10. Providências para adequação do ambiente do órgão -->
+			<div class="form-group">
+				<label for="providencias_adequacao" class="col-form-label">10.
+					Providências para adequação do ambiente do órgão</label> <input type="text"
+					class="form-control" name="providencias_adequacao" MAXLENGTH="255"
+					oninput="this.className = 'form-control'">
+			</div>
+
+			<!-- 11. Contratações correlatas e/ou interdependentes -->
+			<div class="form-group">
+				<label for="contratacoes_correlatas" class="col-form-label">11.
+					Contratações correlatas e/ou interdependentes</label> <input type="text"
+					class="form-control" name="contratacoes_correlatas" MAXLENGTH="255"
+					oninput="this.className = 'form-control'">
+			</div>
+
+			<!-- 12. Declaração da viabilidade ou não da contratação* -->
+			<div class="form-group">
+				<label for="declaracao_viabilidade" class="col-form-label">12.
+					Declaração da viabilidade ou não da contratação*</label>
+				<textarea class="form-control required"
+					name="declaracao_viabilidade" rows="3"
+					oninput="this.className = 'form-control'" required></textarea>
+			</div>
+
+			<div>
+				<p>(*) Nota: itens obrigatórios conforme § 1° do art. 7° da
+					Instrução Normativa nº 1, de 29 de março de 2018.</p>
+			</div>
 		</div>
 
 		<div style="overflow: auto;">

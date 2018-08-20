@@ -24,16 +24,16 @@ public class SetorDao {
 	}
 
 	public List<Setor> lista() {
-		return manager.createQuery("select c from Setor c", Setor.class).getResultList();
+		return manager.createQuery("select s from Setor s", Setor.class).getResultList();
 	}
 
 	public List<Setor> buscaPorNome(String nome) {
-		return manager.createQuery("select c from Setor c where c.nome = :nome", Setor.class).setParameter("nome", nome)
+		return manager.createQuery("select s from Setor s where s.nome = :nome", Setor.class).setParameter("nome", nome)
 				.getResultList();
 	}
 
 	public String buscaNomePorId(Long id) {
-		return manager.createQuery("select c.nome from Setor c where c.id = :id", String.class).setParameter("id", id)
+		return manager.createQuery("select s.nome from Setor s where s.id = :id", String.class).setParameter("id", id)
 				.getSingleResult();
 	}
 

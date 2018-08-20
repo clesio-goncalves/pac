@@ -1,5 +1,6 @@
 package pac.capau.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class Item {
 	private String descricao;
 
 	@NotNull
+	@Column(columnDefinition = "TEXT")
 	private String descricao_detalhada;
 
 	@NotNull

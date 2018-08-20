@@ -14,7 +14,7 @@ function showTab(n) {
 	if (n == (x.length - 1)) {
 		document.getElementById("nextBtn").innerHTML = "Salvar";
 	} else {
-		document.getElementById("nextBtn").innerHTML = "Avancar";
+		document.getElementById("nextBtn").innerHTML = "Avan&ccedil;ar";
 	}
 	// ... and run a function that displays the correct step indicator:
 	fixStepIndicator(n)
@@ -44,7 +44,7 @@ function validateForm() {
 	// This function deals with validation of the form fields
 	var x, y, i, valid = true;
 	x = document.getElementsByClassName("tab");
-	y = x[currentTab].getElementsByClassName("required");
+	y = x[currentTab].getElementsByClassName("requireds");
 	// A loop that checks every input field in the current tab:
 	for (i = 0; i < y.length; i++) {
 		// If a field is empty...
@@ -76,17 +76,17 @@ $(function() {
 	$(".data").datepicker(
 			{
 				dateFormat : 'dd/mm/yy',
-				dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
-						'Sexta', 'Sábado' ],
+				dayNames : [ 'Domingo', 'Segunda', 'Ter&ccedil;a', 'Quarta',
+						'Quinta', 'Sexta', 'S&aacute;bado' ],
 				dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D' ],
 				dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
 						'Sáb', 'Dom' ],
-				monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+				monthNames : [ 'Janeiro', 'Fevereiro', 'Mar&ccedil;o', 'Abril',
 						'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
 						'Outubro', 'Novembro', 'Dezembro' ],
 				monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
 						'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
-				nextText : 'Próximo',
+				nextText : 'Pr&oacute;ximo',
 				prevText : 'Anterior'
 			});
 });
