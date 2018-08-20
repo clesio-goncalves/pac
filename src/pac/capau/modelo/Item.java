@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -47,9 +47,15 @@ public class Item {
 
 	private String vincular_grupo;
 
-	@ManyToOne
+	@OneToOne
 	@NotNull
-	private Demanda demanda;
+	private Usuario usuario;
+
+	@OneToOne
+	private InformacoesGerenciais informacoes_gerenciais;
+
+	@OneToOne
+	private EstudoPreliminar estudo_preliminar;
 
 	public Long getId() {
 		return id;
@@ -139,12 +145,28 @@ public class Item {
 		this.vincular_grupo = vincular_grupo;
 	}
 
-	public Demanda getDemanda() {
-		return demanda;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setDemanda(Demanda demanda) {
-		this.demanda = demanda;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public InformacoesGerenciais getInformacoes_gerenciais() {
+		return informacoes_gerenciais;
+	}
+
+	public void setInformacoes_gerenciais(InformacoesGerenciais informacoes_gerenciais) {
+		this.informacoes_gerenciais = informacoes_gerenciais;
+	}
+
+	public EstudoPreliminar getEstudo_preliminar() {
+		return estudo_preliminar;
+	}
+
+	public void setEstudo_preliminar(EstudoPreliminar estudo_preliminar) {
+		this.estudo_preliminar = estudo_preliminar;
 	}
 
 }

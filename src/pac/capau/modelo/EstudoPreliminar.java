@@ -5,11 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Demanda {
+public class EstudoPreliminar {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,16 +18,21 @@ public class Demanda {
 	@Column(columnDefinition = "TEXT")
 	private String necessidade_contratacao;
 
+	@Column(columnDefinition = "TEXT")
 	private String ref_outros_instrumentos;
 
+	@Column(columnDefinition = "TEXT")
 	private String requisitos_contratacao;
 
 	@NotNull
-	private int estimativa_quantidades;
+	@Column(columnDefinition = "TEXT")
+	private String estimativa_quantidades;
 
+	@Column(columnDefinition = "TEXT")
 	private String levantamento_mercado;
 
 	@NotNull
+	@Column(columnDefinition = "TEXT")
 	private String metodo_estimativa_preco;
 
 	@Column(columnDefinition = "TEXT")
@@ -38,19 +42,18 @@ public class Demanda {
 	@Column(columnDefinition = "TEXT")
 	private String justificativa_parcelamento;
 
+	@Column(columnDefinition = "TEXT")
 	private String resultados_pretendidos;
 
+	@Column(columnDefinition = "TEXT")
 	private String providencias_adequacao;
 
+	@Column(columnDefinition = "TEXT")
 	private String contratacoes_correlatas;
 
 	@NotNull
 	@Column(columnDefinition = "TEXT")
 	private String declaracao_viabilidade;
-
-	@NotNull
-	@ManyToOne
-	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -84,11 +87,11 @@ public class Demanda {
 		this.requisitos_contratacao = requisitos_contratacao;
 	}
 
-	public int getEstimativa_quantidades() {
+	public String getEstimativa_quantidades() {
 		return estimativa_quantidades;
 	}
 
-	public void setEstimativa_quantidades(int estimativa_quantidades) {
+	public void setEstimativa_quantidades(String estimativa_quantidades) {
 		this.estimativa_quantidades = estimativa_quantidades;
 	}
 
@@ -154,14 +157,6 @@ public class Demanda {
 
 	public void setDeclaracao_viabilidade(String declaracao_viabilidade) {
 		this.declaracao_viabilidade = declaracao_viabilidade;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 }

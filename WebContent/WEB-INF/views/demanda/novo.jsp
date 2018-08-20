@@ -18,55 +18,63 @@
 	</div>
 </div>
 <div class="container">
-	<form id="regForm" action="adiciona" method="POST">
+	<form action="adiciona" method="POST">
 
-		<div class="tab">
+		<input type="hidden" name="usuario.id" value="${usuario.id}">
 
-			<h3 align="center">Informações do Item</h3>
-			<hr />
-
+		<h3 align="left">Informações do Item</h3>
+		<hr />
+		<fieldset class="form-group">
 			<!-- Tipo do item: -->
 			<div class="form-group">
-				<label for="tipo" class="col-form-label">Tipo do item*</label>
+				<label for="tipo" class="col-form-label">Tipo do item<span
+					class="obrigatorio">*</span></label>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio1" name="tipo"
-						class="custom-control-input required" checked="" required>
-					<label class="custom-control-label" for="customRadio1">Material
+						class="custom-control-input" checked="" required
+						value="Material de Consumo"> <label
+						class="custom-control-label" for="customRadio1">Material
 						de Consumo</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio2" name="tipo"
-						class="custom-control-input" required> <label
-						class="custom-control-label" for="customRadio2">Material
+						class="custom-control-input" value="Material
+						Permanente">
+					<label class="custom-control-label" for="customRadio2">Material
 						Permanente</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio3" name="tipo"
-						class="custom-control-input"> <label
-						class="custom-control-label" for="customRadio3">Serviço
+						class="custom-control-input" value="Serviço
+						NÃO Continuado">
+					<label class="custom-control-label" for="customRadio3">Serviço
 						NÃO Continuado</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio4" name="tipo"
-						class="custom-control-input"> <label
-						class="custom-control-label" for="customRadio4">Serviço
+						class="custom-control-input" value="Serviço
+						Continuado">
+					<label class="custom-control-label" for="customRadio4">Serviço
 						Continuado</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio5" name="tipo"
-						class="custom-control-input"> <label
+						class="custom-control-input"
+						value="Serviço de
+						Prazo Indeterminado"> <label
 						class="custom-control-label" for="customRadio5">Serviço de
 						Prazo Indeterminado**</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio6" name="tipo"
-						class="custom-control-input"> <label
+						class="custom-control-input" value="Obras"> <label
 						class="custom-control-label" for="customRadio6">Obras</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio7" name="tipo"
-						class="custom-control-input"> <label
-						class="custom-control-label" for="customRadio7">Serviços
+						class="custom-control-input" value="Serviços
+						de Engenharia">
+					<label class="custom-control-label" for="customRadio7">Serviços
 						de Engenharia</label>
 				</div>
 			</div>
@@ -75,29 +83,30 @@
 				<div class="col-3">
 					<!-- Código do item -->
 					<div class="form-group">
-						<label for="codigo" class="col-form-label">Código do item*</label>
-						<input type="text" class="form-control required" name="codigo"
-							MAXLENGTH="10" required oninput="this.className = 'form-control'"
-							onkeypress='return SomenteNumero(event)'>
+						<label for="codigo" class="col-form-label">Código do item<span
+							class="obrigatorio">*</span></label> <input type="text"
+							class="form-control required" name="codigo" MAXLENGTH="10"
+							required onkeypress='return SomenteNumero(event)'>
 					</div>
 				</div>
 
 				<div class="col-9">
 					<!-- Descrição -->
 					<div class="form-group">
-						<label for="descricao" class="col-form-label">Descrição*</label> <input
-							type="text" class="form-control required" name="descricao"
-							MAXLENGTH="255" required
-							oninput="this.className = 'form-control'">
+						<label for="descricao" class="col-form-label">Descrição<span
+							class="obrigatorio">*</span></label> <input type="text"
+							class="form-control required" name="descricao" MAXLENGTH="255"
+							required>
 					</div>
 				</div>
 			</div>
 
 			<!-- Descrição Detalhada -->
 			<div class="form-group">
-				<label for="descricao_detalhada">Descrição Detalhada*</label>
+				<label for="descricao_detalhada">Descrição Detalhada<span
+					class="obrigatorio">*</span></label>
 				<textarea class="form-control required" name="descricao_detalhada"
-					rows="3" oninput="this.className = 'form-control'" required></textarea>
+					rows="3" required maxlength="3000"></textarea>
 			</div>
 
 			<div class="row">
@@ -105,19 +114,19 @@
 					<!-- Unidade de Fornecimento -->
 					<div class="form-group">
 						<label for="unidade_fornecimento" class="col-form-label">Unidade
-							de fornecimento*</label><input type="text" class="form-control required"
-							name="unidade_fornecimento" MAXLENGTH="255" required
-							oninput="this.className = 'form-control'">
+							de fornecimento<span class="obrigatorio">*</span>
+						</label><input type="text" class="form-control required"
+							name="unidade_fornecimento" MAXLENGTH="255" required>
 					</div>
 				</div>
 
 				<div class="col-6">
 					<!-- Quantidade -->
 					<div class="form-group">
-						<label for="quantidade" class="col-form-label">Quantidade*</label><input
-							type="text" class="form-control required" name="quantidade"
-							MAXLENGTH="10" required oninput="this.className = 'form-control'"
-							onkeypress='return SomenteNumero(event)'>
+						<label for="quantidade" class="col-form-label">Quantidade<span
+							class="obrigatorio">*</span></label><input type="text"
+							class="form-control required" name="quantidade" MAXLENGTH="10"
+							required onkeypress='return SomenteNumero(event)'>
 					</div>
 				</div>
 			</div>
@@ -127,14 +136,14 @@
 					<!-- Valor unitário estimado (R$) -->
 					<div class="form-group">
 						<label for="valor_unitario_estimado" class="col-form-label">Valor
-							unitário estimado (R$)*</label>
+							unitário estimado (R$)<span class="obrigatorio">*</span>
+						</label>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
 							</div>
 							<input type="text" class="form-control required"
-								name="valor_unitario_estimado" MAXLENGTH="10" required
-								oninput="this.className = 'form-control'">
+								name="valor_unitario_estimado" MAXLENGTH="10" required>
 						</div>
 					</div>
 				</div>
@@ -143,7 +152,7 @@
 					<!-- Valor total estimado (R$) -->
 					<div class="form-group">
 						<label for="valor_total_estimado" class="col-form-label">Valor
-							total estimado (R$)*</label>
+							total estimado (R$)</label>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
@@ -159,47 +168,37 @@
 			<div class="form-group">
 				<label for="informacoes_orcamentarias" class="col-form-label">Informações
 					Orçamentárias</label> <input type="text" class="form-control"
-					name="informacoes_orcamentarias" MAXLENGTH="255"
-					oninput="this.className = 'form-control'">
+					name="informacoes_orcamentarias" MAXLENGTH="255">
 			</div>
 
 			<!-- Vincular ao grupo -->
 			<div class="form-group">
 				<label for="vincular_grupo" class="col-form-label">Vincular
 					ao grupo</label> <input type="text" class="form-control"
-					name="vincular_grupo" MAXLENGTH="255"
-					oninput="this.className = 'form-control'">
+					name="vincular_grupo" MAXLENGTH="255">
 			</div>
-			<div>
-				<p>(*) Campos obrigatórios</p>
-				<p>(**) Nota: para serviços que podem ter vigência indeterminada
-					nos termos da Orientação Normativa AGU n° 36, de 2011, dentre eles:
-					energia elétrica, água e esgoto, serviços postais da ECT e ajustes
-					firmados com a Imprensa Nacional.</p>
-			</div>
-		</div>
 
-		<div class="tab">
-			<h3 align="center">Informações Gerenciais</h3>
+			<h3>Informações Gerenciais</h3>
 			<hr />
 
 			<!-- Grau de prioridade da aquisição: -->
 			<div class="form-group">
 				<label for="grau_prioridade" class="col-form-label">Grau de
-					prioridade da aquisição*</label>
+					prioridade da aquisição<span class="obrigatorio">*</span>
+				</label>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio8" name="grau_prioridade"
-						class="custom-control-input required" checked="" required>
+						class="custom-control-input" checked="" required value="Baixa">
 					<label class="custom-control-label" for="customRadio8">Baixa</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio9" name="grau_prioridade"
-						class="custom-control-input" required> <label
+						class="custom-control-input" value="Média"> <label
 						class="custom-control-label" for="customRadio9">Média</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio10" name="grau_prioridade"
-						class="custom-control-input"> <label
+						class="custom-control-input" value="Alta"> <label
 						class="custom-control-label" for="customRadio10">Alta</label>
 				</div>
 			</div>
@@ -208,10 +207,9 @@
 			<div class="row">
 				<div class="form-group col-6">
 					<label for="data_estimada" class="col-form-label">Data
-						estimada para a necessidade do item*</label> <input type="text"
-						class="form-control data required" name="data_estimada"
-						oninput="this.className = 'form-control'" data-mask="99/99/9999"
-						required>
+						estimada para a necessidade do item<span class="obrigatorio">*</span>
+					</label> <input type="text" class="form-control data" name="data_estimada"
+						data-mask="99/99/9999" required>
 				</div>
 			</div>
 
@@ -226,7 +224,7 @@
 				</div>
 				<div class="custom-control custom-checkbox">
 					<input type="checkbox" class="custom-control-input"
-						id="customCheck2" name="dispensa" checked> <label
+						id="customCheck2" name="dispensa"> <label
 						class="custom-control-label" for="customCheck2">Dispensa
 						nos termos da Lei n° 8.666/93, art. 24, incisos I e II</label>
 				</div>
@@ -250,153 +248,17 @@
 						ou dependência com outro item</label>
 				</div>
 			</div>
-
-			<!-- Vinculação ou dependência com outro item -->
-			<div class="row">
-				<div class="form-group col-6">
-					<label for="data_estimada" class="col-form-label">Outro
-						item a ser vinculado*</label> <input type="text"
-						class="form-control required" name="outro_item_vinculado"
-						oninput="this.className = 'form-control'" required maxlength="255">
-				</div>
-			</div>
 			<div>
 				<p>(*) Campos obrigatórios</p>
-			</div>
-		</div>
-
-		<div class="tab">
-
-			<h3 align="center">Estudos Preliminares</h3>
-			<hr />
-
-			<!-- 1. Necessidade da contratação* -->
-			<div class="form-group">
-				<label for="necessidade_contratacao" class="col-form-label">1.
-					Necessidade da contratação*</label>
-				<textarea class="form-control required"
-					name="necessidade_contratacao" rows="3"
-					oninput="this.className = 'form-control'" required></textarea>
+				<p>(**) Nota: para serviços que podem ter vigência indeterminada
+					nos termos da Orientação Normativa AGU n° 36, de 2011, dentre eles:
+					energia elétrica, água e esgoto, serviços postais da ECT e ajustes
+					firmados com a Imprensa Nacional.</p>
 			</div>
 
-			<!-- 2. Referência a outros instrumentos de planejamento do órgão ou entidade, se houver -->
-			<div class="form-group">
-				<label for="ref_outros_instrumentos" class="col-form-label">2.
-					Referência a outros instrumentos de planejamento do órgão ou
-					entidade, se houver</label> <input type="text" class="form-control"
-					name="ref_outros_instrumentos" MAXLENGTH="255"
-					oninput="this.className = 'form-control'">
-			</div>
+			<security:csrfInput />
 
-			<!-- 3. Requisitos da contratação -->
-			<div class="form-group">
-				<label for="requisitos_contratacao" class="col-form-label">3.
-					Requisitos da contratação</label> <input type="text" class="form-control"
-					name="requisitos_contratacao" MAXLENGTH="255"
-					oninput="this.className = 'form-control'">
-			</div>
-
-			<!-- 4. Estimativa das quantidades, acompanhadas das memórias de cálculo e dos documentos que lhe dão suporte* -->
-			<div class="form-group">
-				<label for="estimativa_quantidades" class="col-form-label">4.
-					Estimativa das quantidades, acompanhadas das memórias de cálculo e
-					dos documentos que lhe dão suporte*</label> <input type="text"
-					class="form-control required" name="estimativa_quantidades"
-					MAXLENGTH="10" oninput="this.className = 'form-control'"
-					onkeypress='return SomenteNumero(event)' required>
-			</div>
-
-			<!-- 5. Levantamento de mercado e justificativa da escolha do tipo de solução a contratar -->
-			<div class="form-group">
-				<label for="levantamento_mercado" class="col-form-label">5.
-					Levantamento de mercado e justificativa da escolha do tipo de
-					solução a contratar</label> <input type="text" class="form-control"
-					name="levantamento_mercado" MAXLENGTH="255"
-					oninput="this.className = 'form-control'">
-			</div>
-
-			<!-- 6. Definição do método para estimativas de preços ou dos meios de previsão de preços referenciais* -->
-			<div class="form-group">
-				<label for="metodo_estimativa_preco" class="col-form-label">6.
-					Definição do método para estimativas de preços ou dos meios de
-					previsão de preços referenciais*</label> <input type="text"
-					class="form-control required" name="metodo_estimativa_preco"
-					MAXLENGTH="255" oninput="this.className = 'form-control'" required>
-			</div>
-
-			<!-- 7. Descrição da solução como um todo -->
-			<div class="form-group">
-				<label for="descricao_solucao" class="col-form-label">7.
-					Descrição da solução como um todo</label>
-				<textarea class="form-control" name="descricao_solucao" rows="3"
-					oninput="this.className = 'form-control'"></textarea>
-			</div>
-
-			<!-- 8. Justificativas para o parcelamento ou não da solução, quando necessária para a individualização do objeto* -->
-			<div class="form-group">
-				<label for="justificativa_parcelamento" class="col-form-label">8.
-					Justificativas para o parcelamento ou não da solução, quando
-					necessária para a individualização do objeto*</label>
-				<textarea class="form-control required"
-					name="justificativa_parcelamento" rows="3"
-					oninput="this.className = 'form-control'" required></textarea>
-			</div>
-
-			<!-- 9. Demonstrativo dos resultados pretendidos em termos de economicidade e de melhor aproveitamento dos recursos humanos, materiais ou financeiros disponíveis -->
-			<div class="form-group">
-				<label for="resultados_pretendidos" class="col-form-label">9.
-					Demonstrativo dos resultados pretendidos em termos de economicidade
-					e de melhor aproveitamento dos recursos humanos, materiais ou
-					financeiros disponíveis</label> <input type="text" class="form-control"
-					name="resultados_pretendidos" MAXLENGTH="255"
-					oninput="this.className = 'form-control'">
-			</div>
-
-			<!-- 10. Providências para adequação do ambiente do órgão -->
-			<div class="form-group">
-				<label for="providencias_adequacao" class="col-form-label">10.
-					Providências para adequação do ambiente do órgão</label> <input type="text"
-					class="form-control" name="providencias_adequacao" MAXLENGTH="255"
-					oninput="this.className = 'form-control'">
-			</div>
-
-			<!-- 11. Contratações correlatas e/ou interdependentes -->
-			<div class="form-group">
-				<label for="contratacoes_correlatas" class="col-form-label">11.
-					Contratações correlatas e/ou interdependentes</label> <input type="text"
-					class="form-control" name="contratacoes_correlatas" MAXLENGTH="255"
-					oninput="this.className = 'form-control'">
-			</div>
-
-			<!-- 12. Declaração da viabilidade ou não da contratação* -->
-			<div class="form-group">
-				<label for="declaracao_viabilidade" class="col-form-label">12.
-					Declaração da viabilidade ou não da contratação*</label>
-				<textarea class="form-control required"
-					name="declaracao_viabilidade" rows="3"
-					oninput="this.className = 'form-control'" required></textarea>
-			</div>
-
-			<div>
-				<p>(*) Nota: itens obrigatórios conforme § 1° do art. 7° da
-					Instrução Normativa nº 1, de 29 de março de 2018.</p>
-			</div>
-		</div>
-
-		<div style="overflow: auto;">
-			<div style="float: right;">
-				<button type="button" class="btn btn-secondary" id="prevBtn"
-					onclick="nextPrev(-1)">Voltar</button>
-				<button type="button" class="btn btn-primary" id="nextBtn"
-					onclick="nextPrev(1)">Avançar</button>
-			</div>
-		</div>
-
-		<!-- Circles which indicates the steps of the form: -->
-		<div style="text-align: center; margin-top: 40px;">
-			<span class="step"></span> <span class="step"></span> <span
-				class="step"></span> <span class="step"></span>
-		</div>
+		</fieldset>
 	</form>
 </div>
 

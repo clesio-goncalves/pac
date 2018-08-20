@@ -1,12 +1,13 @@
 package pac.capau.modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -23,9 +24,13 @@ public class InformacoesGerenciais {
 	@NotNull
 	private String grau_prioridade;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	private Calendar data_solicitacao;
+
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Calendar data_estimada;
 
 	private boolean contratacao_emergencial;
@@ -37,12 +42,6 @@ public class InformacoesGerenciais {
 	private boolean capacitacao_servidores;
 
 	private boolean vinculacao_outro_item;
-
-	private String outro_item_vinculado;
-
-	@NotNull
-	@OneToOne
-	private Item item;
 
 	public Long getId() {
 		return id;
@@ -58,6 +57,14 @@ public class InformacoesGerenciais {
 
 	public void setGrau_prioridade(String grau_prioridade) {
 		this.grau_prioridade = grau_prioridade;
+	}
+
+	public Calendar getData_solicitacao() {
+		return data_solicitacao;
+	}
+
+	public void setData_solicitacao(Calendar data_solicitacao) {
+		this.data_solicitacao = data_solicitacao;
 	}
 
 	public Calendar getData_estimada() {
@@ -108,20 +115,22 @@ public class InformacoesGerenciais {
 		this.vinculacao_outro_item = vinculacao_outro_item;
 	}
 
-	public String getOutro_item_vinculado() {
-		return outro_item_vinculado;
+	public String formataData(Calendar calendar, String formato) {
+		SimpleDateFormat fmt = new SimpleDateFormat(formato);
+		Date data = calendar.getTime();
+		return fmt.format(data);
 	}
 
-	public void setOutro_item_vinculado(String outro_item_vinculado) {
-		this.outro_item_vinculado = outro_item_vinculado;
-	}
-
-	public Item getItem() {
-		return item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
+	public Calendar converteStringParaCalendar(String string, String formato) {
+		SimpleDateFormat fmt = new SimpleDateFormat(formato);
+		Calendar calendar = Calendar.getInstance();
+		try {
+			Date data = fmt.parse(string);
+			calendar.setTime(data);
+		} catch (java.text.ParseException e) {
+			e.printStackTrace();
+		}
+		return calendar;
 	}
 
 }

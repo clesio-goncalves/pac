@@ -50,7 +50,7 @@
 						<a class="dropdown-item" href="<c:url value="/usuario/lista" />">Usuários</a>
 						<a class="dropdown-item" href="<c:url value="/setor/lista" />">Setores</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="<c:url value="#" />">Demandas</a>
+						<a class="dropdown-item" href="<c:url value="/demanda/lista" />">Demandas</a>
 					</div></li>
 			</ul>
 			<security:authorize access="isAuthenticated()">

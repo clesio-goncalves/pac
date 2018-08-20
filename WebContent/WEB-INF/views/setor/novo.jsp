@@ -33,7 +33,7 @@
 				<span class="glyphicon glyphicon-trash"></span> Limpar
 			</button>
 			<button type="submit" class="btn btn-primary btn-lg">
-				<span class="glyphicon glyphicon-saved"></span> Salvar
+				<span class="glyphicon glyphicon-floppy-disk"></span> Salvar
 			</button>
 		</div>
 	</form>

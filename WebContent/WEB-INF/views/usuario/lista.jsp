@@ -42,7 +42,7 @@
 								<!-- Exibir --> <a
 								href="<c:url value="/usuario/exibe?id=${usuario.id}" />"
 								class="btn btn-secondary btn-sm"><span
-									class="glyphicon glyphicon-zoom-in"></span> Exibir</a> <security:authorize
+									class="glyphicon glyphicon-eye-open"></span> Exibir</a> <security:authorize
 									access="hasRole('ROLE_Administrador')">
 									<!-- Editar -->
 									<a href="<c:url value="/usuario/edita?id=${usuario.id}" />"
