@@ -1,8 +1,6 @@
 package pac.capau.modelo;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -113,24 +111,6 @@ public class InformacoesGerenciais {
 
 	public void setVinculacao_outro_item(boolean vinculacao_outro_item) {
 		this.vinculacao_outro_item = vinculacao_outro_item;
-	}
-
-	public String formataData(Calendar calendar, String formato) {
-		SimpleDateFormat fmt = new SimpleDateFormat(formato);
-		Date data = calendar.getTime();
-		return fmt.format(data);
-	}
-
-	public Calendar converteStringParaCalendar(String string, String formato) {
-		SimpleDateFormat fmt = new SimpleDateFormat(formato);
-		Calendar calendar = Calendar.getInstance();
-		try {
-			Date data = fmt.parse(string);
-			calendar.setTime(data);
-		} catch (java.text.ParseException e) {
-			e.printStackTrace();
-		}
-		return calendar;
 	}
 
 }

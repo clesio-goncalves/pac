@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -54,6 +55,10 @@ public class EstudoPreliminar {
 	@NotNull
 	@Column(columnDefinition = "TEXT")
 	private String declaracao_viabilidade;
+
+	@NotNull
+	@OneToOne
+	private Item item;
 
 	public Long getId() {
 		return id;
@@ -157,6 +162,14 @@ public class EstudoPreliminar {
 
 	public void setDeclaracao_viabilidade(String declaracao_viabilidade) {
 		this.declaracao_viabilidade = declaracao_viabilidade;
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
 }

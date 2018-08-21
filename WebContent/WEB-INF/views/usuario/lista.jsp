@@ -48,7 +48,6 @@
 									<a href="<c:url value="/usuario/edita?id=${usuario.id}" />"
 										class="btn btn-info btn-sm"><span
 										class="glyphicon glyphicon-edit"></span> Editar </a>
-									<!-- Button to Open the Modal -->
 									<button type="button" class="btn btn-danger btn-sm"
 										data-toggle="modal" data-target="#modal${usuario.id}">
 										<span class="glyphicon glyphicon-trash"></span> Excluir

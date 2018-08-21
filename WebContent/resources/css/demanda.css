@@ -2,3 +2,8 @@
 	color: red;
 	font-weight: bold;
 }
+
+legend {
+	border-bottom: 1px solid #ced4da;
+	margin-bottom: 20px;
+}

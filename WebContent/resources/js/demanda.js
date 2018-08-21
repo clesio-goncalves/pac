@@ -16,3 +16,15 @@ $(function() {
 				prevText : 'Anterior'
 			});
 });
+
+$(document).ready(function() {
+	$("#quantidade, #valor_unitario_estimado").focusout(function() {
+		var q = $("#quantidade").val();
+		var v = $("#valor_unitario_estimado").val();
+		if ((q != '') && (v != '')) {
+			$("#valor_total_estimado").val(q * parseFloat(v));
+		} else {
+			$("#valor_total_estimado").val('');
+		}
+	});
+});

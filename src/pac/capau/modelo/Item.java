@@ -54,9 +54,6 @@ public class Item {
 	@OneToOne
 	private InformacoesGerenciais informacoes_gerenciais;
 
-	@OneToOne
-	private EstudoPreliminar estudo_preliminar;
-
 	public Long getId() {
 		return id;
 	}
@@ -159,14 +156,6 @@ public class Item {
 
 	public void setInformacoes_gerenciais(InformacoesGerenciais informacoes_gerenciais) {
 		this.informacoes_gerenciais = informacoes_gerenciais;
-	}
-
-	public EstudoPreliminar getEstudo_preliminar() {
-		return estudo_preliminar;
-	}
-
-	public void setEstudo_preliminar(EstudoPreliminar estudo_preliminar) {
-		this.estudo_preliminar = estudo_preliminar;
 	}
 
 }

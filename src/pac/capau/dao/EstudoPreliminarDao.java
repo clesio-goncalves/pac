@@ -1,5 +1,7 @@
 package pac.capau.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -24,6 +26,11 @@ public class EstudoPreliminarDao {
 
 	public EstudoPreliminar buscaPorId(Long id) {
 		return manager.find(EstudoPreliminar.class, id);
+	}
+
+	public List<EstudoPreliminar> buscaEstudoPreliminarPorItemId(Long id) {
+		return manager.createQuery("select ep from EstudoPreliminar ep where ep.item.id = :id", EstudoPreliminar.class)
+				.setParameter("id", id).getResultList();
 	}
 
 	public void remove(EstudoPreliminar estudoPreliminar) {
