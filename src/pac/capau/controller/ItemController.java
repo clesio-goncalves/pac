@@ -61,7 +61,7 @@ public class ItemController {
 			return "redirect:nova";
 		}
 
-		return "redirect:planejamento?id=" + dao.adiciona(item).getId();
+		return "redirect:/demanda/planejamento/novo?id=" + dao.adiciona(item).getId();
 	}
 
 	@RequestMapping("/lista")
@@ -86,33 +86,6 @@ public class ItemController {
 	@RequestMapping("/remove")
 	public String remove(Item item) {
 		dao.remove(item);
-		return "redirect:lista";
-	}
-
-	@RequestMapping("/planejamento")
-	public String planejamento(Long id, Model model) {
-
-		if (dao.buscaPorId(id) == null) { // se o ID não existir
-			return "redirect:nova";
-		} else if (dao_estudo_preliminar.buscaEstudoPreliminarPorItemId(id).size() > 0) {
-			return "redirect:nova"; // se houver estudo_preliminar cadastrado para o item
-		}
-
-		model.addAttribute("item", id);
-		return "demanda/planejamento";
-	}
-
-	@RequestMapping("/adiciona-planejamento")
-	public String adicionaPlanejamento(@Valid EstudoPreliminar estudo_preliminar,
-			BindingResult result_estudo_preliminar) {
-
-		/* ESTUDOS PRELIMINARES */
-		if (result_estudo_preliminar.hasErrors()) {
-			System.out.println(result_estudo_preliminar);
-			return "redirect:nova";
-		}
-
-		dao_estudo_preliminar.adiciona(estudo_preliminar);
 		return "redirect:lista";
 	}
 

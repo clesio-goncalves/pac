@@ -282,6 +282,6 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/SomenteNumero.js" />"></script>
 <script type="text/javascript"
-	src="<c:url value="/resources/js/demanda.js" />"></script>
+	src="<c:url value="/resources/js/demanda/demanda.js" />"></script>
 
 <c:import url="../componentes/rodape.jsp" />

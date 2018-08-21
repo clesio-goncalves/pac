@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 <title>Cadastrar Planejamento</title>
 <c:import url="../componentes/cabecalho.jsp" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/jquery-ui.min.css" />">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/demanda.css" />">
 
@@ -20,7 +20,7 @@
 </div>
 
 <div class="container">
-	<form action="adiciona-planejamento" method="POST">
+	<form action="adiciona" method="POST">
 
 		<!-- ID -->
 		<input type="hidden" name="item.id" value="${item}" />
@@ -34,8 +34,7 @@
 					da contratação<span class="obrigatorio">*</span>
 				</label>
 				<textarea class="form-control" name="necessidade_contratacao"
-					rows="3" oninput="this.className = 'form-control'" required
-					maxlength="3000" autofocus></textarea>
+					rows="3" required maxlength="3000" autofocus></textarea>
 			</div>
 
 			<!-- 2. Referência a outros instrumentos de planejamento do órgão ou entidade, se houver -->
@@ -44,7 +43,7 @@
 					Referência a outros instrumentos de planejamento do órgão ou
 					entidade, se houver</label>
 				<textarea class="form-control" name="ref_outros_instrumentos"
-					rows="3" oninput="this.className = 'form-control'" maxlength="3000"></textarea>
+					rows="3" maxlength="3000"></textarea>
 			</div>
 
 			<!-- 3. Requisitos da contratação -->
@@ -52,7 +51,7 @@
 				<label for="requisitos_contratacao" class="col-form-label">3.
 					Requisitos da contratação</label>
 				<textarea class="form-control" name="requisitos_contratacao"
-					rows="3" oninput="this.className = 'form-control'" maxlength="3000"></textarea>
+					rows="3" maxlength="3000"></textarea>
 			</div>
 
 			<!-- 4. Estimativa das quantidades, acompanhadas das memórias de cálculo e dos documentos que lhe dão suporte* -->
@@ -62,8 +61,7 @@
 					dos documentos que lhe dão suporte<span class="obrigatorio">*</span>
 				</label>
 				<textarea class="form-control" name="estimativa_quantidades"
-					rows="3" oninput="this.className = 'form-control'" required
-					maxlength="3000"></textarea>
+					rows="3" required maxlength="3000"></textarea>
 			</div>
 
 			<!-- 5. Levantamento de mercado e justificativa da escolha do tipo de solução a contratar -->
@@ -72,7 +70,7 @@
 					Levantamento de mercado e justificativa da escolha do tipo de
 					solução a contratar</label>
 				<textarea class="form-control" name="levantamento_mercado" rows="3"
-					oninput="this.className = 'form-control'" maxlength="3000"></textarea>
+					maxlength="3000"></textarea>
 			</div>
 
 			<!-- 6. Definição do método para estimativas de preços ou dos meios de previsão de preços referenciais* -->
@@ -82,8 +80,7 @@
 					previsão de preços referenciais<span class="obrigatorio">*</span>
 				</label>
 				<textarea class="form-control" name="metodo_estimativa_preco"
-					rows="3" oninput="this.className = 'form-control'" required
-					maxlength="3000"></textarea>
+					rows="3" required maxlength="3000"></textarea>
 			</div>
 
 			<!-- 7. Descrição da solução como um todo -->
@@ -91,7 +88,7 @@
 				<label for="descricao_solucao" class="col-form-label">7.
 					Descrição da solução como um todo</label>
 				<textarea class="form-control" name="descricao_solucao" rows="3"
-					oninput="this.className = 'form-control'" maxlength="3000"></textarea>
+					maxlength="3000"></textarea>
 			</div>
 
 			<!-- 8. Justificativas para o parcelamento ou não da solução, quando necessária para a individualização do objeto* -->
@@ -102,8 +99,7 @@
 					class="obrigatorio">*</span>
 				</label>
 				<textarea class="form-control" name="justificativa_parcelamento"
-					rows="3" oninput="this.className = 'form-control'" required
-					maxlength="3000"></textarea>
+					rows="3" required maxlength="3000"></textarea>
 			</div>
 
 			<!-- 9. Demonstrativo dos resultados pretendidos em termos de economicidade e de melhor aproveitamento dos recursos humanos, materiais ou financeiros disponíveis -->
@@ -113,7 +109,7 @@
 					e de melhor aproveitamento dos recursos humanos, materiais ou
 					financeiros disponíveis</label>
 				<textarea class="form-control" name="resultados_pretendidos"
-					rows="3" oninput="this.className = 'form-control'" maxlength="3000"></textarea>
+					rows="3" maxlength="3000"></textarea>
 			</div>
 
 			<!-- 10. Providências para adequação do ambiente do órgão -->
@@ -121,7 +117,7 @@
 				<label for="providencias_adequacao" class="col-form-label">10.
 					Providências para adequação do ambiente do órgão</label>
 				<textarea class="form-control" name="providencias_adequacao"
-					rows="3" oninput="this.className = 'form-control'" maxlength="3000"></textarea>
+					rows="3" maxlength="3000"></textarea>
 			</div>
 
 			<!-- 11. Contratações correlatas e/ou interdependentes -->
@@ -129,7 +125,7 @@
 				<label for="contratacoes_correlatas" class="col-form-label">11.
 					Contratações correlatas e/ou interdependentes</label>
 				<textarea class="form-control" name="contratacoes_correlatas"
-					rows="3" oninput="this.className = 'form-control'" maxlength="3000"></textarea>
+					rows="3" maxlength="3000"></textarea>
 			</div>
 
 			<!-- 12. Declaração da viabilidade ou não da contratação* -->
@@ -139,17 +135,22 @@
 					class="obrigatorio">*</span>
 				</label>
 				<textarea class="form-control" name="declaracao_viabilidade"
-					rows="3" oninput="this.className = 'form-control'" required
-					maxlength="3000"></textarea>
+					rows="3" required maxlength="3000"></textarea>
 			</div>
 
 			<fieldset class="form-group">
 				<legend>GERENCIAMENTO DE RISCOS</legend>
 
 				<button type="button" class="btn btn-warning btn-lg"
-					data-toggle="modal" data-target="#adicionar_risco">
+					data-toggle="modal" data-target="#modal_novo" id="button_adicionar">
 					<span class="glyphicon glyphicon-plus-sign"></span> Adicionar risco
 				</button>
+
+				<!-- TABELA GERENCIAMENTO RISCOS -->
+				<div id="tabela_lista_riscos" style="margin-top: 20px;">
+					<jsp:include page="risco/lista.jsp"></jsp:include>
+				</div>
+
 				<div>
 					<p>(*) Campos obrigatórios</p>
 				</div>
@@ -169,86 +170,19 @@
 		</fieldset>
 	</form>
 
-	<div class="modal fade" id="adicionar_risco">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Mapa de risco</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="" method="POST">
-						<!-- Descrição -->
-						<div class="form-group">
-							<label for="descricao" class="col-form-label">Descrição<span
-								class="obrigatorio">*</span></label> <input type="text"
-								class="form-control" name="descricao" MAXLENGTH="255" required>
-						</div>
+	<!-- MODAL ADICIONA RISCO -->
+	<jsp:include page="risco/modal_novo.jsp"></jsp:include>
 
-						<!-- Probabilidade -->
-						<div class="row">
-							<div class="form-group col">
-								<label for="probabilidade" class="col-form-label">Probabilidade<span
-									class="obrigatorio">*</span>
-								</label>
-								<div class="custom-control custom-radio">
-									<input type="radio" id="customRadio1" name="probabilidade"
-										class="custom-control-input" checked required value="Baixa">
-									<label class="custom-control-label" for="customRadio1">Baixa</label>
-								</div>
-								<div class="custom-control custom-radio">
-									<input type="radio" id="customRadio9" name="probabilidade"
-										class="custom-control-input" value="Média"> <label
-										class="custom-control-label" for="customRadio2">Média</label>
-								</div>
-								<div class="custom-control custom-radio">
-									<input type="radio" id="customRadio3" name="probabilidade"
-										class="custom-control-input" value="Alta"> <label
-										class="custom-control-label" for="customRadio3">Alta</label>
-								</div>
-							</div>
-
-							<!-- Impacto -->
-							<div class="form-group col">
-								<label for="probabilidade" class="col-form-label">Impacto<span
-									class="obrigatorio">*</span>
-								</label>
-								<div class="custom-control custom-radio">
-									<input type="radio" id="customRadio1" name="probabilidade"
-										class="custom-control-input" checked required value="Baixa">
-									<label class="custom-control-label" for="customRadio1">Baixa</label>
-								</div>
-								<div class="custom-control custom-radio">
-									<input type="radio" id="customRadio9" name="probabilidade"
-										class="custom-control-input" value="Média"> <label
-										class="custom-control-label" for="customRadio2">Média</label>
-								</div>
-								<div class="custom-control custom-radio">
-									<input type="radio" id="customRadio3" name="probabilidade"
-										class="custom-control-input" value="Alta"> <label
-										class="custom-control-label" for="customRadio3">Alta</label>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<a href="#" class="btn btn-primary"><span
-						class="glyphicon glyphicon-floppy-disk"></span> Salvar</a>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">
-						<span class="glyphicon glyphicon-log-out"></span> Fechar
-					</button>
-				</div>
-			</div>
-		</div>
+	<!-- MODAL EDITA RISCO -->
+	<div id="div_modal_editar">
+		<jsp:include page="risco/modal_edita.jsp"></jsp:include>
 	</div>
-</div>
 
+
+</div>
 <script type="text/javascript"
-	src="<c:url value="/resources/js/demanda.js" />"></script>
+	src="<c:url value="/resources/js/demanda/demanda.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/demanda/risco.js" />"></script>
 
 <c:import url="../componentes/rodape.jsp" />
