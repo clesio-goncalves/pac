@@ -48,7 +48,7 @@ public class PlanejamentoController {
 		}
 
 		model.addAttribute("riscos", dao_gerenciamento_risco.lista(this.item.getId()));
-		model.addAttribute("item", id);
+		model.addAttribute("item", this.item);
 		return "planejamento/novo";
 	}
 
@@ -69,6 +69,8 @@ public class PlanejamentoController {
 	@RequestMapping(value = "/risco/adiciona", method = RequestMethod.POST)
 	public String adicionaRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
 
+		this.item = dao.buscaPorId(Long.parseLong(request.getParameter("item_id")));
+		
 		this.gerenciamento_risco = new GerenciamentoRisco();
 		this.gerenciamento_risco.setItem(this.item);
 		this.gerenciamento_risco.setDescricao(request.getParameter("descricao"));
@@ -89,8 +91,7 @@ public class PlanejamentoController {
 	@RequestMapping(value = "/risco/remove", method = RequestMethod.POST)
 	public String removeRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
 
-		System.out.println("Removendo...............................");
-		
+		this.item = dao.buscaPorId(Long.parseLong(request.getParameter("item_id")));
 		this.gerenciamento_risco = new GerenciamentoRisco();
 		this.gerenciamento_risco.setId(Long.parseLong(request.getParameter("risco_id")));
 
@@ -110,6 +111,8 @@ public class PlanejamentoController {
 	@RequestMapping(value = "/risco/altera", method = RequestMethod.POST)
 	public String alteraRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
 
+		this.item = dao.buscaPorId(Long.parseLong(request.getParameter("item_id")));
+		
 		this.gerenciamento_risco = new GerenciamentoRisco();
 		this.gerenciamento_risco.setItem(this.item);
 		this.gerenciamento_risco.setId(Long.parseLong(request.getParameter("risco_id")));

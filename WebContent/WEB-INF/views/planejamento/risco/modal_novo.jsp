@@ -14,6 +14,9 @@
 			</div>
 			<div class="modal-body">
 
+				<!-- ID -->
+				<input type="hidden" name="item_id" value="${item.id}" />
+
 				<!-- Descrição -->
 				<div class="form-group" id="form-group">
 					<label for="descricao" class="col-form-label col-form-label-sm">Descrição<span

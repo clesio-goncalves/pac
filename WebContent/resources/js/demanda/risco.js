@@ -19,6 +19,7 @@ $(document).ready(function() {
 });
 
 function salvar(contexto){
+	var item_id = $("input[name='item_id']").val();
 	var descricao = $("input[name='descricao']").val();
 	var probabilidade = $("select[name='probabilidade']").val();
 	var impacto = $("select[name='impacto']").val();
@@ -27,13 +28,14 @@ function salvar(contexto){
 	var acao_contingencia = $("textarea[name='acao_contingencia']").val();
 	var responsavel_acao_contingencia = $("input[name='responsavel_acao_contingencia']").val();
 	
-	if (descricao != "" && probabilidade != "" && impacto != "" && acao_preventiva != "" && 
+	if (item_id != "" && descricao != "" && probabilidade != "" && impacto != "" && acao_preventiva != "" && 
 			responsavel_acao_preventiva != "" && acao_contingencia != "" && responsavel_acao_contingencia != "") {
 		$.ajax({
 			type : "POST",
 			url : contexto + "demanda/planejamento/risco/adiciona",
 			cache : false,
 			data : {
+				item_id : item_id,
 				descricao : descricao,
 				probabilidade : probabilidade,
 				impacto : impacto,
@@ -72,8 +74,8 @@ function salvar(contexto){
 }
 
 //Ao clicar no botão excluir da tabela lista de riscos
-function excluir(contexto, id) {
-	$("#modal" + id).modal('hide');
+function excluir(contexto, item_id, risco_id) {
+	$("#modal" + risco_id).modal('hide');
 	$('body').removeClass('modal-open');
 	$('.modal-backdrop').remove();
 	$.ajax({
@@ -81,7 +83,8 @@ function excluir(contexto, id) {
 		url : contexto + "demanda/planejamento/risco/remove",
 		cache : false,
 		data : {
-			risco_id : id
+			item_id : item_id,
+			risco_id : risco_id
 		},
 		beforeSend: function(xhr) {
             xhr.setRequestHeader(header, token);
@@ -119,6 +122,7 @@ function editar(contexto, id) {
 
 function alterar(contexto){
 	
+	var item_id = $("input[name='edita_item_id']").val();
 	var risco_id = $("input[name='edita_risco_id']").val();
 	var descricao = $("input[name='edita_descricao']").val();
 	var probabilidade = $("select[name='edita_probabilidade']").val();
@@ -128,13 +132,14 @@ function alterar(contexto){
 	var acao_contingencia = $("textarea[name='edita_acao_contingencia']").val();
 	var responsavel_acao_contingencia = $("input[name='edita_responsavel_acao_contingencia']").val();
 
-	if (risco_id != "" && descricao != "" && probabilidade != "" && impacto != "" && acao_preventiva != "" && 
+	if (item_id != "" && risco_id != "" && descricao != "" && probabilidade != "" && impacto != "" && acao_preventiva != "" && 
 			responsavel_acao_preventiva != "" && acao_contingencia != "" && responsavel_acao_contingencia != "") {
 		$.ajax({
 			type : "POST",
 			url : contexto + "demanda/planejamento/risco/altera",
 			cache : false,
 			data : {
+				item_id : item_id,
 				risco_id : risco_id,
 				descricao :descricao,
 				probabilidade : probabilidade,

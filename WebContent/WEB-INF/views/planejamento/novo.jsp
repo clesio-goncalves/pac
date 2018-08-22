@@ -21,7 +21,7 @@
 	<form action="adiciona" method="POST">
 
 		<!-- ID -->
-		<input type="hidden" name="item.id" value="${item}" />
+		<input type="hidden" name="item.id" value="${item.id}" />
 
 		<fieldset class="form-group">
 			<legend>ESTUDOS PRELIMINARES</legend>

@@ -15,6 +15,9 @@
 			<div class="modal-body">
 
 				<!-- ID -->
+				<input type="hidden" name="edita_item_id" value="${risco.item.id}" />
+
+				<!-- ID -->
 				<input type="hidden" name="edita_risco_id" value="${risco.id}">
 
 				<!-- Descrição -->
@@ -100,7 +103,8 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="alterar(${contexto})">
+				<button type="button" class="btn btn-primary"
+					onclick="alterar(${contexto})">
 					<span class="glyphicon glyphicon-refresh"></span> Atualizar
 				</button>
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">
