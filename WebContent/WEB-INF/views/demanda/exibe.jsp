@@ -1,14 +1,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
-
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 <title>Exibe os dados da demanda</title>
 <c:import url="../componentes/cabecalho.jsp" />
 
 <div class="container">
+	<span style="display: none" id="myURL"><c:url value="/"
+			var="url" /></span>
 	<div class="card border-light mb-3">
 		<div class="card-header">Exibe os dados da demanda</div>
 		<!-- Table -->
@@ -29,6 +32,14 @@
 			<!-- TABELA GERENCIAMENTO RISCOS -->
 			<div id="tabela_lista_riscos">
 				<jsp:include page="../planejamento/risco/lista.jsp"></jsp:include>
+			</div>
+
+			<!-- MODAL ADICIONA RISCO -->
+			<jsp:include page="../planejamento/risco/modal_novo.jsp"></jsp:include>
+
+			<!-- MODAL EDITA RISCO -->
+			<div id="div_modal_editar">
+				<jsp:include page="../planejamento/risco/modal_edita.jsp"></jsp:include>
 			</div>
 
 		</div>

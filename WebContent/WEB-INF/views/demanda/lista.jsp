@@ -22,8 +22,8 @@
 				<thead>
 					<tr>
 						<th>Demandante</th>
-						<th>Setor</th>
-						<th>E-mail</th>
+						<th>Tipo Item</th>
+						<th>Valor Total</th>
 						<th>Data da Solicitação</th>
 						<th>Ações</th>
 					</tr>
@@ -32,8 +32,8 @@
 					<c:forEach var="item" items="${itens}">
 						<tr>
 							<td>${item.usuario.nome}</td>
-							<td>${item.usuario.setor.nome}</td>
-							<td>${item.usuario.email}</td>
+							<td>${item.tipo}</td>
+							<td>${item.quantidade*item.valor_unitario_estimado}</td>
 							<td><fmt:formatDate
 									value="${item.informacoes_gerenciais.data_solicitacao.time}"
 									pattern="dd/MM/yyyy HH:mm:ss" /></td>

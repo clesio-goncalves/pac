@@ -87,8 +87,8 @@
 					<div class="form-group">
 						<label for="codigo" class="col-form-label">Código do item<span
 							class="obrigatorio">*</span></label> <input type="text"
-							class="form-control required" name="codigo" MAXLENGTH="10"
-							required onkeypress='return SomenteNumero(event)'>
+							class="form-control" name="codigo" MAXLENGTH="10" required
+							onkeypress='return SomenteNumero(event)'>
 					</div>
 				</div>
 
@@ -97,8 +97,7 @@
 					<div class="form-group">
 						<label for="descricao" class="col-form-label">Descrição<span
 							class="obrigatorio">*</span></label> <input type="text"
-							class="form-control required" name="descricao" MAXLENGTH="255"
-							required>
+							class="form-control" name="descricao" MAXLENGTH="255" required>
 					</div>
 				</div>
 			</div>
@@ -107,8 +106,8 @@
 			<div class="form-group">
 				<label for="descricao_detalhada">Descrição Detalhada<span
 					class="obrigatorio">*</span></label>
-				<textarea class="form-control required" name="descricao_detalhada"
-					rows="3" required maxlength="3000"></textarea>
+				<textarea class="form-control" name="descricao_detalhada" rows="3"
+					required maxlength="3000"></textarea>
 			</div>
 
 			<div class="row">
@@ -117,7 +116,7 @@
 					<div class="form-group">
 						<label for="unidade_fornecimento" class="col-form-label">Unidade
 							de fornecimento<span class="obrigatorio">*</span>
-						</label><input type="text" class="form-control required"
+						</label><input type="text" class="form-control"
 							name="unidade_fornecimento" MAXLENGTH="255" required>
 					</div>
 				</div>
@@ -144,7 +143,7 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
 							</div>
-							<input type="number" class="form-control required"
+							<input type="number" class="form-control"
 								name="valor_unitario_estimado" id="valor_unitario_estimado"
 								MAXLENGTH="10" required>
 						</div>
@@ -283,6 +282,6 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/SomenteNumero.js" />"></script>
 <script type="text/javascript"
-	src="<c:url value="/resources/js/demanda.js" />"></script>
+	src="<c:url value="/resources/js/demanda/demanda.js" />"></script>
 
 <c:import url="../componentes/rodape.jsp" />

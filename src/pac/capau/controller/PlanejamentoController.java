@@ -110,8 +110,6 @@ public class PlanejamentoController {
 	@RequestMapping(value = "/risco/altera", method = RequestMethod.POST)
 	public String alteraRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
 
-		System.out.println("Alterando..........................................");
-
 		this.gerenciamento_risco = new GerenciamentoRisco();
 		this.gerenciamento_risco.setItem(this.item);
 		this.gerenciamento_risco.setId(Long.parseLong(request.getParameter("risco_id")));

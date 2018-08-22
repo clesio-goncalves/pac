@@ -1,4 +1,6 @@
-body{padding-top:80px;}
+body {
+	padding-top: 80px;
+}
 
 .obrigatorio {
 	color: red;
@@ -13,4 +15,10 @@ legend {
 
 #form-group {
 	margin-bottom: 0.5rem;
+}
+
+teste {
+	border-color: #E74C3C;
+	-webkit-box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+	box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
 }

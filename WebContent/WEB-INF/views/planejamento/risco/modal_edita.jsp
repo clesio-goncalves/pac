@@ -1,5 +1,7 @@
 <%@taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:url value="/" var="contexto" />
 <div class="modal fade" id="modal_edita">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -98,8 +100,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" onclick="alterar()"
-					data-dismiss="modal">
+				<button type="button" class="btn btn-primary" onclick="alterar(${contexto})">
 					<span class="glyphicon glyphicon-refresh"></span> Atualizar
 				</button>
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">

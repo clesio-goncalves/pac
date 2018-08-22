@@ -3,6 +3,8 @@ package pac.capau.controller;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import pac.capau.dao.EstudoPreliminarDao;
 import pac.capau.dao.GerenciamentoRiscoDao;
@@ -28,6 +31,7 @@ import pac.capau.modelo.Usuario;
 public class ItemController {
 
 	private List<EstudoPreliminar> lista_estudo_preliminar;
+	private PlanejamentoController pc;
 
 	@Autowired
 	ItemDao dao;
@@ -92,6 +96,12 @@ public class ItemController {
 	public String remove(Item item) {
 		dao.remove(item);
 		return "redirect:lista";
+	}
+	
+	@RequestMapping(value = "/risco/adiciona", method = RequestMethod.POST)
+	public void adicionaRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
+		this.pc = new PlanejamentoController();
+		this.pc.adicionaRisco(request, response, model);
 	}
 
 }

@@ -19,10 +19,11 @@
 	src="<c:url value="/resources/js/popper.min.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+<c:url value="/" var="contexto" />
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-		<a class="navbar-brand" href="<c:url value="/" />">PAC CAPAU</a>
+		<a class="navbar-brand" href="${contexto}">PAC CAPAU</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarColor01" aria-controls="navbarColor01"
 			aria-expanded="false" aria-label="Toggle navigation">
