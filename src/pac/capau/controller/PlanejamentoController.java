@@ -42,9 +42,9 @@ public class PlanejamentoController {
 		this.item = dao.buscaPorId(id);
 
 		if (this.item == null) { // se o ID não existir
-			return "redirect:nova";
+			return "redirect:/demanda/nova";
 		} else if (dao_estudo_preliminar.buscaEstudoPreliminarPorItemId(id).size() > 0) {
-			return "redirect:nova"; // se houver estudo_preliminar cadastrado para o item
+			return "redirect:/demanda/nova"; // se houver estudo_preliminar cadastrado para o item
 		}
 
 		model.addAttribute("riscos", dao_gerenciamento_risco.lista(this.item.getId()));
@@ -89,6 +89,8 @@ public class PlanejamentoController {
 	@RequestMapping(value = "/risco/remove", method = RequestMethod.POST)
 	public String removeRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
 
+		System.out.println("Removendo...............................");
+		
 		this.gerenciamento_risco = new GerenciamentoRisco();
 		this.gerenciamento_risco.setId(Long.parseLong(request.getParameter("risco_id")));
 

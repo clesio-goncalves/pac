@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pac.capau.dao.EstudoPreliminarDao;
+import pac.capau.dao.GerenciamentoRiscoDao;
 import pac.capau.dao.InformacoesGerenciaisDao;
 import pac.capau.dao.ItemDao;
 import pac.capau.modelo.EstudoPreliminar;
@@ -36,6 +37,9 @@ public class ItemController {
 
 	@Autowired
 	EstudoPreliminarDao dao_estudo_preliminar;
+
+	@Autowired
+	GerenciamentoRiscoDao dao_gerenciamento_risco;
 
 	@RequestMapping("/nova")
 	public String novaDemanda(Model model) {
@@ -80,6 +84,7 @@ public class ItemController {
 			model.addAttribute("estudo_preliminar", this.lista_estudo_preliminar.get(0));
 		}
 
+		model.addAttribute("riscos", dao_gerenciamento_risco.lista(id));
 		return "demanda/exibe";
 	}
 

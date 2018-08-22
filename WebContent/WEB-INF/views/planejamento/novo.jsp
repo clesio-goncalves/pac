@@ -8,8 +8,6 @@
 <meta name="_csrf_header" content="${_csrf.headerName}" />
 <title>Cadastrar Planejamento</title>
 <c:import url="../componentes/cabecalho.jsp" />
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/demanda.css" />">
 
 <div class="jumbotron">
 	<div class="container">
@@ -139,15 +137,8 @@
 			</div>
 
 			<fieldset class="form-group">
-				<legend>GERENCIAMENTO DE RISCOS</legend>
-
-				<button type="button" class="btn btn-warning btn-lg"
-					data-toggle="modal" data-target="#modal_novo" id="button_adicionar">
-					<span class="glyphicon glyphicon-plus-sign"></span> Adicionar risco
-				</button>
-
 				<!-- TABELA GERENCIAMENTO RISCOS -->
-				<div id="tabela_lista_riscos" style="margin-top: 20px;">
+				<div id="tabela_lista_riscos">
 					<jsp:include page="risco/lista.jsp"></jsp:include>
 				</div>
 

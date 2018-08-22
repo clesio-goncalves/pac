@@ -43,7 +43,6 @@ function excluir(id) {
 	$("#modal" + id).modal('hide');
 	$('body').removeClass('modal-open');
 	$('.modal-backdrop').remove();
-	
 	$.ajax({
 		type : "POST",
 		url : "risco/remove",

@@ -1,9 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
+<legend>GERENCIAMENTO DE RISCOS</legend>
+
+<button type="button" class="btn btn-warning btn-lg" data-toggle="modal"
+	data-target="#modal_novo" id="button_adicionar">
+	<span class="glyphicon glyphicon-plus-sign"></span> Adicionar risco
+</button>
 
 <table class="table table-hover table-bordered dt-responsive nowrap"
-	style="width: 100%">
+	style="width: 100%; margin-top: 20px;">
 	<thead>
 		<tr>
 			<th>ID</th>
