@@ -63,7 +63,7 @@ public class PlanejamentoController {
 		}
 
 		dao_estudo_preliminar.adiciona(estudo_preliminar);
-		return "redirect:lista";
+		return "redirect:/demanda/lista";
 	}
 
 	@RequestMapping(value = "/risco/adiciona", method = RequestMethod.POST)
@@ -100,11 +100,31 @@ public class PlanejamentoController {
 
 	@RequestMapping(value = "/risco/edita", method = RequestMethod.POST)
 	public String editaRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
-
-		System.out.println("Editando.........................................");
-
 		model.addAttribute("risco",
 				dao_gerenciamento_risco.buscaPorId(Long.parseLong(request.getParameter("risco_id"))));
 		return "planejamento/risco/modal_edita";
+	}
+
+	@RequestMapping(value = "/risco/altera", method = RequestMethod.POST)
+	public String alteraRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		System.out.println("Alterando..........................................");
+
+		this.gerenciamento_risco = new GerenciamentoRisco();
+		this.gerenciamento_risco.setItem(this.item);
+		this.gerenciamento_risco.setId(Long.parseLong(request.getParameter("risco_id")));
+		this.gerenciamento_risco.setDescricao(request.getParameter("descricao"));
+		this.gerenciamento_risco.setProbabilidade(request.getParameter("probabilidade"));
+		this.gerenciamento_risco.setImpacto(request.getParameter("impacto"));
+		this.gerenciamento_risco.setAcao_preventiva(request.getParameter("acao_preventiva"));
+		this.gerenciamento_risco.setResponsavel_acao_preventiva(request.getParameter("responsavel_acao_preventiva"));
+		this.gerenciamento_risco.setAcao_contingencia(request.getParameter("acao_contingencia"));
+		this.gerenciamento_risco
+				.setResponsavel_acao_contingencia(request.getParameter("responsavel_acao_contingencia"));
+
+		dao_gerenciamento_risco.altera(this.gerenciamento_risco);
+		model.addAttribute("riscos", dao_gerenciamento_risco.lista(this.item.getId()));
+
+		return "planejamento/risco/lista";
 	}
 }

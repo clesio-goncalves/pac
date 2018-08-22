@@ -178,7 +178,6 @@
 		<jsp:include page="risco/modal_edita.jsp"></jsp:include>
 	</div>
 
-
 </div>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/demanda/demanda.js" />"></script>
