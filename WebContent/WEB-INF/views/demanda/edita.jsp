@@ -1,10 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
+<%@	taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Cadastrar Demanda</title>
+<title>Editar Demanda</title>
 <c:import url="../componentes/cabecalho.jsp" />
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/jquery-ui.min.css" />">
@@ -13,16 +14,20 @@
 
 <div class="jumbotron">
 	<div class="container">
-		<h1 class="display-3">Cadastrar Demanda</h1>
+		<h1 class="display-3">Editar Demanda</h1>
 		<p class="lead">Preencha o formulário abaixo para realizar a
-			formalização do cadastro da demanda no sistema.</p>
+			formalização da edição da demanda no sistema.</p>
 	</div>
 </div>
 
 <div class="container">
-	<form action="adiciona" method="POST">
+	<form action="altera" method="POST">
 
+		<!-- USUÁRIO -->
 		<input type="hidden" name="usuario.id" value="${usuario.id}">
+
+		<!-- ID ITEM -->
+		<input type="hidden" name="id" value="${item.id}">
 
 		<h3 align="left">Informações do Item</h3>
 		<hr />
@@ -33,49 +38,55 @@
 					class="obrigatorio">*</span></label>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio1" name="tipo"
-						class="custom-control-input" checked required
-						value="Material de Consumo"> <label
+						class="custom-control-input" required value="Material de Consumo"
+						${item.tipo eq "Material de Consumo" ? 'checked' : ''}> <label
 						class="custom-control-label" for="customRadio1">Material
 						de Consumo</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio2" name="tipo"
 						class="custom-control-input" value="Material
-						Permanente">
-					<label class="custom-control-label" for="customRadio2">Material
+						Permanente"
+						${item.tipo eq "Material Permanente" ? 'checked' : ''}> <label
+						class="custom-control-label" for="customRadio2">Material
 						Permanente</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio3" name="tipo"
 						class="custom-control-input" value="Serviço
-						NÃO Continuado">
+						NÃO Continuado"
+						${item.tipo eq "Serviço NÃO Continuado" ? 'checked' : ''}>
 					<label class="custom-control-label" for="customRadio3">Serviço
 						NÃO Continuado</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio4" name="tipo"
 						class="custom-control-input" value="Serviço
-						Continuado">
-					<label class="custom-control-label" for="customRadio4">Serviço
+						Continuado"
+						${item.tipo eq "Serviço Continuado" ? 'checked' : ''}> <label
+						class="custom-control-label" for="customRadio4">Serviço
 						Continuado</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio5" name="tipo"
 						class="custom-control-input"
 						value="Serviço de
-						Prazo Indeterminado"> <label
-						class="custom-control-label" for="customRadio5">Serviço de
-						Prazo Indeterminado**</label>
+						Prazo Indeterminado"
+						${item.tipo eq "Serviço de Prazo Indeterminado" ? 'checked' : ''}>
+					<label class="custom-control-label" for="customRadio5">Serviço
+						de Prazo Indeterminado**</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio6" name="tipo"
-						class="custom-control-input" value="Obras"> <label
+						class="custom-control-input" value="Obras"
+						${item.tipo eq "Obras" ? 'checked' : ''}> <label
 						class="custom-control-label" for="customRadio6">Obras</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio7" name="tipo"
 						class="custom-control-input" value="Serviços
-						de Engenharia">
+						de Engenharia"
+						${item.tipo eq "Serviços de Engenharia" ? 'checked' : ''}>
 					<label class="custom-control-label" for="customRadio7">Serviços
 						de Engenharia</label>
 				</div>
@@ -87,8 +98,8 @@
 					<div class="form-group">
 						<label for="codigo" class="col-form-label">Código do item<span
 							class="obrigatorio">*</span></label> <input type="text"
-							class="form-control" name="codigo" MAXLENGTH="10" required
-							onkeypress='return SomenteNumero(event)'>
+							class="form-control maskCodigo" name="codigo" required
+							value="${item.codigo}">
 					</div>
 				</div>
 
@@ -97,7 +108,8 @@
 					<div class="form-group">
 						<label for="descricao" class="col-form-label">Descrição<span
 							class="obrigatorio">*</span></label> <input type="text"
-							class="form-control" name="descricao" MAXLENGTH="255" required>
+							class="form-control" name="descricao" MAXLENGTH="255" required
+							value="${item.descricao}">
 					</div>
 				</div>
 			</div>
@@ -107,7 +119,7 @@
 				<label for="descricao_detalhada">Descrição Detalhada<span
 					class="obrigatorio">*</span></label>
 				<textarea class="form-control" name="descricao_detalhada" rows="3"
-					required maxlength="3000"></textarea>
+					required maxlength="3000">${item.descricao_detalhada}</textarea>
 			</div>
 
 			<div class="row">
@@ -117,7 +129,8 @@
 						<label for="unidade_fornecimento" class="col-form-label">Unidade
 							de fornecimento<span class="obrigatorio">*</span>
 						</label><input type="text" class="form-control"
-							name="unidade_fornecimento" MAXLENGTH="255" required>
+							name="unidade_fornecimento" MAXLENGTH="255" required
+							value="${item.unidade_fornecimento}">
 					</div>
 				</div>
 
@@ -126,8 +139,8 @@
 					<div class="form-group">
 						<label for="quantidade" class="col-form-label">Quantidade<span
 							class="obrigatorio">*</span></label><input type="text"
-							class="form-control" name="quantidade" id="quantidade"
-							MAXLENGTH="10" required onkeypress='return SomenteNumero(event)'>
+							class="form-control maskQuantidade" name="quantidade"
+							id="quantidade" required value="${item.quantidade}">
 					</div>
 				</div>
 			</div>
@@ -136,16 +149,17 @@
 				<div class="col-6">
 					<!-- Valor unitário estimado (R$) -->
 					<div class="form-group">
-						<label for="valor_unitario_estimado" class="col-form-label">Valor
+						<label for="valor_unitario" class="col-form-label">Valor
 							unitário estimado (R$)<span class="obrigatorio">*</span>
 						</label>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
 							</div>
-							<input type="number" class="form-control"
-								name="valor_unitario_estimado" id="valor_unitario_estimado"
-								MAXLENGTH="10" required>
+							<input type="text" class="form-control maskDinheiro"
+								name="valor_unitario" id="valor_unitario_estimado" required
+								value="${item.valor_unitario_estimado}"> <input
+								type="hidden" name="valor_unitario_estimado" id="valor_unit">
 						</div>
 					</div>
 				</div>
@@ -154,14 +168,15 @@
 					<!-- Valor total estimado (R$) -->
 					<div class="form-group">
 						<label for="valor_total_estimado" class="col-form-label">Valor
-							total estimado (R$)</label>
+							total estimado (R$)<span class="obrigatorio">*</span>
+						</label>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
 							</div>
-							<input type="text" class="form-control"
+							<input type="text" class="form-control maskDinheiro"
 								name="valor_total_estimado" id="valor_total_estimado"
-								MAXLENGTH="10" readonly>
+								readonly="readonly">
 						</div>
 					</div>
 				</div>
@@ -171,83 +186,112 @@
 			<div class="form-group">
 				<label for="informacoes_orcamentarias" class="col-form-label">Informações
 					Orçamentárias</label> <input type="text" class="form-control"
-					name="informacoes_orcamentarias" MAXLENGTH="255">
+					name="informacoes_orcamentarias" MAXLENGTH="255"
+					value="${item.informacoes_orcamentarias}">
 			</div>
 
 			<!-- Vincular ao grupo -->
 			<div class="form-group">
 				<label for="vincular_grupo" class="col-form-label">Vincular
 					ao grupo</label> <input type="text" class="form-control"
-					name="vincular_grupo" MAXLENGTH="255">
+					name="vincular_grupo" MAXLENGTH="255"
+					value="${item.vincular_grupo}">
 			</div>
 
 			<fieldset class="form-group">
 				<legend>INFORMAÇÕES GERENCIAIS</legend>
 
+				<!-- ID INFORMAÇÕES GERENCIAIS -->
+				<input type="hidden" name="informacoes_gerenciais.id"
+					value="${item.informacoes_gerenciais.id}">
+
 				<!-- Grau de prioridade da aquisição: -->
 				<div class="form-group">
-					<label for="grau_prioridade" class="col-form-label">Grau de
-						prioridade da aquisição<span class="obrigatorio">*</span>
+					<label for="informacoes_gerenciais.grau_prioridade"
+						class="col-form-label">Grau de prioridade da aquisição<span
+						class="obrigatorio">*</span>
 					</label>
 					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio8" name="grau_prioridade"
-							class="custom-control-input" checked required value="Baixa">
+						<input type="radio" id="customRadio8"
+							name="informacoes_gerenciais.grau_prioridade"
+							class="custom-control-input" required value="Baixa"
+							${item.informacoes_gerenciais.grau_prioridade eq "Baixa" ? 'checked' : ''}>
 						<label class="custom-control-label" for="customRadio8">Baixa</label>
 					</div>
 					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio9" name="grau_prioridade"
-							class="custom-control-input" value="Média"> <label
-							class="custom-control-label" for="customRadio9">Média</label>
+						<input type="radio" id="customRadio9"
+							name="informacoes_gerenciais.grau_prioridade"
+							class="custom-control-input" value="Média"
+							${item.informacoes_gerenciais.grau_prioridade eq "Média" ? 'checked' : ''}>
+						<label class="custom-control-label" for="customRadio9">Média</label>
 					</div>
 					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio10" name="grau_prioridade"
-							class="custom-control-input" value="Alta"> <label
-							class="custom-control-label" for="customRadio10">Alta</label>
+						<input type="radio" id="customRadio10"
+							name="informacoes_gerenciais.grau_prioridade"
+							class="custom-control-input" value="Alta"
+							${item.informacoes_gerenciais.grau_prioridade eq "Alta" ? 'checked' : ''}>
+						<label class="custom-control-label" for="customRadio10">Alta</label>
 					</div>
 				</div>
 
 				<!-- Data estimada para a necessidade do item -->
 				<div class="row">
 					<div class="form-group col-6">
-						<label for="data_estimada" class="col-form-label">Data
-							estimada para a necessidade do item<span class="obrigatorio">*</span>
-						</label> <input type="text" class="form-control data" name="data_estimada"
-							data-mask="99/99/9999" required>
+						<label for="informacoes_gerenciais.data_estimada"
+							class="col-form-label">Data estimada para a necessidade
+							do item<span class="obrigatorio">*</span>
+						</label> <input type="text" class="form-control maskData"
+							name="informacoes_gerenciais.data_estimada" required
+							value="<fmt:formatDate value='${item.informacoes_gerenciais.data_estimada.time}' />">
+
 					</div>
 				</div>
+
+				<!-- Data solicitação do item -->
+				<input type="hidden" name="informacoes_gerenciais.data_solicitacao"
+					value="<fmt:formatDate value='${item.informacoes_gerenciais.data_solicitacao.time}' pattern="dd/MM/yyyy HH:mm:ss"/>">
 
 				<!-- Informações adicionais -->
 				<div class="form-group">
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input"
-							id="customCheck1" name="contratacao_emergencial"> <label
-							class="custom-control-label" for="customCheck1">Contratação
+							id="customCheck1"
+							name="informacoes_gerenciais.contratacao_emergencial"
+							${item.informacoes_gerenciais.contratacao_emergencial eq true ? 'checked' : ''}>
+						<label class="custom-control-label" for="customCheck1">Contratação
 							emergencial ou remanescente (Lei n° 8.666/93, art. 24, incisos IV
 							e XI)</label>
 					</div>
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input"
-							id="customCheck2" name="dispensa"> <label
-							class="custom-control-label" for="customCheck2">Dispensa
+							id="customCheck2" name="informacoes_gerenciais.dispensa"
+							${item.informacoes_gerenciais.dispensa eq true ? 'checked' : ''}>
+						<label class="custom-control-label" for="customCheck2">Dispensa
 							nos termos da Lei n° 8.666/93, art. 24, incisos I e II</label>
 					</div>
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input"
-							id="customCheck3" name="renovacao_contrato"> <label
-							class="custom-control-label" for="customCheck3">Renovação
+							id="customCheck3"
+							name="informacoes_gerenciais.renovacao_contrato"
+							${item.informacoes_gerenciais.renovacao_contrato eq true ? 'checked' : ''}>
+						<label class="custom-control-label" for="customCheck3">Renovação
 							de contrato no exercício subsequente, na forma do art. 57 da Lei
 							nº 8.666, de 1993</label>
 					</div>
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input"
-							id="customCheck4" name="capacitacao_servidores"> <label
-							class="custom-control-label" for="customCheck4">Necessidade
+							id="customCheck4"
+							name="informacoes_gerenciais.capacitacao_servidores"
+							${item.informacoes_gerenciais.capacitacao_servidores eq true ? 'checked' : ''}>
+						<label class="custom-control-label" for="customCheck4">Necessidade
 							de capacitação de servidores</label>
 					</div>
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input"
-							id="customCheck5" name="vinculacao_outro_item"> <label
-							class="custom-control-label" for="customCheck5">Vinculação
+							id="customCheck5"
+							name="informacoes_gerenciais.vinculacao_outro_item"
+							${item.informacoes_gerenciais.vinculacao_outro_item eq true ? 'checked' : ''}>
+						<label class="custom-control-label" for="customCheck5">Vinculação
 							ou dependência com outro item</label>
 					</div>
 				</div>
@@ -260,12 +304,19 @@
 				</div>
 
 				<div>
-					<button type="reset" class="btn btn-secondary btn-lg" id="limpar">
-						<span class="glyphicon glyphicon-trash"></span> Limpar
+					<a href="<c:url value="/demanda/lista" />"
+						class="btn btn-secondary btn-lg"> <span
+						class="glyphicon glyphicon-remove"></span> Cancelar
+					</a>
+					<button type="submit" class="btn btn-primary btn-lg"
+						onclick="alteraValoresNumericos()">
+						<span class="glyphicon glyphicon-refresh"></span> Atualizar
 					</button>
-					<button type="submit" class="btn btn-primary btn-lg">
-						<span class="glyphicon glyphicon-floppy-disk"></span> Salvar
-					</button>
+					<a
+						href="<c:url value="/demanda/planejamento/edita?id=${item.id}" />"
+						class="btn btn-warning btn-lg"> <span
+						class="glyphicon glyphicon-list-alt"></span> Planejamento
+					</a>
 				</div>
 			</fieldset>
 
@@ -279,8 +330,6 @@
 	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.mask.min.js" />"></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/SomenteNumero.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/demanda/demanda.js" />"></script>
 

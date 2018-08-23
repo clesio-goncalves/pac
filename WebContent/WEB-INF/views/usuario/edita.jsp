@@ -21,16 +21,17 @@
 
 		<!-- Órgão/Entidade: -->
 		<div class="form-group">
-			<label for="orgao" class="col-form-label">Órgão/Entidade*</label> <input
-				type="text" class="form-control" name="orgao" MAXLENGTH="255"
-				required autofocus value="${usuario.orgao}">
+			<label for="orgao" class="col-form-label">Órgão/Entidade<span
+				class="obrigatorio">*</span></label> <input type="text" class="form-control"
+				name="orgao" MAXLENGTH="255" required autofocus
+				value="${usuario.orgao}">
 		</div>
 
 		<!-- Setor Requisitante (Unidade/Setor/Departamento): -->
 		<div class="form-group">
 			<label for="setor" class="col-form-label">Setor Requisitante
-				(Unidade/Setor/Departamento)*</label> <select class="custom-select"
-				name="setor.id" required>
+				(Unidade/Setor/Departamento)<span class="obrigatorio">*</span>
+			</label> <select class="custom-select" name="setor.id" required>
 				<!-- percorre perfil montando as linhas da tabela -->
 				<c:forEach var="setor" items="${setores}">
 					<option value="${setor.id}"
@@ -42,8 +43,9 @@
 		<!-- Responsável pela demanda: -->
 		<div class="form-group">
 			<label for="nome" class="col-form-label">Nome/Responsável
-				pela demanda*</label> <input type="text" class="form-control" name="nome"
-				MAXLENGTH="255" required value="${usuario.nome}">
+				pela demanda<span class="obrigatorio">*</span>
+			</label> <input type="text" class="form-control" name="nome" MAXLENGTH="255"
+				required value="${usuario.nome}">
 		</div>
 
 		<div class="row">
@@ -51,16 +53,17 @@
 
 				<!-- SIAPE -->
 				<div class="form-group">
-					<label for="siape" class="col-form-label">SIAPE*</label> <input
-						type="number" class="form-control" name="siape" MAXLENGTH="10"
-						required onkeypress='return SomenteNumero(event)'
+					<label for="siape" class="col-form-label">SIAPE<span
+						class="obrigatorio">*</span></label> <input type="text"
+						class="form-control" name="siape" required data-mask="99999999999"
 						value="${usuario.siape}">
 				</div>
 			</div>
 			<div class="col-6">
 				<!-- telefone -->
 				<div class="form-group">
-					<label for="telefone" class="col-form-label">Telefone*</label>
+					<label for="telefone" class="col-form-label">Telefone<span
+						class="obrigatorio">*</span></label>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><span
@@ -77,7 +80,8 @@
 
 		<!-- EMAIL -->
 		<div class="form-group">
-			<label for="email" class="col-form-label">E-mail*</label>
+			<label for="email" class="col-form-label">E-mail<span
+				class="obrigatorio">*</span></label>
 			<div class="input-group mb-3">
 				<div class="input-group-prepend">
 					<span class="input-group-text">@</span>
@@ -89,22 +93,24 @@
 
 		<!-- SENHA -->
 		<div class="form-group">
-			<label for="senha" class="col-form-label">Senha*</label> <input
-				type="password" class="form-control" name="senha" id="senha"
-				MAXLENGTH="50" required>
+			<label for="senha" class="col-form-label">Senha<span
+				class="obrigatorio">*</span></label> <input type="password"
+				class="form-control" name="senha" id="senha" MAXLENGTH="50" required>
 		</div>
 
 		<!-- REPETIR SENHA -->
 		<div class="form-group">
 			<label for="repetir_senha" class="col-form-label">Repetir
-				Senha*</label> <input type="password" class="form-control"
-				name="repetir_senha" id="repetir_senha" MAXLENGTH="50" required>
+				Senha<span class="obrigatorio">*</span>
+			</label> <input type="password" class="form-control" name="repetir_senha"
+				id="repetir_senha" MAXLENGTH="50" required>
 		</div>
 
 		<!-- PERFIL -->
 		<div class="form-group">
-			<label for="perfil" class="col-form-label">Perfil*</label> <select
-				class="custom-select" name="perfil.id" required>
+			<label for="perfil" class="col-form-label">Perfil<span
+				class="obrigatorio">*</span></label> <select class="custom-select"
+				name="perfil.id" required>
 				<!-- percorre perfil montando as linhas da tabela -->
 				<c:forEach var="perfil" items="${perfis}">
 					<option value="${perfil.id}"
@@ -138,8 +144,6 @@
 	</form>
 </div>
 
-<script type="text/javascript"
-	src="<c:url value="/resources/js/SomenteNumero.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.mask.min.js" />"></script>
 <script src="<c:url value="/resources/js/confirma_senha.js" />"></script>

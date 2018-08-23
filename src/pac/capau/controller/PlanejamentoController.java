@@ -66,11 +66,28 @@ public class PlanejamentoController {
 		return "redirect:/demanda/lista";
 	}
 
+	@RequestMapping("/edita")
+	public String edita(Long id, Model model) {
+		this.item = dao.buscaPorId(id);
+
+		if (this.item == null) { // se o ID não existir
+			return "redirect:/demanda/nova";
+		} else if (dao_estudo_preliminar.buscaEstudoPreliminarPorItemId(id).size() == 0) {
+			return "redirect:novo?id=" + this.item.getId(); // se não houver estudo_preliminar cadastrado para o item
+		} else {
+			model.addAttribute("item", dao_estudo_preliminar.buscaEstudoPreliminarPorItemId(id).get(0));
+		}
+
+		model.addAttribute("riscos", dao_gerenciamento_risco.lista(this.item.getId()));
+		model.addAttribute("item", this.item);
+		return "planejamento/edita";
+	}
+
 	@RequestMapping(value = "/risco/adiciona", method = RequestMethod.POST)
 	public String adicionaRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
 
 		this.item = dao.buscaPorId(Long.parseLong(request.getParameter("item_id")));
-		
+
 		this.gerenciamento_risco = new GerenciamentoRisco();
 		this.gerenciamento_risco.setItem(this.item);
 		this.gerenciamento_risco.setDescricao(request.getParameter("descricao"));
@@ -112,7 +129,7 @@ public class PlanejamentoController {
 	public String alteraRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
 
 		this.item = dao.buscaPorId(Long.parseLong(request.getParameter("item_id")));
-		
+
 		this.gerenciamento_risco = new GerenciamentoRisco();
 		this.gerenciamento_risco.setItem(this.item);
 		this.gerenciamento_risco.setId(Long.parseLong(request.getParameter("risco_id")));

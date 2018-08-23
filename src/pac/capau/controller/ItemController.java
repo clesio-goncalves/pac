@@ -56,7 +56,7 @@ public class ItemController {
 	@RequestMapping("/adiciona")
 	public String adiciona(@Valid Item item, BindingResult resultItem,
 			@Valid InformacoesGerenciais informacoes_gerenciais, BindingResult result_informacoes_gerenciais) {
-
+		
 		/* INFORMAÇÕES GERENCIAIS */
 		if (result_informacoes_gerenciais.hasErrors()) {
 			return "redirect:nova";
@@ -66,6 +66,7 @@ public class ItemController {
 
 		/* ITEM */
 		if (resultItem.hasErrors()) {
+			System.out.println(resultItem);
 			return "redirect:nova";
 		}
 
@@ -92,12 +93,32 @@ public class ItemController {
 		return "demanda/exibe";
 	}
 
+	@RequestMapping("/edita")
+	public String edita(Long id, Model model) {
+		// Pego o usuário logado
+		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("usuario", usuario);
+		model.addAttribute("item", dao.buscaPorId(id));
+		return "demanda/edita";
+	}
+
+	@RequestMapping("/altera")
+	public String altera(@Valid Item item, BindingResult resultItem) {
+		if (resultItem.hasErrors()) {
+			return "redirect:edita?id=" + item.getId();
+		}
+		// Altera informações gerenciais no banco
+		dao_informacoes_gerenciais.altera(item.getInformacoes_gerenciais());
+		dao.altera(item);
+		return "redirect:/demanda/planejamento/edita?id=" + item.getId();
+	}
+
 	@RequestMapping("/remove")
 	public String remove(Item item) {
 		dao.remove(item);
 		return "redirect:lista";
 	}
-	
+
 	@RequestMapping(value = "/risco/adiciona", method = RequestMethod.POST)
 	public void adicionaRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
 		this.pc = new PlanejamentoController();

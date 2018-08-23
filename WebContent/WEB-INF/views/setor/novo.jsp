@@ -19,9 +19,9 @@
 
 		<!-- NOME -->
 		<div class="form-group">
-			<label for="nome" class="col-form-label">Nome*</label> <input
-				type="text" class="form-control" name="nome" autofocus
-				MAXLENGTH="255" required>
+			<label for="nome" class="col-form-label">Nome<span
+				class="obrigatorio">*</span></label> <input type="text" class="form-control"
+				name="nome" autofocus MAXLENGTH="255" required>
 		</div>
 
 		<security:csrfInput />
@@ -30,7 +30,7 @@
 		<label for="obrigatorio">(*) Campo obrigatório</label>
 		<div>
 			<button type="reset" class="btn btn-secondary btn-lg">
-				<span class="glyphicon glyphicon-trash"></span> Limpar
+				<span class="glyphicon glyphicon-erase"></span> Limpar
 			</button>
 			<button type="submit" class="btn btn-primary btn-lg">
 				<span class="glyphicon glyphicon-floppy-disk"></span> Salvar

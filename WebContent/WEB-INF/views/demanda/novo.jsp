@@ -21,7 +21,6 @@
 
 <div class="container">
 	<form action="adiciona" method="POST">
-
 		<input type="hidden" name="usuario.id" value="${usuario.id}">
 
 		<h3 align="left">Informações do Item</h3>
@@ -87,8 +86,7 @@
 					<div class="form-group">
 						<label for="codigo" class="col-form-label">Código do item<span
 							class="obrigatorio">*</span></label> <input type="text"
-							class="form-control" name="codigo" MAXLENGTH="10" required
-							onkeypress='return SomenteNumero(event)'>
+							class="form-control maskCodigo" name="codigo" required>
 					</div>
 				</div>
 
@@ -126,8 +124,8 @@
 					<div class="form-group">
 						<label for="quantidade" class="col-form-label">Quantidade<span
 							class="obrigatorio">*</span></label><input type="text"
-							class="form-control" name="quantidade" id="quantidade"
-							MAXLENGTH="10" required onkeypress='return SomenteNumero(event)'>
+							class="form-control maskQuantidade" name="quantidade"
+							id="quantidade" required>
 					</div>
 				</div>
 			</div>
@@ -136,16 +134,16 @@
 				<div class="col-6">
 					<!-- Valor unitário estimado (R$) -->
 					<div class="form-group">
-						<label for="valor_unitario_estimado" class="col-form-label">Valor
+						<label for="valor_unitario" class="col-form-label">Valor
 							unitário estimado (R$)<span class="obrigatorio">*</span>
 						</label>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
 							</div>
-							<input type="number" class="form-control"
-								name="valor_unitario_estimado" id="valor_unitario_estimado"
-								MAXLENGTH="10" required>
+							<input type="text" class="form-control maskDinheiro"
+								name="valor_unitario" id="valor_unitario_estimado" required>
+							<input type="hidden" name="valor_unitario_estimado" id="valor_unit">
 						</div>
 					</div>
 				</div>
@@ -154,14 +152,15 @@
 					<!-- Valor total estimado (R$) -->
 					<div class="form-group">
 						<label for="valor_total_estimado" class="col-form-label">Valor
-							total estimado (R$)</label>
+							total estimado (R$)<span class="obrigatorio">*</span>
+						</label>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
 							</div>
-							<input type="text" class="form-control"
+							<input type="text" class="form-control maskDinheiro"
 								name="valor_total_estimado" id="valor_total_estimado"
-								MAXLENGTH="10" readonly>
+								readonly="readonly">
 						</div>
 					</div>
 				</div>
@@ -211,8 +210,8 @@
 					<div class="form-group col-6">
 						<label for="data_estimada" class="col-form-label">Data
 							estimada para a necessidade do item<span class="obrigatorio">*</span>
-						</label> <input type="text" class="form-control data" name="data_estimada"
-							data-mask="99/99/9999" required>
+						</label> <input type="text" class="form-control maskData"
+							name="data_estimada" required>
 					</div>
 				</div>
 
@@ -227,7 +226,7 @@
 					</div>
 					<div class="custom-control custom-checkbox">
 						<input type="checkbox" class="custom-control-input"
-							id="customCheck2" name="dispensa"> <label
+							id="customCheck2" name="dispensa" checked="checked"> <label
 							class="custom-control-label" for="customCheck2">Dispensa
 							nos termos da Lei n° 8.666/93, art. 24, incisos I e II</label>
 					</div>
@@ -261,9 +260,10 @@
 
 				<div>
 					<button type="reset" class="btn btn-secondary btn-lg" id="limpar">
-						<span class="glyphicon glyphicon-trash"></span> Limpar
+						<span class="glyphicon glyphicon-erase"></span> Limpar
 					</button>
-					<button type="submit" class="btn btn-primary btn-lg">
+					<button type="submit" class="btn btn-primary btn-lg"
+						onclick="alteraValoresNumericos()">
 						<span class="glyphicon glyphicon-floppy-disk"></span> Salvar
 					</button>
 				</div>
@@ -279,8 +279,6 @@
 	src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.mask.min.js" />"></script>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/SomenteNumero.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/demanda/demanda.js" />"></script>
 

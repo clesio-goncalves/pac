@@ -23,7 +23,7 @@
 
 		<!-- NOME -->
 		<div class="form-group">
-			<label for="nome" class="col-form-label">Nome*</label> <input
+			<label for="nome" class="col-form-label">Nome<span class="obrigatorio">*</span></label> <input
 				type="text" class="form-control" name="nome" autofocus
 				MAXLENGTH="255" required value="${setor.nome}">
 		</div>

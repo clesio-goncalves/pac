@@ -115,7 +115,6 @@ public class UsuarioController {
 		// Altera no banco
 		dao.altera(usuario);
 		return "redirect:lista";
-
 	}
 
 }

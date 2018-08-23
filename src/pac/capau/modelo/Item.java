@@ -41,7 +41,10 @@ public class Item {
 	private Double valor_unitario_estimado;
 
 	@Transient
-	private Double valor_total_estimado;
+	private String valor_unitario;
+
+	@Transient
+	private String valor_total_estimado;
 
 	private String informacoes_orcamentarias;
 
@@ -118,11 +121,19 @@ public class Item {
 		this.valor_unitario_estimado = valor_unitario_estimado;
 	}
 
-	public Double getValor_total_estimado() {
+	public String getValor_unitario() {
+		return valor_unitario;
+	}
+
+	public void setValor_unitario(String valor_unitario) {
+		this.valor_unitario = valor_unitario;
+	}
+
+	public String getValor_total_estimado() {
 		return valor_total_estimado;
 	}
 
-	public void setValor_total_estimado(Double valor_total_estimado) {
+	public void setValor_total_estimado(String valor_total_estimado) {
 		this.valor_total_estimado = valor_total_estimado;
 	}
 
