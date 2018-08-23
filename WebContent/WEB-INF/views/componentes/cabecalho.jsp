@@ -19,11 +19,10 @@
 	src="<c:url value="/resources/js/popper.min.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-<c:url value="/" var="contexto" />
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-		<a class="navbar-brand" href="${contexto}">PAC CAPAU</a>
+		<a class="navbar-brand" href="<c:url value="/" />">PAC CAPAU</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarColor01" aria-controls="navbarColor01"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +38,7 @@
 						style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
 						<a class="dropdown-item" href="<c:url value="/usuario/novo" />">Usuário</a>
 						<a class="dropdown-item" href="<c:url value="/setor/novo" />">Setor</a>
+						<a class="dropdown-item" href="<c:url value="/grupo/novo" />">Grupo</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<c:url value="/demanda/nova" />">Formalização
 							Demanda</a>
@@ -50,6 +50,7 @@
 						style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
 						<a class="dropdown-item" href="<c:url value="/usuario/lista" />">Usuários</a>
 						<a class="dropdown-item" href="<c:url value="/setor/lista" />">Setores</a>
+						<a class="dropdown-item" href="<c:url value="/grupo/lista" />">Grupos</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<c:url value="/demanda/lista" />">Demandas</a>
 					</div></li>

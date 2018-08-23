@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Setor {
+public class Grupo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -38,9 +38,11 @@ public class GerenciamentoRisco {
 	@NotNull
 	private String responsavel_acao_contingencia;
 
-	@NotNull
 	@ManyToOne
 	private Item item;
+
+	@ManyToOne
+	private Grupo grupo;
 
 	public Long getId() {
 		return id;
@@ -112,6 +114,14 @@ public class GerenciamentoRisco {
 
 	public void setItem(Item item) {
 		this.item = item;
+	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 
 }

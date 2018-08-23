@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -57,6 +58,9 @@ public class Item {
 
 	@OneToOne(cascade = CascadeType.REMOVE)
 	private InformacoesGerenciais informacoes_gerenciais;
+
+	@ManyToOne
+	private Grupo grupo;
 
 	public Long getId() {
 		return id;
@@ -168,6 +172,14 @@ public class Item {
 
 	public void setInformacoes_gerenciais(InformacoesGerenciais informacoes_gerenciais) {
 		this.informacoes_gerenciais = informacoes_gerenciais;
+	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 
 }

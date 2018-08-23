@@ -56,9 +56,11 @@ public class EstudoPreliminar {
 	@Column(columnDefinition = "TEXT")
 	private String declaracao_viabilidade;
 
-	@NotNull
 	@OneToOne
 	private Item item;
+
+	@OneToOne
+	private Grupo grupo;
 
 	public Long getId() {
 		return id;
@@ -170,6 +172,14 @@ public class EstudoPreliminar {
 
 	public void setItem(Item item) {
 		this.item = item;
+	}
+
+	public Grupo getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
 	}
 
 }
