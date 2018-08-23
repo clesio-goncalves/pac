@@ -20,7 +20,7 @@
 <div class="container">
 	<form action="adiciona" method="POST">
 
-		<!-- ID -->
+		<!-- ITEM ID -->
 		<input type="hidden" name="item.id" value="${item.id}" />
 
 		<fieldset class="form-group">
@@ -147,7 +147,10 @@
 				</div>
 
 				<div>
-					<a href="<c:url value="/demanda/lista" />"
+					<a class="btn btn-success btn-lg"
+						href="<c:url value="/demanda/edita?id=${item.id}" />"><span
+						class="glyphicon glyphicon-chevron-left"></span> Voltar</a> <a
+						href="<c:url value="/demanda/lista" />"
 						class="btn btn-secondary btn-lg"> <span
 						class="glyphicon glyphicon-remove"></span> Cancelar
 					</a>
@@ -170,8 +173,6 @@
 	</div>
 
 </div>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/demanda/demanda.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/demanda/risco.js" />"></script>
 

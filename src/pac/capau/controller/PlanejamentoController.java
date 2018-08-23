@@ -1,5 +1,7 @@
 package pac.capau.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
@@ -26,6 +28,7 @@ public class PlanejamentoController {
 
 	private GerenciamentoRisco gerenciamento_risco;
 	private Item item;
+	private List<EstudoPreliminar> estudo_preliminar;
 
 	@Autowired
 	ItemDao dao;
@@ -43,7 +46,7 @@ public class PlanejamentoController {
 
 		if (this.item == null) { // se o ID não existir
 			return "redirect:/demanda/nova";
-		} else if (dao_estudo_preliminar.buscaEstudoPreliminarPorItemId(id).size() > 0) {
+		} else if (dao_estudo_preliminar.buscaEstudoPreliminarPeloItemId(id).size() > 0) {
 			return "redirect:/demanda/nova"; // se houver estudo_preliminar cadastrado para o item
 		}
 
@@ -56,9 +59,7 @@ public class PlanejamentoController {
 	public String adicionaPlanejamento(@Valid EstudoPreliminar estudo_preliminar,
 			BindingResult result_estudo_preliminar) {
 
-		/* ESTUDOS PRELIMINARES */
 		if (result_estudo_preliminar.hasErrors()) {
-			System.out.println(result_estudo_preliminar);
 			return "redirect:nova";
 		}
 
@@ -69,18 +70,29 @@ public class PlanejamentoController {
 	@RequestMapping("/edita")
 	public String edita(Long id, Model model) {
 		this.item = dao.buscaPorId(id);
+		this.estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloItemId(id);
 
 		if (this.item == null) { // se o ID não existir
 			return "redirect:/demanda/nova";
-		} else if (dao_estudo_preliminar.buscaEstudoPreliminarPorItemId(id).size() == 0) {
+		} else if (this.estudo_preliminar.size() == 0) {
 			return "redirect:novo?id=" + this.item.getId(); // se não houver estudo_preliminar cadastrado para o item
 		} else {
-			model.addAttribute("item", dao_estudo_preliminar.buscaEstudoPreliminarPorItemId(id).get(0));
+			model.addAttribute("estudo_preliminar", this.estudo_preliminar.get(0));
 		}
 
 		model.addAttribute("riscos", dao_gerenciamento_risco.lista(this.item.getId()));
 		model.addAttribute("item", this.item);
 		return "planejamento/edita";
+	}
+
+	@RequestMapping("/altera")
+	public String altera(@Valid EstudoPreliminar estudo_preliminar, BindingResult result_estudo_preliminar) {
+		if (result_estudo_preliminar.hasErrors()) {
+			return "redirect:nova";
+		}
+
+		dao_estudo_preliminar.altera(estudo_preliminar);
+		return "redirect:/demanda/lista";
 	}
 
 	@RequestMapping(value = "/risco/adiciona", method = RequestMethod.POST)

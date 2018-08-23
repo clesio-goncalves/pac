@@ -35,7 +35,12 @@ public class GerenciamentoRiscoDao {
 	}
 
 	public void remove(GerenciamentoRisco derenciamentoRisco) {
-		manager.remove(buscaPorId(derenciamentoRisco.getId()));
+		manager.remove(derenciamentoRisco);
+	}
+
+	public void removeGerenciamentoRiscoPeloItemId(Long id) {
+		manager.createQuery("delete from GerenciamentoRisco gr where gr.item.id = :id").setParameter("id", id)
+				.executeUpdate();
 	}
 
 }

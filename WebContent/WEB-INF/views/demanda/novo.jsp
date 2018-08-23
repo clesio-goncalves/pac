@@ -39,30 +39,26 @@
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio2" name="tipo"
-						class="custom-control-input" value="Material
-						Permanente">
+						class="custom-control-input" value="Material Permanente">
 					<label class="custom-control-label" for="customRadio2">Material
 						Permanente</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio3" name="tipo"
-						class="custom-control-input" value="Serviço
-						NÃO Continuado">
+						class="custom-control-input" value="Serviço NÃO Continuado">
 					<label class="custom-control-label" for="customRadio3">Serviço
 						NÃO Continuado</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio4" name="tipo"
-						class="custom-control-input" value="Serviço
-						Continuado">
-					<label class="custom-control-label" for="customRadio4">Serviço
+						class="custom-control-input" value="Serviço Continuado"> <label
+						class="custom-control-label" for="customRadio4">Serviço
 						Continuado</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio5" name="tipo"
 						class="custom-control-input"
-						value="Serviço de
-						Prazo Indeterminado"> <label
+						value="Serviço de Prazo Indeterminado"> <label
 						class="custom-control-label" for="customRadio5">Serviço de
 						Prazo Indeterminado**</label>
 				</div>
@@ -73,8 +69,7 @@
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio7" name="tipo"
-						class="custom-control-input" value="Serviços
-						de Engenharia">
+						class="custom-control-input" value="Serviços de Engenharia">
 					<label class="custom-control-label" for="customRadio7">Serviços
 						de Engenharia</label>
 				</div>
@@ -143,7 +138,8 @@
 							</div>
 							<input type="text" class="form-control maskDinheiro"
 								name="valor_unitario" id="valor_unitario_estimado" required>
-							<input type="hidden" name="valor_unitario_estimado" id="valor_unit">
+							<input type="hidden" name="valor_unitario_estimado"
+								id="valor_unit">
 						</div>
 					</div>
 				</div>

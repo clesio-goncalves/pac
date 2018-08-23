@@ -45,24 +45,21 @@
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio2" name="tipo"
-						class="custom-control-input" value="Material
-						Permanente"
+						class="custom-control-input" value="Material Permanente"
 						${item.tipo eq "Material Permanente" ? 'checked' : ''}> <label
 						class="custom-control-label" for="customRadio2">Material
 						Permanente</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio3" name="tipo"
-						class="custom-control-input" value="Serviço
-						NÃO Continuado"
+						class="custom-control-input" value="Serviço NÃO Continuado"
 						${item.tipo eq "Serviço NÃO Continuado" ? 'checked' : ''}>
 					<label class="custom-control-label" for="customRadio3">Serviço
 						NÃO Continuado</label>
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio4" name="tipo"
-						class="custom-control-input" value="Serviço
-						Continuado"
+						class="custom-control-input" value="Serviço Continuado"
 						${item.tipo eq "Serviço Continuado" ? 'checked' : ''}> <label
 						class="custom-control-label" for="customRadio4">Serviço
 						Continuado</label>
@@ -70,8 +67,7 @@
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio5" name="tipo"
 						class="custom-control-input"
-						value="Serviço de
-						Prazo Indeterminado"
+						value="Serviço de Prazo Indeterminado"
 						${item.tipo eq "Serviço de Prazo Indeterminado" ? 'checked' : ''}>
 					<label class="custom-control-label" for="customRadio5">Serviço
 						de Prazo Indeterminado**</label>
@@ -84,8 +80,7 @@
 				</div>
 				<div class="custom-control custom-radio">
 					<input type="radio" id="customRadio7" name="tipo"
-						class="custom-control-input" value="Serviços
-						de Engenharia"
+						class="custom-control-input" value="Serviços de Engenharia"
 						${item.tipo eq "Serviços de Engenharia" ? 'checked' : ''}>
 					<label class="custom-control-label" for="customRadio7">Serviços
 						de Engenharia</label>

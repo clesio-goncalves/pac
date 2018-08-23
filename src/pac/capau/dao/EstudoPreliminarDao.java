@@ -24,17 +24,14 @@ public class EstudoPreliminarDao {
 		manager.merge(estudoPreliminar);
 	}
 
-	public EstudoPreliminar buscaPorId(Long id) {
-		return manager.find(EstudoPreliminar.class, id);
-	}
-
-	public List<EstudoPreliminar> buscaEstudoPreliminarPorItemId(Long id) {
+	public List<EstudoPreliminar> buscaEstudoPreliminarPeloItemId(Long id) {
 		return manager.createQuery("select ep from EstudoPreliminar ep where ep.item.id = :id", EstudoPreliminar.class)
 				.setParameter("id", id).getResultList();
 	}
 
-	public void remove(EstudoPreliminar estudoPreliminar) {
-		manager.remove(buscaPorId(estudoPreliminar.getId()));
+	public void removeEstudoPreliminarPeloItemId(Long id) {
+		manager.createQuery("delete from EstudoPreliminar ep where ep.item.id = :id").setParameter("id", id)
+				.executeUpdate();
 	}
 
 }

@@ -6,22 +6,25 @@
 <head>
 <meta name="_csrf" content="${_csrf.token}" />
 <meta name="_csrf_header" content="${_csrf.headerName}" />
-<title>Cadastrar Planejamento</title>
+<title>Editar Planejamento</title>
 <c:import url="../componentes/cabecalho.jsp" />
 
 <div class="jumbotron">
 	<div class="container">
-		<h1 class="display-3">Cadastrar Planejamento do item</h1>
-		<p class="lead">Preencha o formulário abaixo para realizar o
-			cadastro do planejamento do item da demanda no sistema.</p>
+		<h1 class="display-3">Editar Planejamento do item</h1>
+		<p class="lead">Preencha o formulário abaixo para realizar a
+			alteração do planejamento do item da demanda no sistema.</p>
 	</div>
 </div>
 
 <div class="container">
-	<form action="adiciona" method="POST">
+	<form action="altera" method="POST">
 
-		<!-- ID -->
-		<input type="hidden" name="item.id" value="${item.id}" />
+		<!-- ITEM ID -->
+		<input type="hidden" name="item.id" value="${estudo_preliminar.item.id}" />
+
+		<!-- ESTUDO PRELIMINAR ID -->
+		<input type="hidden" name="id" value="${estudo_preliminar.id}" />
 
 		<fieldset class="form-group">
 			<legend>ESTUDOS PRELIMINARES</legend>
@@ -32,7 +35,7 @@
 					da contratação<span class="obrigatorio">*</span>
 				</label>
 				<textarea class="form-control" name="necessidade_contratacao"
-					rows="3" required maxlength="3000" autofocus></textarea>
+					rows="3" required maxlength="3000" autofocus>${estudo_preliminar.necessidade_contratacao}</textarea>
 			</div>
 
 			<!-- 2. Referência a outros instrumentos de planejamento do órgão ou entidade, se houver -->
@@ -41,7 +44,7 @@
 					Referência a outros instrumentos de planejamento do órgão ou
 					entidade, se houver</label>
 				<textarea class="form-control" name="ref_outros_instrumentos"
-					rows="3" maxlength="3000"></textarea>
+					rows="3" maxlength="3000">${estudo_preliminar.ref_outros_instrumentos}</textarea>
 			</div>
 
 			<!-- 3. Requisitos da contratação -->
@@ -49,7 +52,7 @@
 				<label for="requisitos_contratacao" class="col-form-label">3.
 					Requisitos da contratação</label>
 				<textarea class="form-control" name="requisitos_contratacao"
-					rows="3" maxlength="3000"></textarea>
+					rows="3" maxlength="3000">${estudo_preliminar.requisitos_contratacao}</textarea>
 			</div>
 
 			<!-- 4. Estimativa das quantidades, acompanhadas das memórias de cálculo e dos documentos que lhe dão suporte* -->
@@ -59,7 +62,7 @@
 					dos documentos que lhe dão suporte<span class="obrigatorio">*</span>
 				</label>
 				<textarea class="form-control" name="estimativa_quantidades"
-					rows="3" required maxlength="3000"></textarea>
+					rows="3" required maxlength="3000">${estudo_preliminar.estimativa_quantidades}</textarea>
 			</div>
 
 			<!-- 5. Levantamento de mercado e justificativa da escolha do tipo de solução a contratar -->
@@ -68,7 +71,7 @@
 					Levantamento de mercado e justificativa da escolha do tipo de
 					solução a contratar</label>
 				<textarea class="form-control" name="levantamento_mercado" rows="3"
-					maxlength="3000"></textarea>
+					maxlength="3000">${estudo_preliminar.levantamento_mercado}</textarea>
 			</div>
 
 			<!-- 6. Definição do método para estimativas de preços ou dos meios de previsão de preços referenciais* -->
@@ -78,7 +81,7 @@
 					previsão de preços referenciais<span class="obrigatorio">*</span>
 				</label>
 				<textarea class="form-control" name="metodo_estimativa_preco"
-					rows="3" required maxlength="3000"></textarea>
+					rows="3" required maxlength="3000">${estudo_preliminar.metodo_estimativa_preco}</textarea>
 			</div>
 
 			<!-- 7. Descrição da solução como um todo -->
@@ -86,7 +89,7 @@
 				<label for="descricao_solucao" class="col-form-label">7.
 					Descrição da solução como um todo</label>
 				<textarea class="form-control" name="descricao_solucao" rows="3"
-					maxlength="3000"></textarea>
+					maxlength="3000">${estudo_preliminar.descricao_solucao}</textarea>
 			</div>
 
 			<!-- 8. Justificativas para o parcelamento ou não da solução, quando necessária para a individualização do objeto* -->
@@ -97,7 +100,7 @@
 					class="obrigatorio">*</span>
 				</label>
 				<textarea class="form-control" name="justificativa_parcelamento"
-					rows="3" required maxlength="3000"></textarea>
+					rows="3" required maxlength="3000">${estudo_preliminar.justificativa_parcelamento}</textarea>
 			</div>
 
 			<!-- 9. Demonstrativo dos resultados pretendidos em termos de economicidade e de melhor aproveitamento dos recursos humanos, materiais ou financeiros disponíveis -->
@@ -107,7 +110,7 @@
 					e de melhor aproveitamento dos recursos humanos, materiais ou
 					financeiros disponíveis</label>
 				<textarea class="form-control" name="resultados_pretendidos"
-					rows="3" maxlength="3000"></textarea>
+					rows="3" maxlength="3000">${estudo_preliminar.resultados_pretendidos}</textarea>
 			</div>
 
 			<!-- 10. Providências para adequação do ambiente do órgão -->
@@ -115,7 +118,7 @@
 				<label for="providencias_adequacao" class="col-form-label">10.
 					Providências para adequação do ambiente do órgão</label>
 				<textarea class="form-control" name="providencias_adequacao"
-					rows="3" maxlength="3000"></textarea>
+					rows="3" maxlength="3000">${estudo_preliminar.providencias_adequacao}</textarea>
 			</div>
 
 			<!-- 11. Contratações correlatas e/ou interdependentes -->
@@ -123,7 +126,7 @@
 				<label for="contratacoes_correlatas" class="col-form-label">11.
 					Contratações correlatas e/ou interdependentes</label>
 				<textarea class="form-control" name="contratacoes_correlatas"
-					rows="3" maxlength="3000"></textarea>
+					rows="3" maxlength="3000">${estudo_preliminar.contratacoes_correlatas}</textarea>
 			</div>
 
 			<!-- 12. Declaração da viabilidade ou não da contratação* -->
@@ -133,7 +136,7 @@
 					class="obrigatorio">*</span>
 				</label>
 				<textarea class="form-control" name="declaracao_viabilidade"
-					rows="3" required maxlength="3000"></textarea>
+					rows="3" required maxlength="3000">${estudo_preliminar.declaracao_viabilidade}</textarea>
 			</div>
 
 			<fieldset class="form-group">
@@ -147,12 +150,15 @@
 				</div>
 
 				<div>
-					<a href="<c:url value="/demanda/lista" />"
+					<a class="btn btn-success btn-lg"
+						href="<c:url value="/demanda/edita?id=${item.id}" />"><span
+						class="glyphicon glyphicon-chevron-left"></span> Voltar</a> <a
+						href="<c:url value="/demanda/lista" />"
 						class="btn btn-secondary btn-lg"> <span
 						class="glyphicon glyphicon-remove"></span> Cancelar
 					</a>
 					<button type="submit" class="btn btn-primary btn-lg">
-						<span class="glyphicon glyphicon-floppy-disk"></span> Salvar
+						<span class="glyphicon glyphicon-refresh"></span> Atualizar
 					</button>
 				</div>
 			</fieldset>
@@ -170,8 +176,6 @@
 	</div>
 
 </div>
-<script type="text/javascript"
-	src="<c:url value="/resources/js/demanda/demanda.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/demanda/risco.js" />"></script>
 

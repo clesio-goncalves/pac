@@ -56,7 +56,7 @@ public class ItemController {
 	@RequestMapping("/adiciona")
 	public String adiciona(@Valid Item item, BindingResult resultItem,
 			@Valid InformacoesGerenciais informacoes_gerenciais, BindingResult result_informacoes_gerenciais) {
-		
+
 		/* INFORMAÇÕES GERENCIAIS */
 		if (result_informacoes_gerenciais.hasErrors()) {
 			return "redirect:nova";
@@ -83,7 +83,7 @@ public class ItemController {
 	public String exibe(Long id, Model model) {
 		model.addAttribute("item", dao.buscaPorId(id));
 
-		this.lista_estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPorItemId(id);
+		this.lista_estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloItemId(id);
 
 		if (this.lista_estudo_preliminar.size() > 0) {
 			model.addAttribute("estudo_preliminar", this.lista_estudo_preliminar.get(0));
@@ -115,7 +115,9 @@ public class ItemController {
 
 	@RequestMapping("/remove")
 	public String remove(Item item) {
-		dao.remove(item);
+		dao_estudo_preliminar.removeEstudoPreliminarPeloItemId(item.getId()); // Remove Estudo Preliminar
+		dao_gerenciamento_risco.removeGerenciamentoRiscoPeloItemId(item.getId()); // Remove Gerenciamento Risco
+		dao.remove(item); // Remove Item
 		return "redirect:lista";
 	}
 

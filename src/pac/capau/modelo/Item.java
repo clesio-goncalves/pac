@@ -1,5 +1,6 @@
 package pac.capau.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,7 +55,7 @@ public class Item {
 	@NotNull
 	private Usuario usuario;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.REMOVE)
 	private InformacoesGerenciais informacoes_gerenciais;
 
 	public Long getId() {

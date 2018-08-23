@@ -22,12 +22,4 @@ public class InformacoesGerenciaisDao {
 		manager.merge(informacoesGerenciais);
 	}
 
-	public InformacoesGerenciais buscaPorId(Long id) {
-		return manager.find(InformacoesGerenciais.class, id);
-	}
-
-	public void remove(InformacoesGerenciais informacoesGerenciais) {
-		manager.remove(buscaPorId(informacoesGerenciais.getId()));
-	}
-
 }

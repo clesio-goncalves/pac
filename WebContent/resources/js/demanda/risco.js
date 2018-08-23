@@ -1,22 +1,20 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
-$(document).ready(function() {
-	$('#button_adicionar').click(function() {
-		$("input[name='descricao']").val(""),
-		$("input[name='descricao']").removeClass('is-invalid'),
-		$("select[name='probabilidade']").val("Baixa"),
-		$("select[name='impacto']").val("Baixo"),
-		$("textarea[name='acao_preventiva']").val(""),
-		$("textarea[name='acao_preventiva']").removeClass('is-invalid'),
-		$("input[name='responsavel_acao_preventiva']").val(""),
-		$("input[name='responsavel_acao_preventiva']").removeClass('is-invalid'),
-		$("textarea[name='acao_contingencia']").val(""),
-		$("textarea[name='acao_contingencia']").val("").removeClass('is-invalid'),
-		$("input[name='responsavel_acao_contingencia']").val(""),
-		$("input[name='responsavel_acao_contingencia']").removeClass('is-invalid')
-	});
-});
+function adicionar(){
+	$("input[name='descricao']").val("");
+	$("input[name='descricao']").removeClass('is-invalid');
+	$("select[name='probabilidade']").val("Baixa");
+	$("select[name='impacto']").val("Baixo");
+	$("textarea[name='acao_preventiva']").val("");
+	$("textarea[name='acao_preventiva']").removeClass('is-invalid');
+	$("input[name='responsavel_acao_preventiva']").val("");
+	$("input[name='responsavel_acao_preventiva']").removeClass('is-invalid');
+	$("textarea[name='acao_contingencia']").val("");
+	$("textarea[name='acao_contingencia']").val("").removeClass('is-invalid');
+	$("input[name='responsavel_acao_contingencia']").val("");
+	$("input[name='responsavel_acao_contingencia']").removeClass('is-invalid');
+}
 
 function salvar(contexto){
 	var item_id = $("input[name='item_id']").val();

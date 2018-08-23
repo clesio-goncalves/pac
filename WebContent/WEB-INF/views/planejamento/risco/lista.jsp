@@ -4,8 +4,8 @@
 <c:url value="/" var="contexto" />
 <legend>GERENCIAMENTO DE RISCOS</legend>
 
-<button type="button" class="btn btn-warning btn-lg" data-toggle="modal"
-	data-target="#modal_novo" id="button_adicionar">
+<button type="button" class="btn btn-warning btn-lg"
+	onclick="adicionar()" data-toggle="modal" data-target="#modal_novo">
 	<span class="glyphicon glyphicon-plus-sign"></span> Adicionar risco
 </button>
 <table class="table table-hover table-bordered dt-responsive nowrap"
