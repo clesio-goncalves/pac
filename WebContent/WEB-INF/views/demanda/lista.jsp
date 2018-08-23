@@ -33,7 +33,8 @@
 						<tr>
 							<td>${item.usuario.nome}</td>
 							<td>${item.tipo}</td>
-							<td>${item.quantidade*item.valor_unitario_estimado}</td>
+							<td><fmt:formatNumber type="currency"
+									value="${item.quantidade*item.valor_unitario_estimado}" /></td>
 							<td><fmt:formatDate
 									value="${item.informacoes_gerenciais.data_solicitacao.time}"
 									pattern="dd/MM/yyyy HH:mm:ss" /></td>
@@ -95,6 +96,5 @@
 		</security:authorize>
 	</div>
 </div>
-
 <c:import url="../componentes/js_data_table.jsp" />
 <c:import url="../componentes/rodape.jsp" />

@@ -1,3 +1,4 @@
+<%@	taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <legend>INFORMAÇÕES DO ITEM</legend>
 <div class="table-responsive">
 	<table class="table table-striped table-bordered dt-responsive nowrap">
@@ -33,12 +34,14 @@
 
 		<tr>
 			<th>Valor unitário estimado (R$)</th>
-			<td>${item.valor_unitario_estimado}</td>
+			<td><fmt:formatNumber type="currency"
+					value="${item.valor_unitario_estimado}" /></td>
 		</tr>
 
 		<tr>
 			<th>Valor total estimado (R$)</th>
-			<td>${item.quantidade*item.valor_unitario_estimado}</td>
+			<td><fmt:formatNumber type="currency"
+					value="${item.quantidade*item.valor_unitario_estimado}" /></td>
 		</tr>
 
 		<tr>
