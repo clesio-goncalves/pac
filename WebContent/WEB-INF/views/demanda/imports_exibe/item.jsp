@@ -51,7 +51,7 @@
 
 		<tr>
 			<th>Vincular ao grupo</th>
-			<td>${item.vincular_grupo}</td>
+			<td>${item.grupo.id}</td>
 		</tr>
 	</table>
 </div>

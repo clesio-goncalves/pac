@@ -15,9 +15,8 @@ public class EstudoPreliminarDao {
 	@PersistenceContext
 	private EntityManager manager;
 
-	public EstudoPreliminar adiciona(EstudoPreliminar estudoPreliminar) {
+	public void adiciona(EstudoPreliminar estudoPreliminar) {
 		manager.persist(estudoPreliminar);
-		return estudoPreliminar;
 	}
 
 	public void altera(EstudoPreliminar estudoPreliminar) {
@@ -26,6 +25,11 @@ public class EstudoPreliminarDao {
 
 	public List<EstudoPreliminar> buscaEstudoPreliminarPeloItemId(Long id) {
 		return manager.createQuery("select ep from EstudoPreliminar ep where ep.item.id = :id", EstudoPreliminar.class)
+				.setParameter("id", id).getResultList();
+	}
+
+	public List<EstudoPreliminar> buscaEstudoPreliminarPeloGrupoId(Long id) {
+		return manager.createQuery("select ep from EstudoPreliminar ep where ep.grupo.id = :id", EstudoPreliminar.class)
 				.setParameter("id", id).getResultList();
 	}
 

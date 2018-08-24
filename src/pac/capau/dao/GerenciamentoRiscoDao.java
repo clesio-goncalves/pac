@@ -24,9 +24,15 @@ public class GerenciamentoRiscoDao {
 		manager.merge(derenciamentoRisco);
 	}
 
-	public List<GerenciamentoRisco> lista(Long id) {
+	public List<GerenciamentoRisco> listaPeloItemId(Long id) {
 		return manager
 				.createQuery("select gr from GerenciamentoRisco gr where gr.item.id = :id", GerenciamentoRisco.class)
+				.setParameter("id", id).getResultList();
+	}
+
+	public List<GerenciamentoRisco> listaPeloGrupoId(Long id) {
+		return manager
+				.createQuery("select gr from GerenciamentoRisco gr where gr.grupo.id = :id", GerenciamentoRisco.class)
 				.setParameter("id", id).getResultList();
 	}
 
@@ -35,7 +41,7 @@ public class GerenciamentoRiscoDao {
 	}
 
 	public void remove(GerenciamentoRisco derenciamentoRisco) {
-		manager.remove(derenciamentoRisco);
+		manager.remove(buscaPorId(derenciamentoRisco.getId()));
 	}
 
 	public void removeGerenciamentoRiscoPeloItemId(Long id) {

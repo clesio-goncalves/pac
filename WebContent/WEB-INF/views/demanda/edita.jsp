@@ -11,6 +11,8 @@
 	href="<c:url value="/resources/css/jquery-ui.min.css" />">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/demanda.css" />">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/demanda/bootstrap-select.min.css" />">
 
 <div class="jumbotron">
 	<div class="container">
@@ -187,10 +189,16 @@
 
 			<!-- Vincular ao grupo -->
 			<div class="form-group">
-				<label for="vincular_grupo" class="col-form-label">Vincular
-					ao grupo</label> <input type="text" class="form-control"
-					name="vincular_grupo" MAXLENGTH="255"
-					value="${item.vincular_grupo}">
+				<label for="grupo.id" class="col-form-label">Vincular ao
+					grupo</label> <select name="grupo.id"
+					class="selectpicker show-tick form-control" data-live-search="true"
+					multiple data-max-options="1" title="Selecione um grupo"
+					data-live-search-placeholder="Pesquisar">
+					<c:forEach var="grupo" items="${grupos}">
+						<option value="${grupo.id}"
+							${item.grupo.id == grupo.id ? 'selected' : ''}>${grupo.nome}</option>
+					</c:forEach>
+				</select>
 			</div>
 
 			<fieldset class="form-group">
@@ -308,7 +316,7 @@
 						<span class="glyphicon glyphicon-refresh"></span> Atualizar
 					</button>
 					<a
-						href="<c:url value="/demanda/planejamento/edita?id=${item.id}" />"
+						href="<c:url value="/demanda/planejamento/item/edita?id=${item.id}" />"
 						class="btn btn-warning btn-lg"> <span
 						class="glyphicon glyphicon-list-alt"></span> Planejamento
 					</a>
@@ -327,5 +335,9 @@
 	src="<c:url value="/resources/js/jquery.mask.min.js" />"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/demanda/demanda.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/demanda/bootstrap-select.min.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/demanda/defaults-pt_BR.min.js" />"></script>
 
 <c:import url="../componentes/rodape.jsp" />

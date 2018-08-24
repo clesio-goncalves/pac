@@ -14,8 +14,11 @@
 			</div>
 			<div class="modal-body">
 
-				<!-- ID -->
+				<!-- ID ITEM -->
 				<input type="hidden" name="edita_item_id" value="${risco.item.id}" />
+				
+				<!-- ID GRUPO-->
+				<input type="hidden" name="edita_grupo_id" value="${risco.grupo.id}" />
 
 				<!-- ID -->
 				<input type="hidden" name="edita_risco_id" value="${risco.id}">

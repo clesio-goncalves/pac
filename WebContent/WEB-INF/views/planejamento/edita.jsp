@@ -11,17 +11,14 @@
 
 <div class="jumbotron">
 	<div class="container">
-		<h1 class="display-3">Editar Planejamento do item</h1>
+		<h1 class="display-3">Editar Planejamento do ${view}</h1>
 		<p class="lead">Preencha o formulário abaixo para realizar a
-			alteração do planejamento do item da demanda no sistema.</p>
+			alteração do planejamento do ${view} no sistema.</p>
 	</div>
 </div>
 
 <div class="container">
 	<form action="altera" method="POST">
-
-		<!-- ITEM ID -->
-		<input type="hidden" name="item.id" value="${estudo_preliminar.item.id}" />
 
 		<!-- ESTUDO PRELIMINAR ID -->
 		<input type="hidden" name="id" value="${estudo_preliminar.id}" />
@@ -148,23 +145,36 @@
 				<div>
 					<p>(*) Campos obrigatórios</p>
 				</div>
-
-				<div>
-					<a class="btn btn-success btn-lg"
-						href="<c:url value="/demanda/edita?id=${item.id}" />"><span
-						class="glyphicon glyphicon-chevron-left"></span> Voltar</a> <a
-						href="<c:url value="/demanda/lista" />"
-						class="btn btn-secondary btn-lg"> <span
-						class="glyphicon glyphicon-remove"></span> Cancelar
-					</a>
-					<button type="submit" class="btn btn-primary btn-lg">
-						<span class="glyphicon glyphicon-refresh"></span> Atualizar
-					</button>
-				</div>
 			</fieldset>
-
-			<security:csrfInput />
 		</fieldset>
+
+		<security:csrfInput />
+
+		<div>
+			<c:if test="${view eq 'item'}">
+				<input type="hidden" name="item.id" value="${item.id}" />
+				<a class="btn btn-success btn-lg"
+					href="<c:url value="/demanda/edita?id=${item.id}" />"><span
+					class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+				<a href="<c:url value="/demanda/lista" />"
+					class="btn btn-secondary btn-lg"> <span
+					class="glyphicon glyphicon-remove"></span> Cancelar
+				</a>
+			</c:if>
+			<c:if test="${view eq 'grupo'}">
+				<input type="hidden" name="grupo.id" value="${grupo.id}" />
+				<a class="btn btn-success btn-lg"
+					href="<c:url value="/grupo/edita?id=${grupo.id}" />"><span
+					class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
+				<a href="<c:url value="/grupo/lista" />"
+					class="btn btn-secondary btn-lg"> <span
+					class="glyphicon glyphicon-remove"></span> Cancelar
+				</a>
+			</c:if>
+			<button type="submit" class="btn btn-primary btn-lg">
+				<span class="glyphicon glyphicon-refresh"></span> Atualizar
+			</button>
+		</div>
 	</form>
 
 	<!-- MODAL ADICIONA RISCO -->

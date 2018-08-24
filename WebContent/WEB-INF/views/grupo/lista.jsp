@@ -22,6 +22,7 @@
 					<tr>
 						<th>ID</th>
 						<th>Nome</th>
+						<th>Total de Itens</th>
 						<th>Ações</th>
 					</tr>
 				</thead>
@@ -31,6 +32,7 @@
 						<tr>
 							<td>${grupo.id}</td>
 							<td>${grupo.nome}</td>
+							<td></td>
 							<td>
 								<!-- Exibir --> <a
 								href="<c:url value="/grupo/exibe?id=${grupo.id}" />"

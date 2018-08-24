@@ -12,20 +12,40 @@
 		<div class="card-header">Exibe os dados do grupo</div>
 		<!-- Table -->
 		<div class="card-body">
-			<div class="table-responsive">
-				<table
-					class="table table-striped table-bordered dt-responsive nowrap">
-					<tr>
-						<th width="300">ID</th>
-						<td>${grupo.id}</td>
-					</tr>
+			<fieldset class="form-group">
+				<legend style="margin-top: 0;">INFORMAÇÕES DO GRUPO</legend>
+				<div class="table-responsive">
+					<table
+						class="table table-hover table-bordered dt-responsive nowrap">
+						<tr>
+							<th width="300">ID</th>
+							<td>${grupo.id}</td>
+						</tr>
 
-					<tr>
-						<th>Nome</th>
-						<td>${grupo.nome}</td>
-					</tr>
-				</table>
+						<tr>
+							<th>Nome</th>
+							<td>${grupo.nome}</td>
+						</tr>
+					</table>
+				</div>
+			</fieldset>
+			<!-- ESTUDOS PRELIMINARES -->
+			<jsp:include page="../demanda/imports_exibe/estudo_preliminar.jsp"></jsp:include>
+
+			<!-- TABELA GERENCIAMENTO RISCOS -->
+			<div id="tabela_lista_riscos">
+				<jsp:include page="../planejamento/risco/lista.jsp"></jsp:include>
 			</div>
+
+			<!-- MODAL ADICIONA RISCO -->
+			<jsp:include page="../planejamento/risco/modal_novo.jsp"></jsp:include>
+
+			<!-- MODAL EDITA RISCO -->
+			<div id="div_modal_editar">
+				<jsp:include page="../planejamento/risco/modal_edita.jsp"></jsp:include>
+			</div>
+
+
 		</div>
 	</div>
 	<div align="center">

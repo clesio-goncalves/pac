@@ -50,8 +50,6 @@ public class Item {
 
 	private String informacoes_orcamentarias;
 
-	private String vincular_grupo;
-
 	@OneToOne
 	@NotNull
 	private Usuario usuario;
@@ -148,14 +146,6 @@ public class Item {
 
 	public void setInformacoes_orcamentarias(String informacoes_orcamentarias) {
 		this.informacoes_orcamentarias = informacoes_orcamentarias;
-	}
-
-	public String getVincular_grupo() {
-		return vincular_grupo;
-	}
-
-	public void setVincular_grupo(String vincular_grupo) {
-		this.vincular_grupo = vincular_grupo;
 	}
 
 	public Usuario getUsuario() {

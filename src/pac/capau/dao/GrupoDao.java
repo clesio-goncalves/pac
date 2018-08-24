@@ -15,8 +15,9 @@ public class GrupoDao {
 	@PersistenceContext
 	private EntityManager manager;
 
-	public void adiciona(Grupo grupo) {
+	public Grupo adiciona(Grupo grupo) {
 		manager.persist(grupo);
+		return grupo;
 	}
 
 	public void altera(Grupo grupo) {

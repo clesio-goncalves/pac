@@ -10,8 +10,12 @@
 <div class="jumbotron">
 	<div class="container">
 		<h1 class="display-3">Cadastrar Grupo</h1>
-		<p class="lead">Preencha o formulário abaixo para realizar o
-			cadastro do grupo no sistema.</p>
+		<p class="lead">
+			Preencha o formulário abaixo para realizar o cadastro do grupo no
+			sistema. Possibilita <strong style="font-weight: bold;">agrupar
+				vários itens para o registro de um único planejamento</strong> (Estudo
+			preliminar e Gerenciamento de risco em comum). Ex: <strong
+				style="font-weight: bold;">Materiais de limpeza</strong>.
 	</div>
 </div>
 <div class="container">

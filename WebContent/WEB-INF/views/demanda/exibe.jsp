@@ -10,8 +10,6 @@
 <c:import url="../componentes/cabecalho.jsp" />
 
 <div class="container">
-	<span style="display: none" id="myURL"><c:url value="/"
-			var="url" /></span>
 	<div class="card border-light mb-3">
 		<div class="card-header">Exibe os dados da demanda</div>
 		<!-- Table -->

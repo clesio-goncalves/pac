@@ -53,7 +53,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-danger"
-											onclick="excluir(${contexto}, ${risco.item.id}, ${risco.id})">
+											onclick="excluir(${contexto}, ${empty risco.item.id ? 0 : risco.item.id}, ${empty risco.grupo.id ? 0 : risco.grupo.id}, ${risco.id})">
 											<span class="glyphicon glyphicon-trash"></span> Excluir
 										</button>
 										<button type="button" class="btn btn-secondary"

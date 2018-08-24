@@ -14,8 +14,11 @@
 			</div>
 			<div class="modal-body">
 
-				<!-- ID -->
+				<!-- ID ITEM -->
 				<input type="hidden" name="item_id" value="${item.id}" />
+
+				<!-- ID GRUPO -->
+				<input type="hidden" name="grupo_id" value="${grupo.id}" />
 
 				<!-- Descrição -->
 				<div class="form-group" id="form-group">

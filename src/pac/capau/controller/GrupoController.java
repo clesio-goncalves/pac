@@ -11,7 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pac.capau.dao.EstudoPreliminarDao;
+import pac.capau.dao.GerenciamentoRiscoDao;
 import pac.capau.dao.GrupoDao;
+import pac.capau.modelo.EstudoPreliminar;
 import pac.capau.modelo.Grupo;
 
 @Transactional
@@ -20,9 +23,16 @@ import pac.capau.modelo.Grupo;
 public class GrupoController {
 
 	private List<Grupo> lista_grupo;
+	private List<EstudoPreliminar> lista_estudo_preliminar;
 
 	@Autowired
 	GrupoDao dao;
+
+	@Autowired
+	EstudoPreliminarDao dao_estudo_preliminar;
+
+	@Autowired
+	GerenciamentoRiscoDao dao_gerenciamento_risco;
 
 	@RequestMapping("/novo")
 	public String grupo() {
@@ -38,8 +48,7 @@ public class GrupoController {
 		}
 
 		// Adiciona no banco de dados
-		dao.adiciona(grupo);
-		return "redirect:lista";
+		return "redirect:/demanda/planejamento/grupo/novo?id=" + dao.adiciona(grupo).getId();
 	}
 
 	@RequestMapping("/lista")
@@ -57,6 +66,11 @@ public class GrupoController {
 	@RequestMapping("/exibe")
 	public String exibe(Long id, Model model) {
 		model.addAttribute("grupo", dao.buscaPorId(id));
+		this.lista_estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloGrupoId(id);
+		if (this.lista_estudo_preliminar.size() > 0) {
+			model.addAttribute("estudo_preliminar", this.lista_estudo_preliminar.get(0));
+		}
+		model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(id));
 		return "grupo/exibe";
 	}
 

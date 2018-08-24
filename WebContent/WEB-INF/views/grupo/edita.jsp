@@ -40,6 +40,11 @@
 			<button type="submit" class="btn btn-primary btn-lg">
 				<span class="glyphicon glyphicon-refresh"></span> Atualizar
 			</button>
+			<a
+				href="<c:url value="/demanda/planejamento/grupo/edita?id=${grupo.id}" />"
+				class="btn btn-warning btn-lg"> <span
+				class="glyphicon glyphicon-list-alt"></span> Planejamento
+			</a>
 		</div>
 	</form>
 </div>

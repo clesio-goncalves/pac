@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import pac.capau.dao.EstudoPreliminarDao;
 import pac.capau.dao.GerenciamentoRiscoDao;
+import pac.capau.dao.GrupoDao;
 import pac.capau.dao.InformacoesGerenciaisDao;
 import pac.capau.dao.ItemDao;
 import pac.capau.modelo.EstudoPreliminar;
@@ -45,17 +46,22 @@ public class ItemController {
 	@Autowired
 	GerenciamentoRiscoDao dao_gerenciamento_risco;
 
+	@Autowired
+	GrupoDao dao_grupo;
+
 	@RequestMapping("/nova")
 	public String novaDemanda(Model model) {
 		// Pego o usuário logado
 		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("usuario", usuario);
+		model.addAttribute("grupos", dao_grupo.lista());
 		return "demanda/novo";
 	}
 
 	@RequestMapping("/adiciona")
 	public String adiciona(@Valid Item item, BindingResult resultItem,
-			@Valid InformacoesGerenciais informacoes_gerenciais, BindingResult result_informacoes_gerenciais) {
+			@Valid InformacoesGerenciais informacoes_gerenciais, BindingResult result_informacoes_gerenciais,
+			HttpServletRequest request) {
 
 		/* INFORMAÇÕES GERENCIAIS */
 		if (result_informacoes_gerenciais.hasErrors()) {
@@ -66,11 +72,15 @@ public class ItemController {
 
 		/* ITEM */
 		if (resultItem.hasErrors()) {
-			System.out.println(resultItem);
 			return "redirect:nova";
 		}
 
-		return "redirect:/demanda/planejamento/novo?id=" + dao.adiciona(item).getId();
+		// Caso seja informado o grupo
+		if (request.getParameter("grupo.id") != null) {
+			return "redirect:lista";
+		}
+
+		return "redirect:/demanda/planejamento/item/novo?id=" + dao.adiciona(item).getId();
 	}
 
 	@RequestMapping("/lista")
@@ -89,7 +99,7 @@ public class ItemController {
 			model.addAttribute("estudo_preliminar", this.lista_estudo_preliminar.get(0));
 		}
 
-		model.addAttribute("riscos", dao_gerenciamento_risco.lista(id));
+		model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(id));
 		return "demanda/exibe";
 	}
 
@@ -117,7 +127,7 @@ public class ItemController {
 	public String remove(Item item) {
 		dao_estudo_preliminar.removeEstudoPreliminarPeloItemId(item.getId()); // Remove Estudo Preliminar
 		dao_gerenciamento_risco.removeGerenciamentoRiscoPeloItemId(item.getId()); // Remove Gerenciamento Risco
-		dao.remove(item); // Remove Item
+		dao.remove(item); // Remove Item e Informações Gerenciais
 		return "redirect:lista";
 	}
 
