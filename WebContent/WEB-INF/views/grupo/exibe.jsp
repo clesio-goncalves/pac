@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
 <title>Exibe os dados do grupo</title>
 <c:import url="../componentes/cabecalho.jsp" />
 
@@ -29,6 +31,7 @@
 					</table>
 				</div>
 			</fieldset>
+
 			<!-- ESTUDOS PRELIMINARES -->
 			<jsp:include page="../demanda/imports_exibe/estudo_preliminar.jsp"></jsp:include>
 
@@ -44,8 +47,6 @@
 			<div id="div_modal_editar">
 				<jsp:include page="../planejamento/risco/modal_edita.jsp"></jsp:include>
 			</div>
-
-
 		</div>
 	</div>
 	<div align="center">
@@ -94,5 +95,6 @@
 	<a class="btn btn-success" href="<c:url value="/grupo/lista" />"><span
 		class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
 </div>
-
+<script type="text/javascript"
+	src="<c:url value="/resources/js/demanda/risco.js" />"></script>
 <c:import url="../componentes/rodape.jsp" />

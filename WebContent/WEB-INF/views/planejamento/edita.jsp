@@ -18,7 +18,8 @@
 </div>
 
 <div class="container">
-	<form action="altera" method="POST">
+	<form action="<c:url value="/demanda/planejamento/altera" />"
+		method="POST">
 
 		<!-- ESTUDO PRELIMINAR ID -->
 		<input type="hidden" name="id" value="${estudo_preliminar.id}" />
