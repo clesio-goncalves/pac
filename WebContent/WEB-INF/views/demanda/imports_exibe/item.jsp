@@ -1,4 +1,5 @@
 <%@	taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <legend>INFORMAÇÕES DO ITEM</legend>
 <div class="table-responsive">
 	<table class="table table-striped table-bordered dt-responsive nowrap">
@@ -51,7 +52,13 @@
 
 		<tr>
 			<th>Vincular ao grupo</th>
-			<td>${item.grupo.id}</td>
+			<c:if test="${empty item.grupo}">
+				<td>Não informado</td>
+			</c:if>
+			<c:if test="${not empty item.grupo}">
+				<td>${item.grupo.nome}</td>
+			</c:if>
+
 		</tr>
 	</table>
 </div>

@@ -27,18 +27,30 @@
 			<!-- ESTUDOS PRELIMINARES -->
 			<jsp:include page="imports_exibe/estudo_preliminar.jsp"></jsp:include>
 
-			<!-- TABELA GERENCIAMENTO RISCOS -->
-			<div id="tabela_lista_riscos">
-				<jsp:include page="../planejamento/risco/lista.jsp"></jsp:include>
-			</div>
+			<!-- CASO O ITEM NAO SEJA VINCULADO AO UM GRUPO -->
+			<c:if test="${empty item.grupo}">
 
-			<!-- MODAL ADICIONA RISCO -->
-			<jsp:include page="../planejamento/risco/modal_novo.jsp"></jsp:include>
+				<!-- TABELA GERENCIAMENTO RISCOS -->
+				<div id="tabela_lista_riscos">
+					<jsp:include page="../planejamento/risco/lista.jsp"></jsp:include>
+				</div>
 
-			<!-- MODAL EDITA RISCO -->
-			<div id="div_modal_editar">
-				<jsp:include page="../planejamento/risco/modal_edita.jsp"></jsp:include>
-			</div>
+				<!-- MODAL ADICIONA RISCO -->
+				<jsp:include page="../planejamento/risco/modal_novo.jsp"></jsp:include>
+
+				<!-- MODAL EDITA RISCO -->
+				<div id="div_modal_editar">
+					<jsp:include page="../planejamento/risco/modal_edita.jsp"></jsp:include>
+				</div>
+			</c:if>
+
+			<!-- CASO O ITEM SEJA VINCULADO AO UM GRUPO -->
+			<c:if test="${not empty item.grupo}">
+				<!-- TABELA GERENCIAMENTO RISCOS -->
+				<div id="tabela_lista_riscos">
+					<jsp:include page="../planejamento/risco/lista_item_sem_grupo.jsp"></jsp:include>
+				</div>
+			</c:if>
 
 		</div>
 	</div>

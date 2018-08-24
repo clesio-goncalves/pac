@@ -28,6 +28,11 @@ public class ItemDao {
 		return manager.createQuery("select i from Item i", Item.class).getResultList();
 	}
 
+	public Long buscarGrupoIdPeloItemId(Long id) {
+		return manager.createQuery("select i.grupo.id from Item i where i.id = :id", Long.class).setParameter("id", id)
+				.getSingleResult();
+	}
+
 	public Item buscaPorId(Long id) {
 		return manager.find(Item.class, id);
 	}

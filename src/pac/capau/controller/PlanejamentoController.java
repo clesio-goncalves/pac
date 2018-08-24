@@ -47,7 +47,6 @@ public class PlanejamentoController {
 
 	@RequestMapping("/item/novo")
 	public String planejamentoItem(Long id, Model model) {
-
 		this.item = dao.buscaPorId(id);
 
 		if (this.item == null) { // se o ID não existir
@@ -104,8 +103,8 @@ public class PlanejamentoController {
 		if (this.item == null) { // se o ID não existir
 			return "redirect:/demanda/nova";
 		} else if (this.estudo_preliminar.size() == 0) {
-			return "redirect:item/novo?id=" + this.item.getId(); // se não houver estudo_preliminar cadastrado para o
-																	// item
+			return "redirect:/demanda/planejamento/item/novo?id=" + this.item.getId();
+			// se não houver estudo_preliminar cadastrado para o item
 		} else {
 			model.addAttribute("estudo_preliminar", this.estudo_preliminar.get(0));
 		}
@@ -122,10 +121,10 @@ public class PlanejamentoController {
 		this.estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloGrupoId(id);
 
 		if (this.grupo == null) { // se o ID não existir
-			return "redirect:/grupo/novo";
+			return "redirect:/demanda/planejamento/grupo/novo";
 		} else if (this.estudo_preliminar.size() == 0) {
-			return "redirect:grupo/novo?id=" + this.grupo.getId(); // se não houver estudo_preliminar cadastrado para o
-																	// item
+			return "redirect:/demanda/planejamento/grupo/novo?id=" + this.grupo.getId();
+			// se não houver estudo_preliminar cadastrado para o item
 		} else {
 			model.addAttribute("estudo_preliminar", this.estudo_preliminar.get(0));
 		}
@@ -205,6 +204,13 @@ public class PlanejamentoController {
 		model.addAttribute("risco",
 				dao_gerenciamento_risco.buscaPorId(Long.parseLong(request.getParameter("risco_id"))));
 		return "planejamento/risco/modal_edita";
+	}
+	
+	@RequestMapping(value = "/risco/exibe", method = RequestMethod.POST)
+	public String exibeRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
+		model.addAttribute("risco",
+				dao_gerenciamento_risco.buscaPorId(Long.parseLong(request.getParameter("risco_id"))));
+		return "planejamento/risco/modal_exibe";
 	}
 
 	@RequestMapping(value = "/risco/altera", method = RequestMethod.POST)

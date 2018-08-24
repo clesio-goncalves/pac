@@ -33,6 +33,7 @@ public class ItemController {
 
 	private List<EstudoPreliminar> lista_estudo_preliminar;
 	private PlanejamentoController pc;
+	private Long grupo_id;
 
 	@Autowired
 	ItemDao dao;
@@ -75,12 +76,16 @@ public class ItemController {
 			return "redirect:nova";
 		}
 
+		// Adiciona Item no banco
+		item = dao.adiciona(item);
+
 		// Caso seja informado o grupo
 		if (request.getParameter("grupo.id") != null) {
 			return "redirect:lista";
+		} else {
+			return "redirect:/demanda/planejamento/item/novo?id=" + item.getId();
 		}
 
-		return "redirect:/demanda/planejamento/item/novo?id=" + dao.adiciona(item).getId();
 	}
 
 	@RequestMapping("/lista")
@@ -92,14 +97,20 @@ public class ItemController {
 	@RequestMapping("/exibe")
 	public String exibe(Long id, Model model) {
 		model.addAttribute("item", dao.buscaPorId(id));
-
-		this.lista_estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloItemId(id);
+		this.grupo_id = dao.buscarGrupoIdPeloItemId(id);
+		
+		if (this.grupo_id == null) { // se o item não estiver vinculado a um grupo
+			this.lista_estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloItemId(id);
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(id));
+		} else {
+			this.lista_estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloGrupoId(this.grupo_id);
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.grupo_id));
+		}
 
 		if (this.lista_estudo_preliminar.size() > 0) {
 			model.addAttribute("estudo_preliminar", this.lista_estudo_preliminar.get(0));
 		}
 
-		model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(id));
 		return "demanda/exibe";
 	}
 
@@ -108,6 +119,7 @@ public class ItemController {
 		// Pego o usuário logado
 		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("usuario", usuario);
+		model.addAttribute("grupos", dao_grupo.lista());
 		model.addAttribute("item", dao.buscaPorId(id));
 		return "demanda/edita";
 	}

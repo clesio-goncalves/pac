@@ -122,6 +122,28 @@ function editar(contexto, id) {
 	});
 }
 
+//Ao clicar no botão exibir da tabela lista de riscos
+function exibir(contexto, id) {
+	$.ajax({
+		type : "POST",
+		url : contexto + "demanda/planejamento/risco/exibe",
+		cache : false,
+		data : {
+			risco_id : id
+		},
+		beforeSend: function(xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+		success : function(response) {
+			$('#div_modal_exibir').html(response);
+			$('#modal_exibe').modal('show');
+		},
+		error : function() {
+			alert("Ocorreu um erro");
+		}
+	});
+}
+
 function alterar(contexto){
 	var item_id = $("input[name='edita_item_id']").val();
 	var grupo_id = $("input[name='edita_grupo_id']").val();
