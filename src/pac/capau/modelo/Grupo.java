@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,6 +18,9 @@ public class Grupo {
 	@NotNull
 	@Column(unique = true)
 	private String nome;
+
+	@Transient
+	private String total_itens;
 
 	public Long getId() {
 		return id;
@@ -32,6 +36,14 @@ public class Grupo {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getTotal_itens() {
+		return total_itens;
+	}
+
+	public void setTotal_itens(String total_itens) {
+		this.total_itens = total_itens;
 	}
 
 }

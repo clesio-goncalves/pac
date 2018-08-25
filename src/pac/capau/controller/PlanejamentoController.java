@@ -184,9 +184,7 @@ public class PlanejamentoController {
 
 	@RequestMapping(value = "/risco/remove", method = RequestMethod.POST)
 	public String removeRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
-		this.gerenciamento_risco = new GerenciamentoRisco();
-		this.gerenciamento_risco.setId(Long.parseLong(request.getParameter("risco_id")));
-		dao_gerenciamento_risco.remove(this.gerenciamento_risco);
+		dao_gerenciamento_risco.remove(Long.parseLong(request.getParameter("risco_id")));
 
 		if (request.getParameter("grupo_id").equals("0")) { // Testa se veio da view grupo ou item
 			this.item = dao.buscaPorId(Long.parseLong(request.getParameter("item_id")));
@@ -205,7 +203,7 @@ public class PlanejamentoController {
 				dao_gerenciamento_risco.buscaPorId(Long.parseLong(request.getParameter("risco_id"))));
 		return "planejamento/risco/modal_edita";
 	}
-	
+
 	@RequestMapping(value = "/risco/exibe", method = RequestMethod.POST)
 	public String exibeRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("risco",

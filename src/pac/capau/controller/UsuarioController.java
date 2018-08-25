@@ -36,7 +36,7 @@ public class UsuarioController {
 	@Autowired
 	PerfilDao dao_perfil;
 
-	@Secured("hasRole('ROLE_Administrador')")
+	@Secured("hasAnyRole('ROLE_Gerenciador', 'ROLE_Gerenciador')")
 	@RequestMapping("/novo")
 	public String novoUsuario(Model model) {
 		this.lista_setores = dao_setor.lista();
@@ -49,7 +49,7 @@ public class UsuarioController {
 		return "usuario/novo";
 	}
 
-	@Secured("hasRole('ROLE_Administrador')")
+	@Secured("hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')")
 	@RequestMapping("/adiciona")
 	public String adiciona(@Valid Usuario usuario, BindingResult result) {
 
@@ -74,10 +74,10 @@ public class UsuarioController {
 		return "usuario/lista";
 	}
 
-	@Secured("hasRole('ROLE_Administrador')")
+	@Secured("hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')")
 	@RequestMapping("/remove")
-	public String remove(Usuario usuario) {
-		dao.remove(usuario);
+	public String remove(Long id) {
+		dao.remove(id);
 		return "redirect:lista";
 	}
 
@@ -87,7 +87,7 @@ public class UsuarioController {
 		return "usuario/exibe";
 	}
 
-	@Secured("hasRole('ROLE_Administrador')")
+	@Secured("hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')")
 	@RequestMapping("/edita")
 	public String edita(Long id, Model model) {
 
@@ -97,7 +97,7 @@ public class UsuarioController {
 		return "usuario/edita";
 	}
 
-	@Secured("hasRole('ROLE_Administrador')")
+	@Secured("hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')")
 	@RequestMapping("/altera")
 	public String altera(@Valid Usuario usuario, BindingResult result) {
 		this.lista_usuario = dao.buscaPorEmail(usuario.getEmail());

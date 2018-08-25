@@ -64,17 +64,14 @@ public class ItemController {
 			@Valid InformacoesGerenciais informacoes_gerenciais, BindingResult result_informacoes_gerenciais,
 			HttpServletRequest request) {
 
-		/* INFORMAÇÕES GERENCIAIS */
 		if (result_informacoes_gerenciais.hasErrors()) {
 			return "redirect:nova";
-		}
-		informacoes_gerenciais.setData_solicitacao(Calendar.getInstance());
-		item.setInformacoes_gerenciais(dao_informacoes_gerenciais.adiciona(informacoes_gerenciais));
-
-		/* ITEM */
-		if (resultItem.hasErrors()) {
+		} else if (resultItem.hasErrors()) {
 			return "redirect:nova";
 		}
+
+		informacoes_gerenciais.setData_solicitacao(Calendar.getInstance());
+		item.setInformacoes_gerenciais(dao_informacoes_gerenciais.adiciona(informacoes_gerenciais));
 
 		// Adiciona Item no banco
 		item = dao.adiciona(item);
@@ -98,7 +95,7 @@ public class ItemController {
 	public String exibe(Long id, Model model) {
 		model.addAttribute("item", dao.buscaPorId(id));
 		this.grupo_id = dao.buscarGrupoIdPeloItemId(id);
-		
+
 		if (this.grupo_id == null) { // se o item não estiver vinculado a um grupo
 			this.lista_estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloItemId(id);
 			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(id));
@@ -125,21 +122,30 @@ public class ItemController {
 	}
 
 	@RequestMapping("/altera")
-	public String altera(@Valid Item item, BindingResult resultItem) {
+	public String altera(@Valid Item item, BindingResult resultItem, HttpServletRequest request) {
 		if (resultItem.hasErrors()) {
 			return "redirect:edita?id=" + item.getId();
 		}
-		// Altera informações gerenciais no banco
 		dao_informacoes_gerenciais.altera(item.getInformacoes_gerenciais());
 		dao.altera(item);
-		return "redirect:/demanda/planejamento/edita?id=" + item.getId();
+
+		// Caso seja informado o grupo na edição
+		if (request.getParameter("grupo.id") != null) {
+			dao_estudo_preliminar.removeEstudoPreliminarPeloItemId(item.getId()); // Remove Estudo Preliminar
+			dao_gerenciamento_risco.removeGerenciamentoRiscoPeloItemId(item.getId()); // Remove Gerenciamento Risco
+			return "redirect:lista";
+		} else {
+			return "redirect:/demanda/planejamento/item/edita?id=" + item.getId();
+		}
 	}
 
 	@RequestMapping("/remove")
-	public String remove(Item item) {
-		dao_estudo_preliminar.removeEstudoPreliminarPeloItemId(item.getId()); // Remove Estudo Preliminar
-		dao_gerenciamento_risco.removeGerenciamentoRiscoPeloItemId(item.getId()); // Remove Gerenciamento Risco
-		dao.remove(item); // Remove Item e Informações Gerenciais
+	public String remove(Long id) {
+		if (dao.buscarGrupoIdPeloItemId(id) == null) { // sem grupo vinculado
+			dao_estudo_preliminar.removeEstudoPreliminarPeloItemId(id); // Remove Estudo Preliminar
+			dao_gerenciamento_risco.removeGerenciamentoRiscoPeloItemId(id); // Remove Gerenciamento Risco
+		}
+		dao.remove(id); // Remove Item e Informações Gerenciais
 		return "redirect:lista";
 	}
 

@@ -54,14 +54,14 @@ public class SetorController {
 	}
 
 	@RequestMapping("/remove")
-	public String remove(Setor setor) {
+	public String remove(Long id) {
 
 		// Remove o setor caso não haja usuários cadastrados nesse setor
-		if (dao_usuario.buscaUsuarioPorSetor(setor.getId()).size() > 0) {
+		if (dao_usuario.buscaUsuarioPorSetor(id).size() > 0) {
 			return "redirect:lista";
 		}
 
-		dao.remove(setor);
+		dao.remove(id);
 		return "redirect:lista";
 	}
 

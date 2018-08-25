@@ -21,7 +21,7 @@
 				<td>${risco.impacto}</td>
 				<td>
 					<!-- Exibir -->
-					<button type="button" class="btn btn-secondary btn-sm"
+					<button type="button" class="btn btn-warning btn-sm"
 						onclick="exibir(${contexto}, ${risco.id})">
 						<span class="glyphicon glyphicon-eye-open"></span> Exibir
 					</button>

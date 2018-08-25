@@ -25,7 +25,9 @@ public class GrupoDao {
 	}
 
 	public List<Grupo> lista() {
-		return manager.createQuery("select g from Grupo g", Grupo.class).getResultList();
+		return manager.createNativeQuery(
+				"select id, nome, (select count(*) from Item as i where i.grupo_id = g.id) as 'total_itens' from Grupo as g;",
+				Grupo.class).getResultList();
 	}
 
 	public List<Grupo> buscaPorNome(String nome) {
@@ -42,8 +44,8 @@ public class GrupoDao {
 		return manager.find(Grupo.class, id);
 	}
 
-	public void remove(Grupo grupo) {
-		manager.remove(buscaPorId(grupo.getId()));
+	public void remove(Long id) {
+		manager.createQuery("delete from Grupo g where g.id = :id").setParameter("id", id).executeUpdate();
 	}
 
 }

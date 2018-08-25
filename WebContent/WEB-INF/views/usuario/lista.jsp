@@ -43,7 +43,7 @@
 								href="<c:url value="/usuario/exibe?id=${usuario.id}" />"
 								class="btn btn-secondary btn-sm"><span
 									class="glyphicon glyphicon-eye-open"></span> Exibir</a> <security:authorize
-									access="hasRole('ROLE_Administrador')">
+									access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
 									<!-- Editar -->
 									<a href="<c:url value="/usuario/edita?id=${usuario.id}" />"
 										class="btn btn-info btn-sm"><span
@@ -91,7 +91,7 @@
 	</div>
 
 	<div align="center">
-		<security:authorize access="hasRole('ROLE_Administrador')">
+		<security:authorize access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
 			<a href="<c:url value="/usuario/novo" />"
 				class="btn btn-primary btn-lg"><span
 				class="glyphicon glyphicon-plus"></span> Cadastrar</a>

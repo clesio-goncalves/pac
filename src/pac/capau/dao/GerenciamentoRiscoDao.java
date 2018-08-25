@@ -40,8 +40,9 @@ public class GerenciamentoRiscoDao {
 		return manager.find(GerenciamentoRisco.class, id);
 	}
 
-	public void remove(GerenciamentoRisco derenciamentoRisco) {
-		manager.remove(buscaPorId(derenciamentoRisco.getId()));
+	public void remove(Long id) {
+		manager.createQuery("delete from GerenciamentoRisco gr where gr.id = :id").setParameter("id", id)
+				.executeUpdate();
 	}
 
 	public void removeGerenciamentoRiscoPeloItemId(Long id) {
@@ -49,4 +50,8 @@ public class GerenciamentoRiscoDao {
 				.executeUpdate();
 	}
 
+	public void removeGerenciamentoRiscoPeloGrupoId(Long id) {
+		manager.createQuery("delete from GerenciamentoRisco gr where gr.grupo.id = :id").setParameter("id", id)
+				.executeUpdate();
+	}
 }

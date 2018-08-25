@@ -37,8 +37,8 @@ public class ItemDao {
 		return manager.find(Item.class, id);
 	}
 
-	public void remove(Item item) {
-		manager.remove(buscaPorId(item.getId()));
+	public void remove(Long id) {
+		manager.createQuery("delete from Item i where i.id = :id").setParameter("id", id).executeUpdate();
 	}
 
 }

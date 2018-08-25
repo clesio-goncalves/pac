@@ -58,8 +58,10 @@ public class GrupoController {
 	}
 
 	@RequestMapping("/remove")
-	public String remove(Grupo grupo) {
-		dao.remove(grupo);
+	public String remove(Long id) {
+		dao_estudo_preliminar.removeEstudoPreliminarPeloGrupoId(id); // Remove Estudo Preliminar
+		dao_gerenciamento_risco.removeGerenciamentoRiscoPeloGrupoId(id); // Remove Gerenciamento Risco
+		dao.remove(id);
 		return "redirect:lista";
 	}
 

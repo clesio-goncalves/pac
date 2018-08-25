@@ -10,7 +10,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Login SIGA CAPAU</title>
+<title>Login PAC CAPAU</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/bootstrap.min.css" />">
 <link rel="stylesheet" type="text/css"

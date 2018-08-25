@@ -1,6 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/security/tags"
-	prefix="security"%>
 <%@	taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
@@ -43,43 +41,39 @@
 								<!-- Exibir --> <a
 								href="<c:url value="/demanda/exibe?id=${item.id}" />"
 								class="btn btn-secondary btn-sm"><span
-									class="glyphicon glyphicon-eye-open"></span> Exibir</a> <security:authorize
-									access="hasRole('ROLE_Administrador')">
-									<!-- Editar -->
-									<a href="<c:url value="/demanda/edita?id=${item.id}" />"
-										class="btn btn-info btn-sm"><span
-										class="glyphicon glyphicon-edit"></span> Editar </a>
-									<!-- Button to Open the Modal -->
-									<button type="button" class="btn btn-danger btn-sm"
-										data-toggle="modal" data-target="#modal${item.id}">
-										<span class="glyphicon glyphicon-trash"></span> Excluir
-									</button>
-									<div class="modal fade" id="modal${item.id}">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title">Exclusão da demanda</h5>
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													<p>Deseja realmente excluir este item?</p>
-												</div>
-												<div class="modal-footer">
-													<a href="<c:url value="/demanda/remove?id=${item.id}" />"
-														class="btn btn-danger"><span
-														class="glyphicon glyphicon-trash"></span> Excluir</a>
-													<button type="button" class="btn btn-secondary"
-														data-dismiss="modal">
-														<span class="glyphicon glyphicon-log-out"></span> Fechar
-													</button>
-												</div>
+									class="glyphicon glyphicon-eye-open"></span> Exibir</a> <!-- Editar -->
+								<a href="<c:url value="/demanda/edita?id=${item.id}" />"
+								class="btn btn-info btn-sm"><span
+									class="glyphicon glyphicon-edit"></span> Editar </a> <!-- Button to Open the Modal -->
+								<button type="button" class="btn btn-danger btn-sm"
+									data-toggle="modal" data-target="#modal${item.id}">
+									<span class="glyphicon glyphicon-trash"></span> Excluir
+								</button>
+								<div class="modal fade" id="modal${item.id}">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Exclusão da demanda</h5>
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<p>Deseja realmente excluir este item?</p>
+											</div>
+											<div class="modal-footer">
+												<a href="<c:url value="/demanda/remove?id=${item.id}" />"
+													class="btn btn-danger"><span
+													class="glyphicon glyphicon-trash"></span> Excluir</a>
+												<button type="button" class="btn btn-secondary"
+													data-dismiss="modal">
+													<span class="glyphicon glyphicon-log-out"></span> Fechar
+												</button>
 											</div>
 										</div>
 									</div>
-								</security:authorize>
+								</div>
 							</td>
 						</tr>
 					</c:forEach>
@@ -89,11 +83,9 @@
 	</div>
 
 	<div align="center">
-		<security:authorize access="hasRole('ROLE_Administrador')">
-			<a href="<c:url value="/demanda/nova" />"
-				class="btn btn-primary btn-lg"><span
-				class="glyphicon glyphicon-plus"></span> Cadastrar</a>
-		</security:authorize>
+		<a href="<c:url value="/demanda/nova" />"
+			class="btn btn-primary btn-lg"><span
+			class="glyphicon glyphicon-plus"></span> Cadastrar</a>
 	</div>
 </div>
 <c:import url="../componentes/js_data_table.jsp" />

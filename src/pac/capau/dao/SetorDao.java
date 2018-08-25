@@ -41,8 +41,8 @@ public class SetorDao {
 		return manager.find(Setor.class, id);
 	}
 
-	public void remove(Setor setor) {
-		manager.remove(buscaPorId(setor.getId()));
+	public void remove(Long id) {
+		manager.createQuery("delete from Setor s where s.id = :id").setParameter("id", id).executeUpdate();
 	}
 
 }

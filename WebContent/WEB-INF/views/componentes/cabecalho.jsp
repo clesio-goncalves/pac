@@ -36,7 +36,10 @@
 					role="button" aria-haspopup="true" aria-expanded="false">Cadastro</a>
 					<div class="dropdown-menu" x-placement="bottom-start"
 						style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
-						<a class="dropdown-item" href="<c:url value="/usuario/novo" />">Usuário</a>
+						<security:authorize
+							access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
+							<a class="dropdown-item" href="<c:url value="/usuario/novo" />">Usuário</a>
+						</security:authorize>
 						<a class="dropdown-item" href="<c:url value="/setor/novo" />">Setor</a>
 						<a class="dropdown-item" href="<c:url value="/grupo/novo" />">Grupo</a>
 						<div class="dropdown-divider"></div>
@@ -63,7 +66,8 @@
 								property="principal" var="user" /> ${user.email}</a>
 						<div class="dropdown-menu" x-placement="bottom-start"
 							style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 40px, 0px);">
-							<a class="dropdown-item" href="#"><span
+							<a class="dropdown-item"
+								href="<c:url value="/usuario/exibe?id=${user.id}" />"><span
 								class="glyphicon glyphicon-info-sign"></span> Perfil</a> <a
 								class="dropdown-item" href="<c:url value="/logout" />"><span
 								class="glyphicon glyphicon-log-out"></span> Sair</a>

@@ -38,4 +38,9 @@ public class EstudoPreliminarDao {
 				.executeUpdate();
 	}
 
+	public void removeEstudoPreliminarPeloGrupoId(Long id) {
+		manager.createQuery("delete from EstudoPreliminar ep where ep.grupo.id = :id").setParameter("id", id)
+				.executeUpdate();
+	}
+
 }

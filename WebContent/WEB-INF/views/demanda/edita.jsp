@@ -315,11 +315,13 @@
 						onclick="alteraValoresNumericos()">
 						<span class="glyphicon glyphicon-refresh"></span> Atualizar
 					</button>
-					<a
-						href="<c:url value="/demanda/planejamento/item/edita?id=${item.id}" />"
-						class="btn btn-warning btn-lg"> <span
-						class="glyphicon glyphicon-list-alt"></span> Planejamento
-					</a>
+					<c:if test="${empty item.grupo}">
+						<a
+							href="<c:url value="/demanda/planejamento/item/edita?id=${item.id}" />"
+							class="btn btn-warning btn-lg"> <span
+							class="glyphicon glyphicon-list-alt"></span> Planejamento
+						</a>
+					</c:if>
 				</div>
 			</fieldset>
 

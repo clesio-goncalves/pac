@@ -53,10 +53,10 @@
 		<tr>
 			<th>Vincular ao grupo</th>
 			<c:if test="${empty item.grupo}">
-				<td>Não informado</td>
+				<td style="color: red; font-weight: bold">Não informado</td>
 			</c:if>
 			<c:if test="${not empty item.grupo}">
-				<td>${item.grupo.nome}</td>
+				<td><a href="<c:url value="/grupo/exibe?id=${item.grupo.id}" />">${item.grupo.nome}</a></td>
 			</c:if>
 
 		</tr>
