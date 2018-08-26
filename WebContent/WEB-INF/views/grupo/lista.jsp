@@ -34,14 +34,17 @@
 							<td>
 								<!-- Exibir --> <a
 								href="<c:url value="/grupo/exibe?id=${grupo.id}" />"
-								class="btn btn-secondary btn-sm"><span
-									class="glyphicon glyphicon-eye-open"></span> Exibir</a> <!-- Editar -->
-								<a href="<c:url value="/grupo/edita?id=${grupo.id}" />"
-								class="btn btn-info btn-sm"><span
-									class="glyphicon glyphicon-edit"></span> Editar </a>
+								class="btn btn-info btn-sm" data-tooltip="tooltip"
+								data-placement="bottom" title="Exibir"><span
+									class="glyphicon glyphicon-search"></span></a> <!-- Editar --> <a
+								href="<c:url value="/grupo/edita?id=${grupo.id}" />"
+								class="btn btn-warning btn-sm" data-tooltip="tooltip"
+								data-placement="bottom" title="Editar"><span
+									class="glyphicon glyphicon-pencil"></span> </a> <!-- Excluir -->
 								<button type="button" class="btn btn-danger btn-sm"
+									data-tooltip="tooltip" data-placement="bottom" title="Excluir"
 									data-toggle="modal" data-target="#modal${grupo.id}">
-									<span class="glyphicon glyphicon-trash"></span> Excluir
+									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 								<div class="modal fade" id="modal${grupo.id}">
 									<div class="modal-dialog" role="document">
@@ -54,11 +57,12 @@
 												</button>
 											</div>
 											<div class="modal-body">
-
 												<p>
 													Deseja realmente excluir o grupo<br> ID (${grupo.id})
 													-> ${grupo.nome}?
 												</p>
+												<strong>A exclusão não é permitida caso haja itens
+													vinculados a este grupo</strong> <br>
 											</div>
 
 											<div class="modal-footer">

@@ -41,16 +41,21 @@
 							<td>
 								<!-- Exibir --> <a
 								href="<c:url value="/usuario/exibe?id=${usuario.id}" />"
-								class="btn btn-secondary btn-sm"><span
-									class="glyphicon glyphicon-eye-open"></span> Exibir</a> <security:authorize
+								class="btn btn-info btn-sm" data-tooltip="tooltip"
+								data-placement="bottom" title="Exibir"><span
+									class="glyphicon glyphicon-search"></span></a>
+							<security:authorize
 									access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
 									<!-- Editar -->
 									<a href="<c:url value="/usuario/edita?id=${usuario.id}" />"
-										class="btn btn-info btn-sm"><span
-										class="glyphicon glyphicon-edit"></span> Editar </a>
+										class="btn btn-warning btn-sm" data-tooltip="tooltip"
+										data-placement="bottom" title="Editar"><span
+										class="glyphicon glyphicon-pencil"></span> </a>
+									<!-- Excluir -->
 									<button type="button" class="btn btn-danger btn-sm"
+										data-tooltip="tooltip" data-placement="bottom" title="Excluir"
 										data-toggle="modal" data-target="#modal${usuario.id}">
-										<span class="glyphicon glyphicon-trash"></span> Excluir
+										<span class="glyphicon glyphicon-trash"></span>
 									</button>
 									<div class="modal fade" id="modal${usuario.id}">
 										<div class="modal-dialog" role="document">
@@ -91,7 +96,8 @@
 	</div>
 
 	<div align="center">
-		<security:authorize access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
+		<security:authorize
+			access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
 			<a href="<c:url value="/usuario/novo" />"
 				class="btn btn-primary btn-lg"><span
 				class="glyphicon glyphicon-plus"></span> Cadastrar</a>

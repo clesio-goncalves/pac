@@ -59,7 +59,7 @@ public class ItemController {
 		return "demanda/novo";
 	}
 
-	@RequestMapping("/adiciona")
+	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
 	public String adiciona(@Valid Item item, BindingResult resultItem,
 			@Valid InformacoesGerenciais informacoes_gerenciais, BindingResult result_informacoes_gerenciais,
 			HttpServletRequest request) {
@@ -121,7 +121,7 @@ public class ItemController {
 		return "demanda/edita";
 	}
 
-	@RequestMapping("/altera")
+	@RequestMapping(value = "/altera", method = RequestMethod.POST)
 	public String altera(@Valid Item item, BindingResult resultItem, HttpServletRequest request) {
 		if (resultItem.hasErrors()) {
 			return "redirect:edita?id=" + item.getId();

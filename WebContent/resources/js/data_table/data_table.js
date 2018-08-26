@@ -4,5 +4,5 @@ $(document).ready(function() {
 			"url" : "../resources/idioma/Portuguese-Brasil.json"
 		}
 	});
+	$('[data-tooltip="tooltip"]').tooltip()
 });
-

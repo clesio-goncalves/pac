@@ -78,7 +78,7 @@ public class PlanejamentoController {
 		return "planejamento/novo";
 	}
 
-	@RequestMapping("/adiciona")
+	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
 	public String adicionaPlanejamento(@Valid EstudoPreliminar estudo_preliminar,
 			BindingResult result_estudo_preliminar, HttpServletRequest request) {
 
@@ -135,7 +135,7 @@ public class PlanejamentoController {
 		return "planejamento/edita";
 	}
 
-	@RequestMapping("/altera")
+	@RequestMapping(value = "/altera", method = RequestMethod.POST)
 	public String altera(@Valid EstudoPreliminar estudo_preliminar, BindingResult result_estudo_preliminar,
 			HttpServletRequest request) {
 		if (result_estudo_preliminar.hasErrors()) {

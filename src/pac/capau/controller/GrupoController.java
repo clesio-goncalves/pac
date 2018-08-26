@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import pac.capau.dao.EstudoPreliminarDao;
 import pac.capau.dao.GerenciamentoRiscoDao;
@@ -22,6 +23,7 @@ import pac.capau.modelo.Grupo;
 @RequestMapping("/grupo")
 public class GrupoController {
 
+	private Grupo grupo;
 	private List<Grupo> lista_grupo;
 	private List<EstudoPreliminar> lista_estudo_preliminar;
 
@@ -39,7 +41,7 @@ public class GrupoController {
 		return "grupo/novo";
 	}
 
-	@RequestMapping("/adiciona")
+	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
 	public String adiciona(@Valid Grupo grupo, BindingResult result) {
 		if (result.hasErrors()) {
 			return "redirect:novo";
@@ -53,21 +55,30 @@ public class GrupoController {
 
 	@RequestMapping("/lista")
 	public String lista(Model model) {
-		model.addAttribute("grupos", dao.lista());
+		this.lista_grupo = dao.lista();
+		for (Grupo grupo : this.lista_grupo) {
+			grupo.setTotal_itens(dao.totalItensGrupo(grupo.getId()));
+		}
+		model.addAttribute("grupos", this.lista_grupo);
 		return "grupo/lista";
 	}
 
 	@RequestMapping("/remove")
 	public String remove(Long id) {
-		dao_estudo_preliminar.removeEstudoPreliminarPeloGrupoId(id); // Remove Estudo Preliminar
-		dao_gerenciamento_risco.removeGerenciamentoRiscoPeloGrupoId(id); // Remove Gerenciamento Risco
-		dao.remove(id);
+		if (dao.totalItensGrupo(id) == 0) { // remove se não houver itens vinculados
+			dao_estudo_preliminar.removeEstudoPreliminarPeloGrupoId(id); // Remove Estudo Preliminar
+			dao_gerenciamento_risco.removeGerenciamentoRiscoPeloGrupoId(id); // Remove Gerenciamento Risco
+			dao.remove(id);
+		}
 		return "redirect:lista";
 	}
 
 	@RequestMapping("/exibe")
 	public String exibe(Long id, Model model) {
-		model.addAttribute("grupo", dao.buscaPorId(id));
+		this.grupo = dao.buscaPorId(id);
+		this.grupo.setTotal_itens(dao.totalItensGrupo(id));
+		model.addAttribute("grupo", this.grupo);
+
 		this.lista_estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloGrupoId(id);
 		if (this.lista_estudo_preliminar.size() > 0) {
 			model.addAttribute("estudo_preliminar", this.lista_estudo_preliminar.get(0));
@@ -82,7 +93,7 @@ public class GrupoController {
 		return "grupo/edita";
 	}
 
-	@RequestMapping("/altera")
+	@RequestMapping(value = "/altera", method = RequestMethod.POST)
 	public String altera(@Valid Grupo grupo, BindingResult result) {
 		this.lista_grupo = dao.buscaPorNome(grupo.getNome());
 		if (result.hasErrors()) {

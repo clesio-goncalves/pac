@@ -61,7 +61,7 @@
 					</tr>
 					<tr>
 						<th>Perfil</th>
-						<td>${usuario.perfil.nome}</td>
+						<td style="color: red; font-weight: bold">${usuario.perfil.nome}</td>
 					</tr>
 				</table>
 			</div>
@@ -76,7 +76,7 @@
 				class="glyphicon glyphicon-plus"></span> Cadastrar</a>
 			<!-- Editar -->
 			<a href="<c:url value="/usuario/edita?id=${usuario.id}" />"
-				class="btn btn-info btn-lg"><span
+				class="btn btn-warning btn-lg"><span
 				class="glyphicon glyphicon-edit"></span> Editar </a>
 			<!-- Excluir -->
 			<button type="button" class="btn btn-danger btn-lg"

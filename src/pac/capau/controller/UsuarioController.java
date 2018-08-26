@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import pac.capau.dao.PerfilDao;
 import pac.capau.dao.SetorDao;
@@ -36,8 +37,8 @@ public class UsuarioController {
 	@Autowired
 	PerfilDao dao_perfil;
 
-	@Secured("hasAnyRole('ROLE_Gerenciador', 'ROLE_Gerenciador')")
 	@RequestMapping("/novo")
+	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
 	public String novoUsuario(Model model) {
 		this.lista_setores = dao_setor.lista();
 		if (this.lista_setores.size() == 0) {
@@ -49,8 +50,8 @@ public class UsuarioController {
 		return "usuario/novo";
 	}
 
-	@Secured("hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')")
-	@RequestMapping("/adiciona")
+	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
+	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
 	public String adiciona(@Valid Usuario usuario, BindingResult result) {
 
 		if (result.hasErrors()) {
@@ -74,8 +75,8 @@ public class UsuarioController {
 		return "usuario/lista";
 	}
 
-	@Secured("hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')")
 	@RequestMapping("/remove")
+	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
 	public String remove(Long id) {
 		dao.remove(id);
 		return "redirect:lista";
@@ -87,8 +88,8 @@ public class UsuarioController {
 		return "usuario/exibe";
 	}
 
-	@Secured("hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')")
 	@RequestMapping("/edita")
+	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
 	public String edita(Long id, Model model) {
 
 		model.addAttribute("setores", dao_setor.lista());
@@ -97,8 +98,8 @@ public class UsuarioController {
 		return "usuario/edita";
 	}
 
-	@Secured("hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')")
-	@RequestMapping("/altera")
+	@RequestMapping(value = "/altera", method = RequestMethod.POST)
+	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
 	public String altera(@Valid Usuario usuario, BindingResult result) {
 		this.lista_usuario = dao.buscaPorEmail(usuario.getEmail());
 		if (result.hasErrors()) {

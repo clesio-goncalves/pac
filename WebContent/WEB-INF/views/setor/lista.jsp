@@ -31,14 +31,17 @@
 							<td>
 								<!-- Exibir --> <a
 								href="<c:url value="/setor/exibe?id=${setor.id}" />"
-								class="btn btn-secondary btn-sm"><span
-									class="glyphicon glyphicon-eye-open"></span> Exibir</a> <!-- Editar -->
-								<a href="<c:url value="/setor/edita?id=${setor.id}" />"
-								class="btn btn-info btn-sm"><span
-									class="glyphicon glyphicon-edit"></span> Editar </a>
+								class="btn btn-info btn-sm" data-tooltip="tooltip"
+								data-placement="bottom" title="Exibir"><span
+									class="glyphicon glyphicon-search"></span></a> <!-- Editar --> <a
+								href="<c:url value="/setor/edita?id=${setor.id}" />"
+								class="btn btn-warning btn-sm" data-tooltip="tooltip"
+								data-placement="bottom" title="Editar"><span
+									class="glyphicon glyphicon-pencil"></span> </a> <!-- Excluir -->
 								<button type="button" class="btn btn-danger btn-sm"
+									data-tooltip="tooltip" data-placement="bottom" title="Excluir"
 									data-toggle="modal" data-target="#modal${setor.id}">
-									<span class="glyphicon glyphicon-trash"></span> Excluir
+									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 								<div class="modal fade" id="modal${setor.id}">
 									<div class="modal-dialog" role="document">

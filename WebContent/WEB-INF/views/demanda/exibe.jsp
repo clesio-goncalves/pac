@@ -65,7 +65,7 @@
 			class="glyphicon glyphicon-plus"></span> Cadastrar</a>
 		<!-- Editar -->
 		<a href="<c:url value="/demanda/edita?id=${item.id}" />"
-			class="btn btn-info btn-lg"><span
+			class="btn btn-warning btn-lg"><span
 			class="glyphicon glyphicon-edit"></span> Editar </a>
 		<!-- Excluir -->
 		<button type="button" class="btn btn-danger btn-lg"

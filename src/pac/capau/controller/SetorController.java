@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import pac.capau.dao.SetorDao;
 import pac.capau.dao.UsuarioDao;
@@ -33,7 +34,7 @@ public class SetorController {
 		return "setor/novo";
 	}
 
-	@RequestMapping("/adiciona")
+	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
 	public String adiciona(@Valid Setor setor, BindingResult result) {
 
 		if (result.hasErrors()) {
@@ -77,7 +78,7 @@ public class SetorController {
 		return "setor/edita";
 	}
 
-	@RequestMapping("/altera")
+	@RequestMapping(value = "/altera", method = RequestMethod.POST)
 	public String altera(@Valid Setor setor, BindingResult result) {
 		this.lista_setor = dao.buscaPorNome(setor.getNome());
 		if (result.hasErrors()) {

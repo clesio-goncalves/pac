@@ -1,6 +1,10 @@
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
+$(document).ready(function() {
+	$('[data-tooltip="tooltip"]').tooltip();
+});
+
 function adicionar(){
 	$("input[name='descricao']").val("");
 	$("input[name='descricao']").removeClass('is-invalid');

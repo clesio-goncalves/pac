@@ -26,6 +26,11 @@
 							<th>Nome</th>
 							<td>${grupo.nome}</td>
 						</tr>
+
+						<tr>
+							<th>Total de itens</th>
+							<td>${grupo.total_itens}</td>
+						</tr>
 					</table>
 				</div>
 			</fieldset>
@@ -53,7 +58,7 @@
 			class="glyphicon glyphicon-plus"></span> Cadastrar</a>
 		<!-- Editar -->
 		<a href="<c:url value="/grupo/edita?id=${grupo.id}" />"
-			class="btn btn-info btn-lg"><span
+			class="btn btn-warning btn-lg"><span
 			class="glyphicon glyphicon-edit"></span> Editar </a>
 		<!-- Excluir -->
 		<button type="button" class="btn btn-danger btn-lg"
@@ -77,6 +82,8 @@
 						Deseja realmente excluir o grupo<br> ID (${grupo.id}) ->
 						${grupo.nome}?
 					</p>
+					<strong>A exclusão não é permitida caso haja itens
+						vinculados a este grupo</strong> <br>
 				</div>
 				<div class="modal-footer">
 					<a href="<c:url value="/grupo/remove?id=${grupo.id}" />"

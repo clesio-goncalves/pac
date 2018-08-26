@@ -25,9 +25,12 @@ public class GrupoDao {
 	}
 
 	public List<Grupo> lista() {
-		return manager.createNativeQuery(
-				"select id, nome, (select count(*) from Item as i where i.grupo_id = g.id) as 'total_itens' from Grupo as g;",
-				Grupo.class).getResultList();
+		return manager.createQuery("select g from Grupo g", Grupo.class).getResultList();
+	}
+
+	public Long totalItensGrupo(Long id) {
+		return manager.createQuery("select count(*) from Item i where i.grupo.id = :id", Long.class)
+				.setParameter("id", id).getSingleResult();
 	}
 
 	public List<Grupo> buscaPorNome(String nome) {
