@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@	taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <c:set var="total_geral" value="${0}" />
 <c:set var="total" value="${0}" />
 <table id="tabela_id"
@@ -35,41 +37,86 @@
 					href="<c:url value="/demanda/exibe?id=${item.id}" />"
 					class="btn btn-info btn-sm" data-tooltip="tooltip"
 					data-placement="bottom" title="Exibir"><span
-						class="glyphicon glyphicon-search"></span></a> <!-- Editar --> <a
-					href="<c:url value="/demanda/edita?id=${item.id}" />"
-					class="btn btn-warning btn-sm" data-tooltip="tooltip"
-					data-placement="bottom" title="Editar"><span
-						class="glyphicon glyphicon-pencil"></span> </a> <!-- Excluir -->
-					<button type="button" class="btn btn-danger btn-sm"
-						data-tooltip="tooltip" data-placement="bottom" title="Excluir"
-						data-toggle="modal" data-target="#modal${item.id}">
-						<span class="glyphicon glyphicon-trash"></span>
-					</button>
-					<div class="modal fade" id="modal${item.id}">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title">Exclusão da demanda</h5>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
+						class="glyphicon glyphicon-search"></span> </a> <security:authorize
+						access="hasRole('ROLE_Demandante')">
+						<security:authentication property="principal" var="usuario_logado" />
+						<c:if test="${usuario_logado.id == item.usuario.id}">
+							<!-- Editar -->
+							<a href="<c:url value="/demanda/edita?id=${item.id}" />"
+								class="btn btn-warning btn-sm" data-tooltip="tooltip"
+								data-placement="bottom" title="Editar"><span
+								class="glyphicon glyphicon-pencil"></span> </a>
+							<!-- Excluir -->
+							<button type="button" class="btn btn-danger btn-sm"
+								data-tooltip="tooltip" data-placement="bottom" title="Excluir"
+								data-toggle="modal" data-target="#modal${item.id}">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+							<div class="modal fade" id="modal${item.id}">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title">Exclusão da demanda</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<p>Deseja realmente excluir este item?</p>
+										</div>
+										<div class="modal-footer">
+											<a href="<c:url value="/demanda/remove?id=${item.id}" />"
+												class="btn btn-danger"><span
+												class="glyphicon glyphicon-trash"></span> Excluir</a>
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">
+												<span class="glyphicon glyphicon-log-out"></span> Fechar
+											</button>
+										</div>
+									</div>
 								</div>
-								<div class="modal-body">
-									<p>Deseja realmente excluir este item?</p>
-								</div>
-								<div class="modal-footer">
-									<a href="<c:url value="/demanda/remove?id=${item.id}" />"
-										class="btn btn-danger"><span
-										class="glyphicon glyphicon-trash"></span> Excluir</a>
-									<button type="button" class="btn btn-secondary"
-										data-dismiss="modal">
-										<span class="glyphicon glyphicon-log-out"></span> Fechar
-									</button>
+							</div>
+						</c:if>
+					</security:authorize> <security:authorize
+						access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
+						<!-- Editar -->
+						<a href="<c:url value="/demanda/edita?id=${item.id}" />"
+							class="btn btn-warning btn-sm" data-tooltip="tooltip"
+							data-placement="bottom" title="Editar"><span
+							class="glyphicon glyphicon-pencil"></span> </a>
+						<!-- Excluir -->
+						<button type="button" class="btn btn-danger btn-sm"
+							data-tooltip="tooltip" data-placement="bottom" title="Excluir"
+							data-toggle="modal" data-target="#modal${item.id}">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+						<div class="modal fade" id="modal${item.id}">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title">Exclusão da demanda</h5>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p>Deseja realmente excluir este item?</p>
+									</div>
+									<div class="modal-footer">
+										<a href="<c:url value="/demanda/remove?id=${item.id}" />"
+											class="btn btn-danger"><span
+											class="glyphicon glyphicon-trash"></span> Excluir</a>
+										<button type="button" class="btn btn-secondary"
+											data-dismiss="modal">
+											<span class="glyphicon glyphicon-log-out"></span> Fechar
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</security:authorize>
 				</td>
 			</tr>
 		</c:forEach>

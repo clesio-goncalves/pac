@@ -1,7 +1,6 @@
 package pac.capau.springsecurity;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +12,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import pac.capau.dao.UsuarioDao;
 
-@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,6 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.
 			authorizeRequests()
 			.antMatchers("/usuario/novo", "/usuario/adiciona", "/usuario/edita", "/usuario/altera", "/usuario/remove")
+				.hasAnyRole("Administrador", "Gerenciador")
+			.antMatchers("/setor/novo", "/setor/adiciona", "/setor/edita", "/setor/altera", "/setor/remove")
 				.hasAnyRole("Administrador", "Gerenciador")
 			.anyRequest()
 			.authenticated()

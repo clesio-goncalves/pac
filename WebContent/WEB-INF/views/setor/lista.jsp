@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,48 +35,52 @@
 								href="<c:url value="/setor/exibe?id=${setor.id}" />"
 								class="btn btn-info btn-sm" data-tooltip="tooltip"
 								data-placement="bottom" title="Exibir"><span
-									class="glyphicon glyphicon-search"></span></a> <!-- Editar --> <a
-								href="<c:url value="/setor/edita?id=${setor.id}" />"
-								class="btn btn-warning btn-sm" data-tooltip="tooltip"
-								data-placement="bottom" title="Editar"><span
-									class="glyphicon glyphicon-pencil"></span> </a> <!-- Excluir -->
-								<button type="button" class="btn btn-danger btn-sm"
-									data-tooltip="tooltip" data-placement="bottom" title="Excluir"
-									data-toggle="modal" data-target="#modal${setor.id}">
-									<span class="glyphicon glyphicon-trash"></span>
-								</button>
-								<div class="modal fade" id="modal${setor.id}">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title">Exclusão do setor</h5>
-												<button type="button" class="close" data-dismiss="modal"
-													aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
+									class="glyphicon glyphicon-search"></span></a> <security:authorize
+									access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
+									<!-- Editar -->
+									<a href="<c:url value="/setor/edita?id=${setor.id}" />"
+										class="btn btn-warning btn-sm" data-tooltip="tooltip"
+										data-placement="bottom" title="Editar"><span
+										class="glyphicon glyphicon-pencil"></span> </a>
+									<!-- Excluir -->
+									<button type="button" class="btn btn-danger btn-sm"
+										data-tooltip="tooltip" data-placement="bottom" title="Excluir"
+										data-toggle="modal" data-target="#modal${setor.id}">
+										<span class="glyphicon glyphicon-trash"></span>
+									</button>
+									<div class="modal fade" id="modal${setor.id}">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title">Exclusão do setor</h5>
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
 
-												<p>
-													Deseja realmente excluir o setor<br> ID (${setor.id})
-													-> ${setor.nome}?
-												</p>
-												<strong>A exclusão não é permitida caso haja
-													usuários vinculados a este setor</strong> <br>
-											</div>
+													<p>
+														Deseja realmente excluir o setor<br> ID (${setor.id})
+														-> ${setor.nome}?
+													</p>
+													<strong>A exclusão não é permitida caso haja
+														usuários vinculados a este setor</strong> <br>
+												</div>
 
-											<div class="modal-footer">
-												<a href="<c:url value="/setor/remove?id=${setor.id}" />"
-													class="btn btn-danger"><span
-													class="glyphicon glyphicon-trash"></span> Excluir</a>
-												<button type="button" class="btn btn-secondary"
-													data-dismiss="modal">
-													<span class="glyphicon glyphicon-log-out"></span> Fechar
-												</button>
+												<div class="modal-footer">
+													<a href="<c:url value="/setor/remove?id=${setor.id}" />"
+														class="btn btn-danger"><span
+														class="glyphicon glyphicon-trash"></span> Excluir</a>
+													<button type="button" class="btn btn-secondary"
+														data-dismiss="modal">
+														<span class="glyphicon glyphicon-log-out"></span> Fechar
+													</button>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+								</security:authorize>
 							</td>
 						</tr>
 					</c:forEach>

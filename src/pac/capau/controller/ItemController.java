@@ -38,6 +38,7 @@ public class ItemController {
 	private PlanejamentoController pc;
 	private Long grupo_id;
 	private FiltroItem filtro_item;
+	private Usuario usuario;
 
 	@Autowired
 	ItemDao dao;
@@ -62,9 +63,7 @@ public class ItemController {
 
 	@RequestMapping("/nova")
 	public String novaDemanda(Model model) {
-		// Pego o usuário logado
-		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("usuario", usuario);
+		model.addAttribute("usuario", retornaUsuarioLogado()); // Pego o usuário logado
 		model.addAttribute("grupos", dao_grupo.lista());
 		return "demanda/novo";
 	}
@@ -125,41 +124,56 @@ public class ItemController {
 	}
 
 	@RequestMapping("/edita")
-	public String edita(Long id, Model model) {
-		// Pego o usuário logado
-		Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("usuario", usuario);
-		model.addAttribute("grupos", dao_grupo.lista());
-		model.addAttribute("item", dao.buscaPorId(id));
-		return "demanda/edita";
+	public String edita(Long id, Model model, HttpServletResponse response) {
+		if (possuiPermissaoItem(id)) {
+			erro aqui no this.usuario
+			model.addAttribute("usuario", this.usuario);
+			model.addAttribute("grupos", dao_grupo.lista());
+			model.addAttribute("item", dao.buscaPorId(id));
+			return "demanda/edita";
+		} else {
+			response.setStatus(403);
+			return "redirect:/403";
+		}
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.POST)
-	public String altera(@Valid Item item, BindingResult resultItem, HttpServletRequest request) {
-		if (resultItem.hasErrors()) {
-			return "redirect:edita?id=" + item.getId();
-		}
-		dao_informacoes_gerenciais.altera(item.getInformacoes_gerenciais());
-		dao.altera(item);
+	public String altera(@Valid Item item, BindingResult resultItem, HttpServletRequest request,
+			HttpServletResponse response) {
+		if (possuiPermissaoItem(item.getId())) {
+			if (resultItem.hasErrors()) {
+				return "redirect:edita?id=" + item.getId();
+			}
+			dao_informacoes_gerenciais.altera(item.getInformacoes_gerenciais());
+			dao.altera(item);
 
-		// Caso seja informado o grupo na edição
-		if (request.getParameter("grupo.id") != null) {
-			dao_estudo_preliminar.removeEstudoPreliminarPeloItemId(item.getId()); // Remove Estudo Preliminar
-			dao_gerenciamento_risco.removeGerenciamentoRiscoPeloItemId(item.getId()); // Remove Gerenciamento Risco
-			return "redirect:lista";
+			// Caso seja informado o grupo na edição
+			if (request.getParameter("grupo.id") != null) {
+				dao_estudo_preliminar.removeEstudoPreliminarPeloItemId(item.getId()); // Remove Estudo Preliminar
+				dao_gerenciamento_risco.removeGerenciamentoRiscoPeloItemId(item.getId()); // Remove Gerenciamento Risco
+				return "redirect:lista";
+			} else {
+				return "redirect:/demanda/planejamento/item/edita?id=" + item.getId();
+			}
 		} else {
-			return "redirect:/demanda/planejamento/item/edita?id=" + item.getId();
+			response.setStatus(403);
+			return "redirect:/403";
 		}
 	}
 
 	@RequestMapping("/remove")
-	public String remove(Long id) {
-		if (dao.buscarGrupoIdPeloItemId(id) == null) { // sem grupo vinculado
-			dao_estudo_preliminar.removeEstudoPreliminarPeloItemId(id); // Remove Estudo Preliminar
-			dao_gerenciamento_risco.removeGerenciamentoRiscoPeloItemId(id); // Remove Gerenciamento Risco
+	public String remove(Long id, HttpServletResponse response) {
+		if (possuiPermissaoItem(id)) {
+			if (dao.buscarGrupoIdPeloItemId(id) == null) { // sem grupo vinculado
+				dao_estudo_preliminar.removeEstudoPreliminarPeloItemId(id); // Remove Estudo Preliminar
+				dao_gerenciamento_risco.removeGerenciamentoRiscoPeloItemId(id); // Remove Gerenciamento Risco
+			}
+			dao.remove(id); // Remove Item e Informações Gerenciais
+			return "redirect:lista";
+		} else {
+			response.setStatus(403);
+			return "redirect:/403";
 		}
-		dao.remove(id); // Remove Item e Informações Gerenciais
-		return "redirect:lista";
 	}
 
 	@RequestMapping(value = "/filtrar", method = RequestMethod.POST)
@@ -216,5 +230,23 @@ public class ItemController {
 		} else {
 			return this.filtro_item.formataData(data_final);
 		}
+	}
+
+	private boolean possuiPermissaoItem(Long id) {
+		this.usuario = retornaUsuarioLogado(); // Pego o usuário logado
+		// O demandante só realiza a ação se for dono do item
+		if (this.usuario.getPerfil().getNome().equals("ROLE_Demandante")) {
+			if (dao.buscarUsuarioIdPeloItemId(id) == this.usuario.getId()) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return true;
+		}
+	}
+
+	private Usuario retornaUsuarioLogado() {
+		return (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 }

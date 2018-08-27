@@ -17,7 +17,7 @@
 </div>
 <div class="container">
 	<form action="altera" method="POST">
-
+		<input type="hidden" name="usuario.id" value="${usuario.id}">
 		<!-- ID -->
 		<input type="hidden" name="id" value="${grupo.id}">
 

@@ -20,6 +20,7 @@
 </div>
 <div class="container">
 	<form action="adiciona" method="POST">
+		<input type="hidden" name="usuario.id" value="${usuario.id}">
 
 		<!-- NOME -->
 		<div class="form-group">

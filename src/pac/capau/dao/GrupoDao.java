@@ -38,13 +38,9 @@ public class GrupoDao {
 				.getResultList();
 	}
 
-	public String buscaNomePorId(Long id) {
-		return manager.createQuery("select g.nome from Grupo g where g.id = :id", String.class).setParameter("id", id)
-				.getSingleResult();
-	}
-
-	public Grupo buscaPorId(Long id) {
-		return manager.find(Grupo.class, id);
+	public List<Grupo> buscaPorId(Long id) {
+		return manager.createQuery("select g from Grupo g where g.id = :id", Grupo.class).setParameter("id", id)
+				.getResultList();
 	}
 
 	public void remove(Long id) {

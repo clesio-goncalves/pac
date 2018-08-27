@@ -21,6 +21,3 @@ values (2, 'Instituto Federal do Piaui - Campus Paulistana', 'Clésio de Araújo
 
 insert into Usuario(id, orgao, nome, telefone, siape, email, senha, ativo, perfil_id, setor_id)
 values (3, 'Instituto Federal do Piaui - Campus Paulistana', 'Clésio de Araújo Gonçalves', '(89) 99907-0830', 2216135, 'clesio3@clesio.com','$2a$10$bRHXvb97c2b4avC31ISmF.4xZkCgUsVMS./xsWvDL83OE8WIVpxX6', 1, 3, 1);
-
-select g.id, g.nome, 
-(select count(*) from Item as i where i.grupo_id = g.id) as 'quantidade_itens' from Grupo as g;

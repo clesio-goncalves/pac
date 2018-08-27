@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +22,10 @@ public class Grupo {
 
 	@Transient
 	private Long total_itens;
+
+	@NotNull
+	@OneToOne
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -44,6 +49,14 @@ public class Grupo {
 
 	public void setTotal_itens(Long total_itens) {
 		this.total_itens = total_itens;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

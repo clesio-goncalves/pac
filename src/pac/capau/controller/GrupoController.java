@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import pac.capau.dao.GerenciamentoRiscoDao;
 import pac.capau.dao.GrupoDao;
 import pac.capau.modelo.EstudoPreliminar;
 import pac.capau.modelo.Grupo;
+import pac.capau.modelo.Usuario;
 
 @Transactional
 @Controller
@@ -37,7 +39,8 @@ public class GrupoController {
 	GerenciamentoRiscoDao dao_gerenciamento_risco;
 
 	@RequestMapping("/novo")
-	public String grupo() {
+	public String grupo(Model model) {
+		model.addAttribute("usuario", retornaUsuarioLogado()); // Pego o usuário logado
 		return "grupo/novo";
 	}
 
@@ -75,9 +78,12 @@ public class GrupoController {
 
 	@RequestMapping("/exibe")
 	public String exibe(Long id, Model model) {
-		this.grupo = dao.buscaPorId(id);
-		this.grupo.setTotal_itens(dao.totalItensGrupo(id));
-		model.addAttribute("grupo", this.grupo);
+		this.lista_grupo = dao.buscaPorId(id);
+		
+		if (this.lista_grupo.size() > 0) {
+			this.lista_grupo.get(0).setTotal_itens(dao.totalItensGrupo(id));
+			model.addAttribute("grupo", this.lista_grupo.get(0));
+		}
 
 		this.lista_estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloGrupoId(id);
 		if (this.lista_estudo_preliminar.size() > 0) {
@@ -104,6 +110,10 @@ public class GrupoController {
 
 		dao.altera(grupo);
 		return "redirect:lista";
+	}
+	
+	private Usuario retornaUsuarioLogado() {
+		return (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 
 }

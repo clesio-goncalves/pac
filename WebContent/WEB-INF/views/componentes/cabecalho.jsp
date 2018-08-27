@@ -39,8 +39,8 @@
 						<security:authorize
 							access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
 							<a class="dropdown-item" href="<c:url value="/usuario/novo" />">Usuário</a>
+							<a class="dropdown-item" href="<c:url value="/setor/novo" />">Setor</a>
 						</security:authorize>
-						<a class="dropdown-item" href="<c:url value="/setor/novo" />">Setor</a>
 						<a class="dropdown-item" href="<c:url value="/grupo/novo" />">Grupo</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<c:url value="/demanda/nova" />">Formalização

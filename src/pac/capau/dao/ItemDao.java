@@ -38,6 +38,11 @@ public class ItemDao {
 				.getSingleResult();
 	}
 
+	public Long buscarUsuarioIdPeloItemId(Long id) {
+		return manager.createQuery("select i.usuario.id from Item i where i.id = :id", Long.class)
+				.setParameter("id", id).getSingleResult();
+	}
+
 	public Item buscaPorId(Long id) {
 		return manager.find(Item.class, id);
 	}

@@ -26,6 +26,11 @@
 							<th>Nome</th>
 							<td>${grupo.nome}</td>
 						</tr>
+						
+						<tr>
+							<th>Usuário Responsável</th>
+							<td>${grupo.usuario.nome}</td>
+						</tr>
 
 						<tr>
 							<th>Total de itens</th>

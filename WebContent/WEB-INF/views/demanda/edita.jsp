@@ -24,8 +24,6 @@
 
 <div class="container">
 	<form action="altera" method="POST">
-
-		<!-- USUÁRIO -->
 		<input type="hidden" name="usuario.id" value="${usuario.id}">
 
 		<!-- ID ITEM -->

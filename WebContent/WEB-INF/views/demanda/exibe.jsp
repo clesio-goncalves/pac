@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,49 +65,20 @@
 		<a href="<c:url value="/demanda/nova" />"
 			class="btn btn-primary btn-lg"><span
 			class="glyphicon glyphicon-plus"></span> Cadastrar</a>
-		<!-- Editar -->
-		<a href="<c:url value="/demanda/edita?id=${item.id}" />"
-			class="btn btn-warning btn-lg"><span
-			class="glyphicon glyphicon-edit"></span> Editar </a>
-		<!-- Excluir -->
-		<button type="button" class="btn btn-danger btn-lg"
-			data-toggle="modal" data-target="#modal${item.id}">
-			<span class="glyphicon glyphicon-trash"></span> Excluir
-		</button>
-	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="modal${item.id}">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Exclusão da demanda</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>
-						Deseja realmente excluir a demanda de <br>ID (${item.id}) ->
-						Demandate (${item.usuario.nome})?
-					</p>
-				</div>
-				<div class="modal-footer">
-					<a href="<c:url value="/demanda/remove?id=${item.id}" />"
-						class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
-						Excluir</a>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">
-						<span class="glyphicon glyphicon-log-out"></span> Fechar
-					</button>
-				</div>
-			</div>
-		</div>
+		<security:authorize access="hasRole('ROLE_Demandante')">
+			<security:authentication property="principal" var="usuario_logado" />
+			<c:if test="${usuario_logado.id == item.usuario.id}">
+				<jsp:include page="imports_exibe/edita_remove.jsp"></jsp:include>
+			</c:if>
+		</security:authorize>
+		<security:authorize
+			access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
+			<jsp:include page="imports_exibe/edita_remove.jsp"></jsp:include>
+		</security:authorize>
 	</div>
 	<a class="btn btn-success" href="<c:url value="/demanda/lista" />"><span
 		class="glyphicon glyphicon-chevron-left"></span> Voltar</a>
 </div>
-
 <script type="text/javascript"
 	src="<c:url value="/resources/js/demanda/risco.js" />"></script>
 <c:import url="../componentes/rodape.jsp" />

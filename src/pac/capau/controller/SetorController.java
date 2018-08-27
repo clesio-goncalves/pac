@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,10 +31,12 @@ public class SetorController {
 	UsuarioDao dao_usuario;
 
 	@RequestMapping("/novo")
+	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
 	public String setor() {
 		return "setor/novo";
 	}
 
+	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
 	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
 	public String adiciona(@Valid Setor setor, BindingResult result) {
 
@@ -55,6 +58,7 @@ public class SetorController {
 	}
 
 	@RequestMapping("/remove")
+	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
 	public String remove(Long id) {
 
 		// Remove o setor caso não haja usuários cadastrados nesse setor
@@ -73,12 +77,14 @@ public class SetorController {
 	}
 
 	@RequestMapping("/edita")
+	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
 	public String edita(Long id, Model model) {
 		model.addAttribute("setor", dao.buscaPorId(id));
 		return "setor/edita";
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.POST)
+	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
 	public String altera(@Valid Setor setor, BindingResult result) {
 		this.lista_setor = dao.buscaPorNome(setor.getNome());
 		if (result.hasErrors()) {
