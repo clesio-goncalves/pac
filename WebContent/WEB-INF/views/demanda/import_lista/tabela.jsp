@@ -7,6 +7,7 @@
 	style="width: 100%">
 	<thead>
 		<tr>
+			<th>Solicitação</th>
 			<th>Grupo</th>
 			<th>Tipo Item</th>
 			<th>Descrição</th>
@@ -18,6 +19,9 @@
 	<tbody>
 		<c:forEach var="item" items="${itens}">
 			<tr>
+				<td><fmt:formatDate
+						value="${item.informacoes_gerenciais.data_solicitacao.time}"
+						pattern="dd/MM/yyyy HH:mm:ss" /></td>
 				<td>${item.grupo.nome}</td>
 				<td>${item.tipo}</td>
 				<td>${item.descricao}</td>

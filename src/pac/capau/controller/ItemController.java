@@ -21,7 +21,10 @@ import pac.capau.dao.GerenciamentoRiscoDao;
 import pac.capau.dao.GrupoDao;
 import pac.capau.dao.InformacoesGerenciaisDao;
 import pac.capau.dao.ItemDao;
+import pac.capau.dao.SetorDao;
+import pac.capau.dao.UsuarioDao;
 import pac.capau.modelo.EstudoPreliminar;
+import pac.capau.modelo.FiltroItem;
 import pac.capau.modelo.InformacoesGerenciais;
 import pac.capau.modelo.Item;
 import pac.capau.modelo.Usuario;
@@ -34,6 +37,7 @@ public class ItemController {
 	private List<EstudoPreliminar> lista_estudo_preliminar;
 	private PlanejamentoController pc;
 	private Long grupo_id;
+	private FiltroItem filtro_item;
 
 	@Autowired
 	ItemDao dao;
@@ -49,6 +53,12 @@ public class ItemController {
 
 	@Autowired
 	GrupoDao dao_grupo;
+
+	@Autowired
+	SetorDao dao_setor;
+
+	@Autowired
+	UsuarioDao dao_responsavel;
 
 	@RequestMapping("/nova")
 	public String novaDemanda(Model model) {
@@ -87,6 +97,9 @@ public class ItemController {
 
 	@RequestMapping("/lista")
 	public String lista(Model model) {
+		model.addAttribute("grupos", dao_grupo.lista());
+		model.addAttribute("setores", dao_setor.lista());
+		model.addAttribute("responsaveis", dao_responsavel.lista());
 		model.addAttribute("itens", dao.lista());
 		return "demanda/lista";
 	}
@@ -149,10 +162,59 @@ public class ItemController {
 		return "redirect:lista";
 	}
 
+	@RequestMapping(value = "/filtrar", method = RequestMethod.POST)
+	public String filtra(HttpServletRequest request, HttpServletResponse response, Model model) {
+		model.addAttribute("itens", dao.filtraItens(trataParametrosRequest(request)));
+		return "demanda/import_lista/tabela";
+	}
+
 	@RequestMapping(value = "/risco/adiciona", method = RequestMethod.POST)
 	public void adicionaRisco(HttpServletRequest request, HttpServletResponse response, Model model) {
 		this.pc = new PlanejamentoController();
 		this.pc.adicionaRisco(request, response, model);
 	}
 
+	private FiltroItem trataParametrosRequest(HttpServletRequest request) {
+		this.filtro_item = new FiltroItem();
+		this.filtro_item.setData_inicial_solicitacao(request.getParameter("data_inicial_solicitacao"));
+		this.filtro_item.setData_final_solicitacao(request.getParameter("data_final_solicitacao"));
+		this.filtro_item.setData_inicial_necessidade(request.getParameter("data_inicial_necessidade"));
+		this.filtro_item.setData_final_necessidade(request.getParameter("data_final_necessidade"));
+		this.filtro_item.setGrupo(request.getParameter("grupo"));
+		this.filtro_item.setDescricao(request.getParameter("descricao"));
+		this.filtro_item.setTipo(request.getParameter("tipo"));
+		this.filtro_item.setSetor(request.getParameter("setor"));
+		this.filtro_item.setResponsavel(request.getParameter("responsavel"));
+		this.filtro_item.setValor(request.getParameter("valor"));
+		this.filtro_item.setContratacao_emergencial(request.getParameter("contratacao_emergencial"));
+
+		trataDatas();
+
+		return this.filtro_item;
+	}
+
+	private void trataDatas() {
+		// Data Solicitação
+		this.filtro_item.setData_inicial_solicitacao(trataDataInicial(this.filtro_item.getData_inicial_solicitacao()));
+		this.filtro_item.setData_final_solicitacao(trataDataFinal(this.filtro_item.getData_final_solicitacao()));
+	}
+
+	private String trataDataInicial(String data_inicial) {
+		// Se a data inicial não estiver sido informada, será atribuido 01/01/2018
+		if (data_inicial.equals("")) {
+			return "2018-01-01";
+		} else {
+			return this.filtro_item.formataData(data_inicial);
+		}
+	}
+
+	private String trataDataFinal(String data_final) {
+		// Se a data final não estiver sido informada, sera atribuido a data atual do
+		// servidor
+		if (data_final.equals("")) {
+			return this.filtro_item.retornaDataFinal();
+		} else {
+			return this.filtro_item.formataData(data_final);
+		}
+	}
 }

@@ -24,7 +24,7 @@
 						<th>Nome</th>
 						<th>SIAPE</th>
 						<th>E-mail</th>
-						<th>Telefone</th>
+						<th>Setor</th>
 						<th>Ações</th>
 					</tr>
 				</thead>
@@ -36,7 +36,7 @@
 							<td>${usuario.nome}</td>
 							<td>${usuario.siape}</td>
 							<td>${usuario.email}</td>
-							<td>${usuario.telefone}</td>
+							<td>${usuario.setor.nome}</td>
 
 							<td>
 								<!-- Exibir --> <a

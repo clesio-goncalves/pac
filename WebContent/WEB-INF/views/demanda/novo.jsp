@@ -9,8 +9,6 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/jquery-ui.min.css" />">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/demanda.css" />">
-<link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/demanda/bootstrap-select.min.css" />">
 
 <div class="jumbotron">
