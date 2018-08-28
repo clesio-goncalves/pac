@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import pac.capau.modelo.EstudoPreliminar;
 import pac.capau.modelo.GerenciamentoRisco;
 import pac.capau.modelo.Grupo;
 import pac.capau.modelo.Item;
+import pac.capau.modelo.Usuario;
 
 @Transactional
 @Controller
@@ -30,6 +32,8 @@ public class PlanejamentoController {
 
 	private GerenciamentoRisco gerenciamento_risco;
 	private Item item;
+	private Usuario usuario;
+	private Long id_view;
 	private List<Grupo> lista_grupo;
 	private List<EstudoPreliminar> estudo_preliminar;
 
@@ -46,7 +50,7 @@ public class PlanejamentoController {
 	GerenciamentoRiscoDao dao_gerenciamento_risco;
 
 	@RequestMapping("/item/novo")
-	public String planejamentoItem(Long id, Model model) {
+	public String planejamentoItem(Long id, Model model, HttpServletResponse response) {
 		this.item = dao.buscaPorId(id);
 
 		if (this.item == null) { // se o ID não existir
@@ -55,15 +59,19 @@ public class PlanejamentoController {
 			return "redirect:/demanda/nova"; // se houver estudo_preliminar cadastrado para o item
 		}
 
-		model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(this.item.getId()));
-		model.addAttribute("item", this.item);
-		model.addAttribute("view", "item");
-		return "planejamento/novo";
+		if (possuiPermissaoItem(id)) {
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(this.item.getId()));
+			model.addAttribute("item", this.item);
+			model.addAttribute("view", "item");
+			return "planejamento/novo";
+		} else {
+			response.setStatus(403);
+			return "redirect:/403";
+		}
 	}
 
 	@RequestMapping("/grupo/novo")
-	public String planejamentoGrupo(Long id, Model model) {
-
+	public String planejamentoGrupo(Long id, Model model, HttpServletResponse response) {
 		this.lista_grupo = dao_grupo.buscaPorId(id);
 
 		if (this.lista_grupo.size() == 0) { // se o ID não existir
@@ -72,10 +80,15 @@ public class PlanejamentoController {
 			return "redirect:/grupo/novo"; // se houver estudo_preliminar cadastrado para o grupo
 		}
 
-		model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.lista_grupo.get(0).getId()));
-		model.addAttribute("grupo", this.lista_grupo.get(0));
-		model.addAttribute("view", "grupo");
-		return "planejamento/novo";
+		if (possuiPermissaoGrupo(id)) {
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.lista_grupo.get(0).getId()));
+			model.addAttribute("grupo", this.lista_grupo.get(0));
+			model.addAttribute("view", "grupo");
+			return "planejamento/novo";
+		} else {
+			response.setStatus(403);
+			return "redirect:/403";
+		}
 	}
 
 	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
@@ -96,7 +109,7 @@ public class PlanejamentoController {
 	}
 
 	@RequestMapping("/item/edita")
-	public String editaItem(Long id, Model model) {
+	public String editaItem(Long id, Model model, HttpServletResponse response) {
 		this.item = dao.buscaPorId(id);
 		this.estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloItemId(id);
 
@@ -109,14 +122,20 @@ public class PlanejamentoController {
 			model.addAttribute("estudo_preliminar", this.estudo_preliminar.get(0));
 		}
 
-		model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(this.item.getId()));
-		model.addAttribute("item", this.item);
-		model.addAttribute("view", "item");
-		return "planejamento/edita";
+		if (possuiPermissaoItem(id)) {
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(this.item.getId()));
+			model.addAttribute("item", this.item);
+			model.addAttribute("view", "item");
+			return "planejamento/edita";
+		} else {
+			response.setStatus(403);
+			return "redirect:/403";
+		}
+
 	}
 
 	@RequestMapping("/grupo/edita")
-	public String editaGrupo(Long id, Model model) {
+	public String editaGrupo(Long id, Model model, HttpServletResponse response) {
 		this.lista_grupo = dao_grupo.buscaPorId(id);
 		this.estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloGrupoId(id);
 
@@ -129,25 +148,47 @@ public class PlanejamentoController {
 			model.addAttribute("estudo_preliminar", this.estudo_preliminar.get(0));
 		}
 
-		model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.lista_grupo.get(0).getId()));
-		model.addAttribute("grupo", this.lista_grupo.get(0));
-		model.addAttribute("view", "grupo");
-		return "planejamento/edita";
+		if (possuiPermissaoGrupo(id)) {
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.lista_grupo.get(0).getId()));
+			model.addAttribute("grupo", this.lista_grupo.get(0));
+			model.addAttribute("view", "grupo");
+			return "planejamento/edita";
+		} else {
+			response.setStatus(403);
+			return "redirect:/403";
+		}
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.POST)
 	public String altera(@Valid EstudoPreliminar estudo_preliminar, BindingResult result_estudo_preliminar,
-			HttpServletRequest request) {
-		if (result_estudo_preliminar.hasErrors()) {
-			return "redirect:nova";
+			HttpServletRequest request, HttpServletResponse response) {
+
+		// Pega o ID para saber qual permissão executar
+		if (request.getParameter("grupo.id") == null) {
+			this.id_view = Long.parseLong(request.getParameter("item.id"));
+
+			if (possuiPermissaoItem(this.id_view)) {
+				if (result_estudo_preliminar.hasErrors()) {
+					return "redirect:nova";
+				}
+				dao_estudo_preliminar.altera(estudo_preliminar);
+				return "redirect:/demanda/lista";
+			}
+		} else {
+			this.id_view = Long.parseLong(request.getParameter("grupo.id"));
+
+			if (possuiPermissaoGrupo(this.id_view)) {
+				if (result_estudo_preliminar.hasErrors()) {
+					return "redirect:nova";
+				}
+				dao_estudo_preliminar.altera(estudo_preliminar);
+				return "redirect:/grupo/lista";
+			}
 		}
 
-		dao_estudo_preliminar.altera(estudo_preliminar);
-		if (request.getParameter("grupo.id") == null) {
-			return "redirect:/demanda/lista";
-		} else {
-			return "redirect:/grupo/lista";
-		}
+		response.setStatus(403);
+		return "redirect:/403";
+
 	}
 
 	@RequestMapping(value = "/risco/adiciona", method = RequestMethod.POST)
@@ -241,5 +282,37 @@ public class PlanejamentoController {
 			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.lista_grupo.get(0).getId()));
 		}
 		return "planejamento/risco/lista";
+	}
+
+	private boolean possuiPermissaoItem(Long id) {
+		this.usuario = retornaUsuarioLogado(); // Pego o usuário logado
+		// O demandante só realiza a ação se for dono do item
+		if (this.usuario.getPerfil().getNome().equals("ROLE_Demandante")) {
+			if (dao.buscarUsuarioIdPeloItemId(id) == this.usuario.getId()) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return true;
+		}
+	}
+
+	private boolean possuiPermissaoGrupo(Long id) {
+		this.usuario = retornaUsuarioLogado(); // Pego o usuário logado
+		// O demandante só realiza a ação se for dono do grupo
+		if (this.usuario.getPerfil().getNome().equals("ROLE_Demandante")) {
+			if (dao_grupo.buscarUsuarioIdPeloGrupoId(id) == this.usuario.getId()) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return true;
+		}
+	}
+
+	private Usuario retornaUsuarioLogado() {
+		return (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	}
 }

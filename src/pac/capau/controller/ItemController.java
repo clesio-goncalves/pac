@@ -126,8 +126,7 @@ public class ItemController {
 	@RequestMapping("/edita")
 	public String edita(Long id, Model model, HttpServletResponse response) {
 		if (possuiPermissaoItem(id)) {
-			erro aqui no this.usuario
-			model.addAttribute("usuario", this.usuario);
+			model.addAttribute("usuario", dao.buscarUsuarioIdPeloItemId(id));
 			model.addAttribute("grupos", dao_grupo.lista());
 			model.addAttribute("item", dao.buscaPorId(id));
 			return "demanda/edita";

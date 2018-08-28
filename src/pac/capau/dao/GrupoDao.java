@@ -28,6 +28,11 @@ public class GrupoDao {
 		return manager.createQuery("select g from Grupo g", Grupo.class).getResultList();
 	}
 
+	public Long buscarUsuarioIdPeloGrupoId(Long id) {
+		return manager.createQuery("select g.usuario.id from Grupo g where g.id = :id", Long.class)
+				.setParameter("id", id).getSingleResult();
+	}
+
 	public Long totalItensGrupo(Long id) {
 		return manager.createQuery("select count(*) from Item i where i.grupo.id = :id", Long.class)
 				.setParameter("id", id).getSingleResult();

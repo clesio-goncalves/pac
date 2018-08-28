@@ -31,7 +31,6 @@ public class Usuario implements UserDetails {
 	private String nome;
 
 	@NotNull
-	@Size(min = 5, max = 50)
 	@Column(unique = true)
 	private String email;
 

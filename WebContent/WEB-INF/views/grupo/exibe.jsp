@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,17 +23,15 @@
 							<th width="300">ID</th>
 							<td>${grupo.id}</td>
 						</tr>
-
 						<tr>
 							<th>Nome</th>
 							<td>${grupo.nome}</td>
 						</tr>
-						
 						<tr>
 							<th>Usuário Responsável</th>
-							<td>${grupo.usuario.nome}</td>
+							<td><a
+								href="<c:url value="/usuario/exibe?id=${grupo.usuario.id}" />">${grupo.usuario.nome}</a></td>
 						</tr>
-
 						<tr>
 							<th>Total de itens</th>
 							<td>${grupo.total_itens}</td>
@@ -41,7 +41,7 @@
 			</fieldset>
 
 			<!-- ESTUDOS PRELIMINARES -->
-			<jsp:include page="../demanda/imports_exibe/estudo_preliminar.jsp"></jsp:include>
+			<jsp:include page="../demanda/import_exibe/estudo_preliminar.jsp"></jsp:include>
 
 			<!-- TABELA GERENCIAMENTO RISCOS -->
 			<div id="tabela_lista_riscos">
@@ -61,46 +61,16 @@
 		<!-- Cadastrar -->
 		<a href="<c:url value="/grupo/novo" />" class="btn btn-primary btn-lg"><span
 			class="glyphicon glyphicon-plus"></span> Cadastrar</a>
-		<!-- Editar -->
-		<a href="<c:url value="/grupo/edita?id=${grupo.id}" />"
-			class="btn btn-warning btn-lg"><span
-			class="glyphicon glyphicon-edit"></span> Editar </a>
-		<!-- Excluir -->
-		<button type="button" class="btn btn-danger btn-lg"
-			data-toggle="modal" data-target="#modal${grupo.id}">
-			<span class="glyphicon glyphicon-trash"></span> Excluir
-		</button>
-	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="modal${grupo.id}">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Exclusão do grupo</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>
-						Deseja realmente excluir o grupo<br> ID (${grupo.id}) ->
-						${grupo.nome}?
-					</p>
-					<strong>A exclusão não é permitida caso haja itens
-						vinculados a este grupo</strong> <br>
-				</div>
-				<div class="modal-footer">
-					<a href="<c:url value="/grupo/remove?id=${grupo.id}" />"
-						class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span>
-						Excluir</a>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">
-						<span class="glyphicon glyphicon-log-out"></span> Fechar
-					</button>
-				</div>
-			</div>
-		</div>
+		<security:authorize access="hasRole('ROLE_Demandante')">
+			<security:authentication property="principal" var="usuario_logado" />
+			<c:if test="${usuario_logado.id == grupo.usuario.id}">
+				<jsp:include page="import_exibe/edita_remove.jsp"></jsp:include>
+			</c:if>
+		</security:authorize>
+		<security:authorize
+			access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
+			<jsp:include page="import_exibe/edita_remove.jsp"></jsp:include>
+		</security:authorize>
 	</div>
 	<a class="btn btn-success" href="<c:url value="/grupo/lista" />"><span
 		class="glyphicon glyphicon-chevron-left"></span> Voltar</a>

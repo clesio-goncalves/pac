@@ -14,50 +14,27 @@
 		<div class="card-header">Exibe os dados da demanda</div>
 		<!-- Table -->
 		<div class="card-body">
-
 			<!-- INFORMAÇÕES DA DEMANDA -->
-			<jsp:include page="imports_exibe/demanda.jsp"></jsp:include>
+			<jsp:include page="import_exibe/demanda.jsp"></jsp:include>
 
 			<!-- INFORMAÇÕES DO ITEM -->
-			<jsp:include page="imports_exibe/item.jsp"></jsp:include>
+			<jsp:include page="import_exibe/item.jsp"></jsp:include>
 
 			<!-- INFORMAÇÕES GERENCIAIS -->
-			<jsp:include page="imports_exibe/gerenciais.jsp"></jsp:include>
+			<jsp:include page="import_exibe/gerenciais.jsp"></jsp:include>
 
 			<!-- ESTUDOS PRELIMINARES -->
-			<jsp:include page="imports_exibe/estudo_preliminar.jsp"></jsp:include>
+			<jsp:include page="import_exibe/estudo_preliminar.jsp"></jsp:include>
 
-			<!-- CASO O ITEM NAO SEJA VINCULADO AO UM GRUPO -->
-			<c:if test="${empty item.grupo}">
+			<!-- TABELA GERENCIAMENTO RISCOS -->
+			<div id="tabela_lista_riscos">
+				<jsp:include page="../planejamento/risco/lista_em_exibe_demanda.jsp"></jsp:include>
+			</div>
 
-				<!-- TABELA GERENCIAMENTO RISCOS -->
-				<div id="tabela_lista_riscos">
-					<jsp:include page="../planejamento/risco/lista.jsp"></jsp:include>
-				</div>
-
-				<!-- MODAL ADICIONA RISCO -->
-				<jsp:include page="../planejamento/risco/modal_novo.jsp"></jsp:include>
-
-				<!-- MODAL EDITA RISCO -->
-				<div id="div_modal_editar">
-					<jsp:include page="../planejamento/risco/modal_edita.jsp"></jsp:include>
-				</div>
-			</c:if>
-
-			<!-- CASO O ITEM SEJA VINCULADO AO UM GRUPO -->
-			<c:if test="${not empty item.grupo}">
-
-				<!-- TABELA GERENCIAMENTO RISCOS -->
-				<div id="tabela_lista_riscos">
-					<jsp:include page="../planejamento/risco/lista_item_sem_grupo.jsp"></jsp:include>
-				</div>
-
-				<!-- MODAL EXIBE RISCO -->
-				<div id="div_modal_exibir">
-					<jsp:include page="../planejamento/risco/modal_exibe.jsp"></jsp:include>
-				</div>
-			</c:if>
-
+			<!-- MODAL EXIBE RISCO -->
+			<div id="div_modal_exibir">
+				<jsp:include page="../planejamento/risco/modal_exibe.jsp"></jsp:include>
+			</div>
 		</div>
 	</div>
 	<div align="center">
@@ -68,12 +45,12 @@
 		<security:authorize access="hasRole('ROLE_Demandante')">
 			<security:authentication property="principal" var="usuario_logado" />
 			<c:if test="${usuario_logado.id == item.usuario.id}">
-				<jsp:include page="imports_exibe/edita_remove.jsp"></jsp:include>
+				<jsp:include page="import_exibe/edita_remove.jsp"></jsp:include>
 			</c:if>
 		</security:authorize>
 		<security:authorize
 			access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
-			<jsp:include page="imports_exibe/edita_remove.jsp"></jsp:include>
+			<jsp:include page="import_exibe/edita_remove.jsp"></jsp:include>
 		</security:authorize>
 	</div>
 	<a class="btn btn-success" href="<c:url value="/demanda/lista" />"><span
