@@ -27,6 +27,10 @@ public class GrupoDao {
 	public List<Grupo> lista() {
 		return manager.createQuery("select g from Grupo g", Grupo.class).getResultList();
 	}
+	
+	public List<Grupo> listaDemanda() {
+		return manager.createNativeQuery("select g.id, g.nome, g.usuario_id from Grupo g", Grupo.class).getResultList();
+	}
 
 	public Long buscarUsuarioIdPeloGrupoId(Long id) {
 		return manager.createQuery("select g.usuario.id from Grupo g where g.id = :id", Long.class)
@@ -43,9 +47,8 @@ public class GrupoDao {
 				.getResultList();
 	}
 
-	public List<Grupo> buscaPorId(Long id) {
-		return manager.createQuery("select g from Grupo g where g.id = :id", Grupo.class).setParameter("id", id)
-				.getResultList();
+	public Grupo buscaPorId(Long id) {
+		return manager.find(Grupo.class, id);
 	}
 
 	public void remove(Long id) {

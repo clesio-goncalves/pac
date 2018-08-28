@@ -110,10 +110,6 @@ public class ItemDao {
 
 		sql = sql + " order by i.informacoes_gerenciais.data_solicitacao desc";
 
-		System.out.println("-----------------------------------------------------");
-		System.out.println("SQL: " + sql);
-		System.out.println("-----------------------------------------------------");
-
 		return manager.createQuery(sql, Item.class).getResultList();
 
 	}

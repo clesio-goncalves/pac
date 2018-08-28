@@ -34,7 +34,7 @@ public class PlanejamentoController {
 	private Item item;
 	private Usuario usuario;
 	private Long id_view;
-	private List<Grupo> lista_grupo;
+	private Grupo grupo;
 	private List<EstudoPreliminar> estudo_preliminar;
 
 	@Autowired
@@ -72,17 +72,17 @@ public class PlanejamentoController {
 
 	@RequestMapping("/grupo/novo")
 	public String planejamentoGrupo(Long id, Model model, HttpServletResponse response) {
-		this.lista_grupo = dao_grupo.buscaPorId(id);
+		this.grupo = dao_grupo.buscaPorId(id);
 
-		if (this.lista_grupo.size() == 0) { // se o ID não existir
+		if (this.grupo == null) { // se o ID não existir
 			return "redirect:/grupo/novo";
 		} else if (dao_estudo_preliminar.buscaEstudoPreliminarPeloGrupoId(id).size() > 0) {
 			return "redirect:/grupo/novo"; // se houver estudo_preliminar cadastrado para o grupo
 		}
 
 		if (possuiPermissaoGrupo(id)) {
-			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.lista_grupo.get(0).getId()));
-			model.addAttribute("grupo", this.lista_grupo.get(0));
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.grupo.getId()));
+			model.addAttribute("grupo", this.grupo);
 			model.addAttribute("view", "grupo");
 			return "planejamento/novo";
 		} else {
@@ -136,21 +136,21 @@ public class PlanejamentoController {
 
 	@RequestMapping("/grupo/edita")
 	public String editaGrupo(Long id, Model model, HttpServletResponse response) {
-		this.lista_grupo = dao_grupo.buscaPorId(id);
+		this.grupo = dao_grupo.buscaPorId(id);
 		this.estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloGrupoId(id);
 
-		if (this.lista_grupo.size() == 0) { // se o ID não existir
+		if (this.grupo == null) { // se o ID não existir
 			return "redirect:/demanda/planejamento/grupo/novo";
 		} else if (this.estudo_preliminar.size() == 0) {
-			return "redirect:/demanda/planejamento/grupo/novo?id=" + this.lista_grupo.get(0).getId();
+			return "redirect:/demanda/planejamento/grupo/novo?id=" + this.grupo.getId();
 			// se não houver estudo_preliminar cadastrado para o item
 		} else {
 			model.addAttribute("estudo_preliminar", this.estudo_preliminar.get(0));
 		}
 
 		if (possuiPermissaoGrupo(id)) {
-			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.lista_grupo.get(0).getId()));
-			model.addAttribute("grupo", this.lista_grupo.get(0));
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.grupo.getId()));
+			model.addAttribute("grupo", this.grupo);
 			model.addAttribute("view", "grupo");
 			return "planejamento/edita";
 		} else {
@@ -200,8 +200,8 @@ public class PlanejamentoController {
 			this.item = dao.buscaPorId(Long.parseLong(request.getParameter("item_id")));
 			this.gerenciamento_risco.setItem(this.item);
 		} else {
-			this.lista_grupo = dao_grupo.buscaPorId(Long.parseLong(request.getParameter("grupo_id")));
-			this.gerenciamento_risco.setGrupo(this.lista_grupo.get(0));
+			this.grupo = dao_grupo.buscaPorId(Long.parseLong(request.getParameter("grupo_id")));
+			this.gerenciamento_risco.setGrupo(this.grupo);
 		}
 
 		this.gerenciamento_risco.setDescricao(request.getParameter("descricao"));
@@ -217,7 +217,7 @@ public class PlanejamentoController {
 		if (request.getParameter("grupo_id").equals("")) { // Testa se veio da view grupo ou item
 			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(this.item.getId()));
 		} else {
-			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.lista_grupo.get(0).getId()));
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.grupo.getId()));
 		}
 
 		return "planejamento/risco/lista";
@@ -231,8 +231,8 @@ public class PlanejamentoController {
 			this.item = dao.buscaPorId(Long.parseLong(request.getParameter("item_id")));
 			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(this.item.getId()));
 		} else {
-			this.lista_grupo = dao_grupo.buscaPorId(Long.parseLong(request.getParameter("grupo_id")));
-			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.lista_grupo.get(0).getId()));
+			this.grupo = dao_grupo.buscaPorId(Long.parseLong(request.getParameter("grupo_id")));
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.grupo.getId()));
 		}
 
 		return "planejamento/risco/lista";
@@ -261,8 +261,8 @@ public class PlanejamentoController {
 			this.item = dao.buscaPorId(Long.parseLong(request.getParameter("item_id")));
 			this.gerenciamento_risco.setItem(this.item);
 		} else {
-			this.lista_grupo = dao_grupo.buscaPorId(Long.parseLong(request.getParameter("grupo_id")));
-			this.gerenciamento_risco.setGrupo(this.lista_grupo.get(0));
+			this.grupo = dao_grupo.buscaPorId(Long.parseLong(request.getParameter("grupo_id")));
+			this.gerenciamento_risco.setGrupo(this.grupo);
 		}
 
 		this.gerenciamento_risco.setId(Long.parseLong(request.getParameter("risco_id")));
@@ -279,7 +279,7 @@ public class PlanejamentoController {
 		if (request.getParameter("grupo_id").equals("")) { // Testa se veio da view grupo ou item
 			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloItemId(this.item.getId()));
 		} else {
-			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.lista_grupo.get(0).getId()));
+			model.addAttribute("riscos", dao_gerenciamento_risco.listaPeloGrupoId(this.grupo.getId()));
 		}
 		return "planejamento/risco/lista";
 	}

@@ -27,6 +27,7 @@ import pac.capau.modelo.Usuario;
 public class GrupoController {
 
 	private Usuario usuario;
+	private Grupo grupo;
 	private List<Grupo> lista_grupo;
 	private List<EstudoPreliminar> lista_estudo_preliminar;
 
@@ -69,11 +70,11 @@ public class GrupoController {
 
 	@RequestMapping("/exibe")
 	public String exibe(Long id, Model model) {
-		this.lista_grupo = dao.buscaPorId(id);
+		this.grupo = dao.buscaPorId(id);
 
-		if (this.lista_grupo.size() > 0) {
-			this.lista_grupo.get(0).setTotal_itens(dao.totalItensGrupo(id));
-			model.addAttribute("grupo", this.lista_grupo.get(0));
+		if (this.grupo != null) {
+			this.grupo.setTotal_itens(dao.totalItensGrupo(id));
+			model.addAttribute("grupo", this.grupo);
 		}
 
 		this.lista_estudo_preliminar = dao_estudo_preliminar.buscaEstudoPreliminarPeloGrupoId(id);
@@ -103,7 +104,7 @@ public class GrupoController {
 	public String edita(Long id, Model model, HttpServletResponse response) {
 		if (possuiPermissaoGrupo(id)) {
 			model.addAttribute("usuario", dao.buscarUsuarioIdPeloGrupoId(id));
-			model.addAttribute("grupo", dao.buscaPorId(id).get(0));
+			model.addAttribute("grupo", dao.buscaPorId(id));
 			return "grupo/edita";
 		} else {
 			response.setStatus(403);

@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,10 +13,11 @@
 	<div class="container">
 		<security:authorize access="isAuthenticated()">
 			<security:authentication property="principal" var="usuario" />
-			<h1 class="display-3">Bem-vindo, ${usuario.email}</h1>
+			<c:set var="nome_completo" value="${fn:split(usuario.nome, ' ')}" />
+			<h1 class="display-3">Bem-vindo, ${nome_completo[0]}</h1>
 		</security:authorize>
 		<p class="lead">Este é o protótipo do Sistema PAC-CAPAU
-			(Planejamento e Gerenciamento de Contratações do Campus Paulistana)</p>
+			(Planejamento Anual de Contratações do Campus Paulistana)</p>
 		<hr class="my-4">
 		<p class="lead">
 			Esse sistema segue a <a

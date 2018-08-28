@@ -96,7 +96,7 @@ public class ItemController {
 
 	@RequestMapping("/lista")
 	public String lista(Model model) {
-		model.addAttribute("grupos", dao_grupo.lista());
+		model.addAttribute("grupos", dao_grupo.listaDemanda());
 		model.addAttribute("setores", dao_setor.lista());
 		model.addAttribute("responsaveis", dao_responsavel.lista());
 		model.addAttribute("itens", dao.lista());
