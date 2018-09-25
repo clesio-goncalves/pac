@@ -71,8 +71,8 @@
 						</div>
 						<input type="text" class="form-control" name="telefone"
 							id="telefone" MAXLENGTH="20" required
-							pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}"
-							data-mask="(00) 90000-0000" value="${usuario.telefone}">
+							pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}"
+							data-mask="(00) 0000-00009" value="${usuario.telefone}">
 					</div>
 				</div>
 			</div>

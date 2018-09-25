@@ -61,7 +61,7 @@
 					</tr>
 					<tr>
 						<th>Perfil</th>
-						<td style="color: red; font-weight: bold">${usuario.perfil.nome}</td>
+						<td style="color: blue; font-weight: bold">${usuario.perfil.nome}</td>
 					</tr>
 				</table>
 			</div>
