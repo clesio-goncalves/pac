@@ -30,6 +30,10 @@ public class UsuarioDao implements UserDetailsService {
 		return manager.createQuery("select u from Usuario u", Usuario.class).getResultList();
 	}
 
+	public List<Usuario> listaUsuariosCoordenadores() {
+		return manager.createQuery("select u from Usuario u where u.perfil.id = 4", Usuario.class).getResultList();
+	}
+
 	public List<Usuario> buscaUsuarioPorSetor(Long id) {
 		return manager.createQuery("select u from Usuario u where u.setor.id = :id", Usuario.class)
 				.setParameter("id", id).getResultList();
@@ -52,11 +56,9 @@ public class UsuarioDao implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = manager.createQuery("select u from Usuario u where u.email = :usuario", Usuario.class)
 				.setParameter("usuario", username).getSingleResult();
-
 		if (usuario == null) {
 			throw new UsernameNotFoundException("Usuário não encontrado!");
 		}
-
 		return usuario;
 	}
 

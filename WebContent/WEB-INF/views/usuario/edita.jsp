@@ -6,6 +6,8 @@
 <head>
 <title>Editar Usuário</title>
 <c:import url="../componentes/cabecalho.jsp" />
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/css/demanda/bootstrap-select.min.css" />">
 <div class="jumbotron">
 	<div class="container">
 		<h1 class="display-3">Editar Usuário</h1>
@@ -110,11 +112,27 @@
 		<div class="form-group">
 			<label for="perfil" class="col-form-label">Perfil<span
 				class="obrigatorio">*</span></label> <select class="custom-select"
-				name="perfil.id" required>
+				name="perfil.id" required onchange="selecionaPerfil()">
 				<!-- percorre perfil montando as linhas da tabela -->
 				<c:forEach var="perfil" items="${perfis}">
 					<option value="${perfil.id}"
 						${perfil.id==usuario.perfil.id ? 'selected' : ''}>${perfil.nome}</option>
+				</c:forEach>
+			</select>
+		</div>
+
+		<!-- Vincular ao coordenador -->
+		<div class="form-group">
+			<label for="coordenador.id" class="col-form-label">Vincular
+				ao coordenador <span class="obrigatorio">*</span>
+			</label> <select name="coordenador.id" id="coordenador"
+				class="selectpicker show-tick form-control" data-live-search="true"
+				multiple data-max-options="1" title="Selecione um coordenador"
+				data-live-search-placeholder="Pesquisar"
+				required ${usuario.perfil.nome!='Demandante'? 'disabled' : ''}>
+				<c:forEach var="coordenador" items="${coordenadores}">
+					<option value="${coordenador.id}"
+						${coordenador.id==usuario.coordenador.id ? 'selected' : ''}>${coordenador.nome}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -147,5 +165,11 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/js/jquery.mask.min.js" />"></script>
 <script src="<c:url value="/resources/js/confirma_senha.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/usuario/usuario.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/demanda/bootstrap-select.min.js" />"></script>
+<script type="text/javascript"
+	src="<c:url value="/resources/js/demanda/defaults-pt_BR.min.js" />"></script>
 
 <c:import url="../componentes/rodape.jsp" />

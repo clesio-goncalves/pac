@@ -11,6 +11,7 @@ public class FiltroItem {
 	private String data_final_necessidade;
 	private String grupo;
 	private String descricao;
+	private String status;
 	private String tipo;
 	private String setor;
 	private String responsavel;
@@ -66,6 +67,14 @@ public class FiltroItem {
 		this.descricao = descricao;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public String getTipo() {
 		return tipo;
 	}
@@ -104,6 +113,14 @@ public class FiltroItem {
 
 	public void setContratacao_emergencial(String contratacao_emergencial) {
 		this.contratacao_emergencial = contratacao_emergencial;
+	}
+
+	public String[] getData_formatada() {
+		return data_formatada;
+	}
+
+	public void setData_formatada(String[] data_formatada) {
+		this.data_formatada = data_formatada;
 	}
 
 	public String retornaDataFinal() {

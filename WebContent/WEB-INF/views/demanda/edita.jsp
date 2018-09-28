@@ -28,6 +28,15 @@
 
 		<!-- ID ITEM -->
 		<input type="hidden" name="id" value="${item.id}">
+		
+		<security:authorize access="hasRole('ROLE_Demandante')">
+			<input type="hidden" name="status" value="Pendente">
+		</security:authorize>
+
+		<security:authorize
+			access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador', 'ROLE_Coordenador')">
+			<input type="hidden" name="status" value="Enviado">
+		</security:authorize>
 
 		<h3 align="left">Informações do Item</h3>
 		<hr />

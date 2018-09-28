@@ -38,19 +38,19 @@ public class UsuarioController {
 	PerfilDao dao_perfil;
 
 	@RequestMapping("/novo")
-	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
+	@Secured({ "ROLE_Administrador", "ROLE_Gerenciador" })
 	public String novoUsuario(Model model) {
 		this.lista_setores = dao_setor.lista();
 		if (this.lista_setores.size() == 0) {
 			return "redirect:/setor/novo";
 		}
-
 		model.addAttribute("setores", this.lista_setores);
 		model.addAttribute("perfis", dao_perfil.lista());
+		model.addAttribute("coordenadores", dao.listaUsuariosCoordenadores());
 		return "usuario/novo";
 	}
 
-	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
+	@Secured({ "ROLE_Administrador", "ROLE_Gerenciador" })
 	@RequestMapping(value = "/adiciona", method = RequestMethod.POST)
 	public String adiciona(@Valid Usuario usuario, BindingResult result) {
 
@@ -76,7 +76,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/remove")
-	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
+	@Secured({ "ROLE_Administrador", "ROLE_Gerenciador" })
 	public String remove(Long id) {
 		dao.remove(id);
 		return "redirect:lista";
@@ -89,17 +89,17 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/edita")
-	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
+	@Secured({ "ROLE_Administrador", "ROLE_Gerenciador" })
 	public String edita(Long id, Model model) {
-
-		model.addAttribute("setores", dao_setor.lista());
 		model.addAttribute("usuario", dao.buscaPorId(id));
+		model.addAttribute("setores", dao_setor.lista());
 		model.addAttribute("perfis", dao_perfil.lista());
+		model.addAttribute("coordenadores", dao.listaUsuariosCoordenadores());
 		return "usuario/edita";
 	}
 
 	@RequestMapping(value = "/altera", method = RequestMethod.POST)
-	@Secured({"ROLE_Administrador", "ROLE_Gerenciador"})
+	@Secured({ "ROLE_Administrador", "ROLE_Gerenciador" })
 	public String altera(@Valid Usuario usuario, BindingResult result) {
 		this.lista_usuario = dao.buscaPorEmail(usuario.getEmail());
 		if (result.hasErrors()) {

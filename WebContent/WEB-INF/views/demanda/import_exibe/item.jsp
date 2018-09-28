@@ -53,12 +53,22 @@
 		<tr>
 			<th>Vincular ao grupo</th>
 			<c:if test="${empty item.grupo}">
-				<td style="color: red; font-weight: bold">Não informado</td>
+				<td style="color: blue; font-weight: bold">Não informado</td>
 			</c:if>
 			<c:if test="${not empty item.grupo}">
-				<td><a href="<c:url value="/grupo/exibe?id=${item.grupo.id}" />">${item.grupo.nome}</a></td>
+				<td><a
+					href="<c:url value="/grupo/exibe?id=${item.grupo.id}" />">${item.grupo.nome}</a></td>
+			</c:if>
+		</tr>
+		<tr>
+			<th>Status</th>
+			<c:if test="${item.status == 'Pendente'}">
+				<td><span class="badge badge-warning">Pendente</span></td>
 			</c:if>
 
+			<c:if test="${item.status == 'Enviado'}">
+				<td><span class="badge badge-success">Enviado</span></td>
+			</c:if>
 		</tr>
 	</table>
 </div>

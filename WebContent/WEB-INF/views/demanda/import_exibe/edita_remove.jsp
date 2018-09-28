@@ -5,11 +5,11 @@
 	class="glyphicon glyphicon-edit"></span> Editar </a>
 <!-- Excluir -->
 <button type="button" class="btn btn-danger btn-lg" data-toggle="modal"
-	data-target="#modal${item.id}">
+	data-target="#excluir${item.id}">
 	<span class="glyphicon glyphicon-trash"></span> Excluir
 </button>
 <!-- Modal -->
-<div class="modal fade" id="modal${item.id}" align="left">
+<div class="modal fade" id="excluir${item.id}" align="left">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">

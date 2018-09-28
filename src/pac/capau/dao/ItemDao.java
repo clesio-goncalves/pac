@@ -43,12 +43,33 @@ public class ItemDao {
 				.setParameter("id", id).getSingleResult();
 	}
 
+	public Long buscarCoordenadorIdPeloItemId(Long id) {
+		return manager.createQuery("select i.usuario.coordenador.id from Item i where i.id = :id", Long.class)
+				.setParameter("id", id).getSingleResult();
+	}
+
+	public Long qntItemPendente() {
+		return manager.createQuery("select count(i) from Item i where i.status like 'Pendente'", Long.class)
+				.getSingleResult();
+	}
+
+	public Long qntItemPendenteDoCoordenador(Long id) {
+		return manager.createQuery(
+				"select count(i) from Item i where i.status like 'Pendente' where i.usuario.coordenador.id = :id",
+				Long.class).setParameter("id", id).getSingleResult();
+	}
+
 	public Item buscaPorId(Long id) {
 		return manager.find(Item.class, id);
 	}
 
 	public void remove(Long id) {
 		manager.createQuery("delete from Item i where i.id = :id").setParameter("id", id).executeUpdate();
+	}
+
+	public void aprovar(Long id) {
+		manager.createQuery("update Item i set i.status='Enviado' where i.id = :id").setParameter("id", id)
+				.executeUpdate();
 	}
 
 	public List<Item> filtraItens(FiltroItem filtro_item) {
@@ -79,6 +100,11 @@ public class ItemDao {
 		// Descrição
 		if (!filtro_item.getDescricao().equals("")) {
 			sql = sql + " and i.descricao like '%" + filtro_item.getDescricao() + "%'";
+		}
+
+		// Descrição
+		if (!filtro_item.getStatus().equals("todos")) {
+			sql = sql + " and i.status like '%" + filtro_item.getStatus() + "%'";
 		}
 
 		// Tipo Item

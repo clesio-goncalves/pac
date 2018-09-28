@@ -63,6 +63,13 @@
 						<th>Perfil</th>
 						<td style="color: blue; font-weight: bold">${usuario.perfil.nome}</td>
 					</tr>
+					<c:if test="${usuario.perfil.nome == 'Demandante'}">
+						<tr>
+							<th>Coordenador</th>
+							<td><a
+								href="<c:url value="/usuario/exibe?id=${usuario.coordenador.id}" />">${usuario.coordenador.nome}</a></td>
+						</tr>
+					</c:if>
 				</table>
 			</div>
 		</div>

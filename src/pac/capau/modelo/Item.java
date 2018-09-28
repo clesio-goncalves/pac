@@ -50,6 +50,9 @@ public class Item {
 
 	private String informacoes_orcamentarias;
 
+	@NotNull
+	private String status;
+
 	@OneToOne
 	@NotNull
 	private Usuario usuario;
@@ -146,6 +149,14 @@ public class Item {
 
 	public void setInformacoes_orcamentarias(String informacoes_orcamentarias) {
 		this.informacoes_orcamentarias = informacoes_orcamentarias;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Usuario getUsuario() {

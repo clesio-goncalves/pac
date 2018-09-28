@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -57,6 +58,9 @@ public class Usuario implements UserDetails {
 	@NotNull
 	@ManyToOne
 	private Setor setor;
+
+	@OneToOne
+	private Usuario coordenador;
 
 	public Long getId() {
 		return id;
@@ -144,6 +148,14 @@ public class Usuario implements UserDetails {
 
 	public void setSetor(Setor setor) {
 		this.setor = setor;
+	}
+
+	public Usuario getCoordenador() {
+		return coordenador;
+	}
+
+	public void setCoordenador(Usuario coordenador) {
+		this.coordenador = coordenador;
 	}
 
 	@Override

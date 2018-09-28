@@ -48,9 +48,18 @@
 				<jsp:include page="import_exibe/edita_remove.jsp"></jsp:include>
 			</c:if>
 		</security:authorize>
+		<security:authorize access="hasRole('ROLE_Coordenador')">
+			<security:authentication property="principal" var="usuario_logado" />
+			<c:if
+				test="${usuario_logado.id == item.usuario.coordenador.id or usuario_logado.id == item.usuario.id}">
+				<jsp:include page="import_exibe/edita_remove.jsp"></jsp:include>
+				<jsp:include page="import_exibe/aprova.jsp"></jsp:include>
+			</c:if>
+		</security:authorize>
 		<security:authorize
 			access="hasAnyRole('ROLE_Administrador', 'ROLE_Gerenciador')">
 			<jsp:include page="import_exibe/edita_remove.jsp"></jsp:include>
+			<jsp:include page="import_exibe/aprova.jsp"></jsp:include>
 		</security:authorize>
 	</div>
 	<a class="btn btn-success" href="<c:url value="/demanda/lista" />"><span

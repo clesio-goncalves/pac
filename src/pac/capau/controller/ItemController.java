@@ -175,6 +175,17 @@ public class ItemController {
 		}
 	}
 
+	@RequestMapping("/aprova")
+	public String aprova(Long id, Model model, HttpServletResponse response) {
+		if (possuiPermissaoItem(id)) {
+			dao.aprovar(id);
+			return "redirect:exibe?id=" + id;
+		} else {
+			response.setStatus(403);
+			return "redirect:/403";
+		}
+	}
+
 	@RequestMapping(value = "/filtrar", method = RequestMethod.POST)
 	public String filtra(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("itens", dao.filtraItens(trataParametrosRequest(request)));
@@ -195,6 +206,7 @@ public class ItemController {
 		this.filtro_item.setData_final_necessidade(request.getParameter("data_final_necessidade"));
 		this.filtro_item.setGrupo(request.getParameter("grupo"));
 		this.filtro_item.setDescricao(request.getParameter("descricao"));
+		this.filtro_item.setStatus(request.getParameter("status"));
 		this.filtro_item.setTipo(request.getParameter("tipo"));
 		this.filtro_item.setSetor(request.getParameter("setor"));
 		this.filtro_item.setResponsavel(request.getParameter("responsavel"));
@@ -236,6 +248,13 @@ public class ItemController {
 		// O demandante só realiza a ação se for dono do item
 		if (this.usuario.getPerfil().getNome().equals("ROLE_Demandante")) {
 			if (dao.buscarUsuarioIdPeloItemId(id) == this.usuario.getId()) {
+				return true;
+			} else {
+				return false;
+			}
+			// O coordenador só realiza a ação se for coordenador da demanda do item
+		} else if (this.usuario.getPerfil().getNome().equals("ROLE_Coordenador")) {
+			if (dao.buscarCoordenadorIdPeloItemId(id) == this.usuario.getId()) {
 				return true;
 			} else {
 				return false;

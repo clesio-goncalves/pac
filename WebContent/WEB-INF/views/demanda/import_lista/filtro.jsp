@@ -70,11 +70,23 @@
 				</div>
 			</div>
 
-			<div class="col-8">
+			<div class="col-6">
 				<!-- Descrição -->
 				<div class="form-group">
 					<label for="descricao" class="col-form-label">Descrição</label> <input
 						type="text" class="form-control" name="descricao" MAXLENGTH="255">
+				</div>
+			</div>
+
+			<div class="col-2">
+				<!-- Status -->
+				<div class="form-group">
+					<label for="status" class="col-form-label">Status </label> <select
+						class="custom-select" name="status">
+						<option value="todos" selected="selected">Todos</option>
+						<option value="enviado">Enviado</option>
+						<option value="pendente">Pendente</option>
+					</select>
 				</div>
 			</div>
 		</div>

@@ -15,6 +15,7 @@
 			<th>Descrição</th>
 			<th>Valor Total</th>
 			<th>Setor</th>
+			<th>Status</th>
 			<th>Ações</th>
 		</tr>
 	</thead>
@@ -32,15 +33,25 @@
 						type="currency" value="${total}" /> <c:set var="total_geral"
 						value="${total_geral + total}" /></td>
 				<td>${item.usuario.setor.nome}</td>
+
+				<!-- Status -->
+				<c:if test="${item.status == 'Pendente'}">
+					<td><span class="badge badge-warning">Pendente</span></td>
+				</c:if>
+
+				<c:if test="${item.status == 'Enviado'}">
+					<td><span class="badge badge-success">Enviado</span></td>
+				</c:if>
 				<td>
 					<!-- Exibir --> <a
 					href="<c:url value="/demanda/exibe?id=${item.id}" />"
 					class="btn btn-info btn-sm" data-tooltip="tooltip"
 					data-placement="bottom" title="Exibir"><span
 						class="glyphicon glyphicon-search"></span> </a> <security:authorize
-						access="hasRole('ROLE_Demandante')">
+						access="hasAnyRole('ROLE_Demandante', 'ROLE_Coordenador')">
 						<security:authentication property="principal" var="usuario_logado" />
-						<c:if test="${usuario_logado.id == item.usuario.id}">
+						<c:if
+							test="${usuario_logado.id == item.usuario.coordenador.id or usuario_logado.id == item.usuario.id}">
 							<!-- Editar -->
 							<a href="<c:url value="/demanda/edita?id=${item.id}" />"
 								class="btn btn-warning btn-sm" data-tooltip="tooltip"
@@ -122,7 +133,7 @@
 		</c:forEach>
 	</tbody>
 	<tr style="background-color: #fff; font-weight: bold;">
-		<td colspan="6" align="center">Valor Total Geral: <fmt:formatNumber
+		<td colspan="7" align="center">Valor Total Geral: <fmt:formatNumber
 				type="currency" value="${total_geral}" />
 		</td>
 	</tr>

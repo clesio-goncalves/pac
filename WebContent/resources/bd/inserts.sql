@@ -7,6 +7,9 @@ values (2, 'Demandante');
 insert into Perfil (id, nome)
 values (3, 'Gerenciador');
 
+insert into Perfil (id, nome)
+values (4, 'Coordenador');
+
 insert into Setor (id, nome)
 values (1, 'TI');
 

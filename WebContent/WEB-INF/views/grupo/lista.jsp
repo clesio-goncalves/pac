@@ -41,7 +41,7 @@
 								class="btn btn-info btn-sm" data-tooltip="tooltip"
 								data-placement="bottom" title="Exibir"><span
 									class="glyphicon glyphicon-search"></span></a> <security:authorize
-									access="hasRole('ROLE_Demandante')">
+									access="hasAnyRole('ROLE_Demandante', 'ROLE_Coordenador')">
 									<security:authentication property="principal"
 										var="usuario_logado" />
 									<c:if test="${usuario_logado.id == grupo.usuario.id}">
