@@ -70,5 +70,18 @@
 				<td><span class="badge badge-success">Enviado</span></td>
 			</c:if>
 		</tr>
+		<c:if
+			test="${item.status == 'Enviado' and item.usuario.perfil.nome == 'Demandante'}">
+			<tr>
+				<th>Data da Aprovação</th>
+				<td><fmt:formatDate value="${item.data_aprovacao.time}"
+						pattern="dd/MM/yyyy HH:mm:ss" /></td>
+			</tr>
+			<tr>
+				<th>Usuário da Aprovação</th>
+				<td><a
+					href="<c:url value="/usuario/exibe?id=${item.usuario_aprovacao.id}" />">${item.usuario_aprovacao.nome}</a></td>
+			</tr>
+		</c:if>
 	</table>
 </div>

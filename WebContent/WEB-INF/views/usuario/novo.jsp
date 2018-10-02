@@ -125,7 +125,7 @@
 				data-live-search-placeholder="Pesquisar" required
 				disabled="disabled">
 				<c:forEach var="coordenador" items="${coordenadores}">
-					<option value="${coordenador.id}">${coordenador.nome}</option>
+					<option value="${coordenador.id}">${coordenador.siape}-${coordenador.nome}</option>
 				</c:forEach>
 			</select>
 		</div>

@@ -132,7 +132,7 @@
 				required ${usuario.perfil.nome!='Demandante'? 'disabled' : ''}>
 				<c:forEach var="coordenador" items="${coordenadores}">
 					<option value="${coordenador.id}"
-						${coordenador.id==usuario.coordenador.id ? 'selected' : ''}>${coordenador.nome}</option>
+						${coordenador.id==usuario.coordenador.id ? 'selected' : ''}>${coordenador.siape}-${coordenador.nome}</option>
 				</c:forEach>
 			</select>
 		</div>

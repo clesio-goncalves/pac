@@ -95,11 +95,22 @@ public class ItemController {
 	}
 
 	@RequestMapping("/lista")
-	public String lista(Model model) {
+	public String lista(String status, Model model) {
 		model.addAttribute("grupos", dao_grupo.listaDemanda());
 		model.addAttribute("setores", dao_setor.lista());
 		model.addAttribute("responsaveis", dao_responsavel.lista());
-		model.addAttribute("itens", dao.lista());
+		if (status == null) {
+			model.addAttribute("itens", dao.lista());
+		} else if (status.equals("pendente")) {
+			this.usuario = retornaUsuarioLogado();
+			if (this.usuario.getPerfil().getNome().equals("ROLE_Administrador")) {
+				model.addAttribute("itens", dao.listaItensPendentes());
+			} else if (this.usuario.getPerfil().getNome().equals("ROLE_Gerenciador")) {
+				model.addAttribute("itens", dao.listaItensPendentes());
+			} else if (this.usuario.getPerfil().getNome().equals("ROLE_Coordenador")) {
+				model.addAttribute("itens", dao.listaItensPendentesCoordenador(this.usuario.getId()));
+			}
+		}
 		return "demanda/lista";
 	}
 
@@ -178,7 +189,7 @@ public class ItemController {
 	@RequestMapping("/aprova")
 	public String aprova(Long id, Model model, HttpServletResponse response) {
 		if (possuiPermissaoItem(id)) {
-			dao.aprovar(id);
+			dao.aprovar(id, Calendar.getInstance(), retornaUsuarioLogado().getId());
 			return "redirect:exibe?id=" + id;
 		} else {
 			response.setStatus(403);

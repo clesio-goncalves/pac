@@ -89,8 +89,26 @@
 					<!-- Código do item -->
 					<div class="form-group">
 						<label for="codigo" class="col-form-label">Código do item<span
-							class="obrigatorio">*</span></label> <input type="text"
-							class="form-control maskCodigo" name="codigo" required>
+							class="obrigatorio">*</span></label>
+
+						<div class="input-group">
+							<input type="text" class="form-control maskCodigo" name="codigo"
+								required>
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary dropdown-toggle"
+									type="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+								<div class="dropdown-menu">
+									<a class="dropdown-item"
+										href="http://comprasnet.gov.br/acesso.asp?url=/Livre/Catmat/Conitemmat1.asp"
+										target="_blank">Material</a> <a class="dropdown-item"
+										href="https://www2.comprasnet.gov.br/siasgnet/public/pesquisarCatalogoServico.do?method=iniciar&funcaoRetorno=consultarItemCatalogoRetorno&parametro.tipoItem="
+										target="_blank">Serviço</a>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -279,7 +297,6 @@
 					</button>
 				</div>
 			</fieldset>
-
 			<security:csrfInput />
 		</fieldset>
 	</form>

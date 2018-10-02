@@ -1,5 +1,6 @@
 package pac.capau.dao;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -33,6 +34,18 @@ public class ItemDao {
 				.getResultList();
 	}
 
+	public List<Item> listaItensPendentes() {
+		return manager.createQuery(
+				"select i from Item i where i.status like 'Pendente' order by i.informacoes_gerenciais.data_solicitacao desc",
+				Item.class).getResultList();
+	}
+
+	public List<Item> listaItensPendentesCoordenador(Long id) {
+		return manager.createQuery(
+				"select i from Item i where i.status like 'Pendente' and i.usuario.coordenador.id = :id order by i.informacoes_gerenciais.data_solicitacao desc",
+				Item.class).setParameter("id", id).getResultList();
+	}
+
 	public Long buscarGrupoIdPeloItemId(Long id) {
 		return manager.createQuery("select i.grupo.id from Item i where i.id = :id", Long.class).setParameter("id", id)
 				.getSingleResult();
@@ -55,7 +68,7 @@ public class ItemDao {
 
 	public Long qntItemPendenteDoCoordenador(Long id) {
 		return manager.createQuery(
-				"select count(i) from Item i where i.status like 'Pendente' where i.usuario.coordenador.id = :id",
+				"select count(i) from Item i where i.status like 'Pendente' and i.usuario.coordenador.id = :id",
 				Long.class).setParameter("id", id).getSingleResult();
 	}
 
@@ -67,9 +80,11 @@ public class ItemDao {
 		manager.createQuery("delete from Item i where i.id = :id").setParameter("id", id).executeUpdate();
 	}
 
-	public void aprovar(Long id) {
-		manager.createQuery("update Item i set i.status='Enviado' where i.id = :id").setParameter("id", id)
-				.executeUpdate();
+	public void aprovar(Long id, Calendar data_aprovacao, Long usuario_aprovacao) {
+		manager.createQuery(
+				"update Item i set i.status='Enviado', i.data_aprovacao = :data_aprovacao, i.usuario_aprovacao.id = :usuario_aprovacao where i.id = :id")
+				.setParameter("usuario_aprovacao", usuario_aprovacao).setParameter("data_aprovacao", data_aprovacao)
+				.setParameter("id", id).executeUpdate();
 	}
 
 	public List<Item> filtraItens(FiltroItem filtro_item) {

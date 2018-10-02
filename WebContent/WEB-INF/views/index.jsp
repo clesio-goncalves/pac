@@ -41,7 +41,8 @@
 								</c:if>
 							</div>
 							<div class="modal-footer">
-								<a href="<c:url value="/demanda/lista" />" class="btn btn-info"><span
+								<a href="<c:url value="/demanda/lista?status=pendente" />"
+									class="btn btn-info"><span
 									class="glyphicon glyphicon-search"></span> Exibir</a>
 								<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">
@@ -58,17 +59,18 @@
 		<hr class="my-4">
 		<p class="lead">
 			Esse sistema segue a <a
-				href="https://www.comprasgovernamentais.gov.br/index.php/legislacao/instrucoes-normativas/861-pgc-in">Instrução
-				Normativa nº 1, de 29 de março de 2018</a>, que dispõe sobre o Sistema
-			de Planejamento e Gerenciamento de Contratações e sobre a elaboração
-			do Plano Anual de Contratações de bens, serviços, obras e soluções de
-			tecnologia da informação e comunicações no âmbito da Administração
-			Pública federal direta, autárquica e fundacional.
+				href="https://www.comprasgovernamentais.gov.br/index.php/legislacao/instrucoes-normativas/861-pgc-in"
+				target="_blank">Instrução Normativa nº 1, de 29 de março de 2018</a>,
+			que dispõe sobre o Sistema de Planejamento e Gerenciamento de
+			Contratações e sobre a elaboração do Plano Anual de Contratações de
+			bens, serviços, obras e soluções de tecnologia da informação e
+			comunicações no âmbito da Administração Pública federal direta,
+			autárquica e fundacional.
 		</p>
 		<p class="lead">
 			<a class="btn btn-primary btn-lg"
 				href="https://www.comprasgovernamentais.gov.br/index.php/legislacao/instrucoes-normativas/861-pgc-in"
-				role="button">Leia mais</a>
+				role="button" target="_blank">Leia mais</a>
 		</p>
 	</div>
 </div>
