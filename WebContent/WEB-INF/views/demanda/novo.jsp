@@ -82,6 +82,12 @@
 					<label class="custom-control-label" for="customRadio7">Serviços
 						de Engenharia</label>
 				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio8" name="tipo"
+						class="custom-control-input" value="Assistência Estudantil">
+					<label class="custom-control-label" for="customRadio8">Assistência
+						Estudantil</label>
+				</div>
 			</div>
 
 			<div class="row">
@@ -159,7 +165,7 @@
 						<label for="valor_unitario" class="col-form-label">Valor
 							unitário estimado (R$)<span class="obrigatorio">*</span>
 						</label>
-						<div class="input-group mb-3">
+						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
 							</div>
@@ -167,6 +173,11 @@
 								name="valor_unitario" id="valor_unitario_estimado" required>
 							<input type="hidden" name="valor_unitario_estimado"
 								id="valor_unit">
+							<div class="input-group-append">
+								<a class="btn btn-outline-secondary"
+									href="http://paineldeprecos.planejamento.gov.br/"
+									target="_blank"><span class="glyphicon glyphicon-search"></span></a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -177,7 +188,7 @@
 						<label for="valor_total_estimado" class="col-form-label">Valor
 							total estimado (R$)<span class="obrigatorio">*</span>
 						</label>
-						<div class="input-group mb-3">
+						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
 							</div>
@@ -218,19 +229,19 @@
 						prioridade da aquisição<span class="obrigatorio">*</span>
 					</label>
 					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio8" name="grau_prioridade"
-							class="custom-control-input" checked required value="Baixa">
-						<label class="custom-control-label" for="customRadio8">Baixa</label>
-					</div>
-					<div class="custom-control custom-radio">
 						<input type="radio" id="customRadio9" name="grau_prioridade"
-							class="custom-control-input" value="Média"> <label
-							class="custom-control-label" for="customRadio9">Média</label>
+							class="custom-control-input" checked required value="Baixa">
+						<label class="custom-control-label" for="customRadio9">Baixa</label>
 					</div>
 					<div class="custom-control custom-radio">
 						<input type="radio" id="customRadio10" name="grau_prioridade"
+							class="custom-control-input" value="Média"> <label
+							class="custom-control-label" for="customRadio10">Média</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio11" name="grau_prioridade"
 							class="custom-control-input" value="Alta"> <label
-							class="custom-control-label" for="customRadio10">Alta</label>
+							class="custom-control-label" for="customRadio11">Alta</label>
 					</div>
 				</div>
 

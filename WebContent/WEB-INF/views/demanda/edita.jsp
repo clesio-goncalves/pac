@@ -94,6 +94,13 @@
 					<label class="custom-control-label" for="customRadio7">Serviços
 						de Engenharia</label>
 				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" id="customRadio8" name="tipo"
+						class="custom-control-input" value="Assistência Estudantil"
+						${item.tipo eq "Assistência Estudantil" ? 'checked' : ''}>
+					<label class="custom-control-label" for="customRadio8">Assistência
+						Estudantil</label>
+				</div>
 			</div>
 
 			<div class="row">
@@ -172,7 +179,7 @@
 						<label for="valor_unitario" class="col-form-label">Valor
 							unitário estimado (R$)<span class="obrigatorio">*</span>
 						</label>
-						<div class="input-group mb-3">
+						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
 							</div>
@@ -180,6 +187,11 @@
 								name="valor_unitario" id="valor_unitario_estimado" required
 								value="${item.valor_unitario_estimado}"> <input
 								type="hidden" name="valor_unitario_estimado" id="valor_unit">
+							<div class="input-group-append">
+								<a class="btn btn-outline-secondary"
+									href="http://paineldeprecos.planejamento.gov.br/"
+									target="_blank"><span class="glyphicon glyphicon-search"></span></a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -190,7 +202,7 @@
 						<label for="valor_total_estimado" class="col-form-label">Valor
 							total estimado (R$)<span class="obrigatorio">*</span>
 						</label>
-						<div class="input-group mb-3">
+						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text">R$</span>
 							</div>
@@ -238,25 +250,25 @@
 						class="obrigatorio">*</span>
 					</label>
 					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio8"
+						<input type="radio" id="customRadio9"
 							name="informacoes_gerenciais.grau_prioridade"
 							class="custom-control-input" required value="Baixa"
 							${item.informacoes_gerenciais.grau_prioridade eq "Baixa" ? 'checked' : ''}>
-						<label class="custom-control-label" for="customRadio8">Baixa</label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input type="radio" id="customRadio9"
-							name="informacoes_gerenciais.grau_prioridade"
-							class="custom-control-input" value="Média"
-							${item.informacoes_gerenciais.grau_prioridade eq "Média" ? 'checked' : ''}>
-						<label class="custom-control-label" for="customRadio9">Média</label>
+						<label class="custom-control-label" for="customRadio9">Baixa</label>
 					</div>
 					<div class="custom-control custom-radio">
 						<input type="radio" id="customRadio10"
 							name="informacoes_gerenciais.grau_prioridade"
+							class="custom-control-input" value="Média"
+							${item.informacoes_gerenciais.grau_prioridade eq "Média" ? 'checked' : ''}>
+						<label class="custom-control-label" for="customRadio10">Média</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" id="customRadio11"
+							name="informacoes_gerenciais.grau_prioridade"
 							class="custom-control-input" value="Alta"
 							${item.informacoes_gerenciais.grau_prioridade eq "Alta" ? 'checked' : ''}>
-						<label class="custom-control-label" for="customRadio10">Alta</label>
+						<label class="custom-control-label" for="customRadio11">Alta</label>
 					</div>
 				</div>
 
