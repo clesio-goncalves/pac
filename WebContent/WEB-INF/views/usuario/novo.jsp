@@ -30,8 +30,10 @@
 		<div class="form-group">
 			<label for="setor" class="col-form-label">Setor Requisitante
 				(Unidade/Setor/Departamento)<span class="obrigatorio">*</span>
-			</label> <select class="custom-select" name="setor.id" required>
-				<!-- percorre perfil montando as linhas da tabela -->
+			</label> <select name="setor.id" class="selectpicker show-tick form-control"
+				data-live-search="true" multiple data-max-options="1"
+				title="Selecione um setor" data-live-search-placeholder="Pesquisar"
+				required>
 				<c:forEach var="setor" items="${setores}">
 					<option value="${setor.id}">${setor.nome}</option>
 				</c:forEach>

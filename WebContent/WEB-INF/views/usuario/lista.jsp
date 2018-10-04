@@ -22,7 +22,6 @@
 					<tr>
 						<th>ID</th>
 						<th>Nome</th>
-						<th>SIAPE</th>
 						<th>E-mail</th>
 						<th>Setor</th>
 						<th>Ações</th>
@@ -34,7 +33,6 @@
 						<tr>
 							<td>${usuario.id}</td>
 							<td>${usuario.nome}</td>
-							<td>${usuario.siape}</td>
 							<td>${usuario.email}</td>
 							<td>${usuario.setor.nome}</td>
 

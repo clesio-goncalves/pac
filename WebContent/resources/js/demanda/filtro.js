@@ -11,7 +11,7 @@ function limpar(){
 	$("input[name='descricao']").val(""),
 	$("select[name='status']").val("todos"),
 	$("select[name='tipo']").val(""),
-	$("select[name='setor']").val(""),
+	$("select[name='setor']").val("").selectpicker("refresh"),
 	$("select[name='responsavel']").val("").selectpicker("refresh"),
 	$("input[name='valor']").val(""),
 	$("select[name='contratacao_emergencial']").val("Nao")
@@ -37,7 +37,7 @@ function filtrar(){
 			descricao : $("input[name='descricao']").val(),
 			status : $("select[name='status']").val(),
 			tipo : $("select[name='tipo']").val(),
-			setor : $("select[name='setor']").val(),
+			setor : $("select[name='setor'] :selected").val(),
 			responsavel : $("select[name='responsavel'] :selected").val(),
 			valor : $("input[name='valor_numerico']").val(),
 			contratacao_emergencial : $("select[name='contratacao_emergencial']").val()

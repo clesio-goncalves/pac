@@ -263,9 +263,12 @@ public class ItemController {
 			} else {
 				return false;
 			}
-			// O coordenador só realiza a ação se for coordenador da demanda do item
+			// O coordenador só realiza a ação se for dono do item
 		} else if (this.usuario.getPerfil().getNome().equals("ROLE_Coordenador")) {
-			if (dao.buscarCoordenadorIdPeloItemId(id) == this.usuario.getId()) {
+			if (dao.buscarUsuarioIdPeloItemId(id) == this.usuario.getId()) {
+				return true;
+				// O coordenador só realiza a ação se for coordenador da demanda do item
+			} else if (dao.buscarCoordenadorIdPeloItemId(id) == this.usuario.getId()) {
 				return true;
 			} else {
 				return false;

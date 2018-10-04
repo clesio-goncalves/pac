@@ -107,6 +107,8 @@
 						<option value="Obras">Obras</option>
 						<option value="Serviços de Engenharia">Serviços de
 							Engenharia</option>
+						<option value="Assistência Estudantil">Assistência
+							Estudantil</option>
 					</select>
 				</div>
 			</div>
@@ -115,8 +117,11 @@
 				<!-- Setor Requisitante -->
 				<div class="form-group">
 					<label for="setor" class="col-form-label">Setor
-						Requisitante</label> <select class="custom-select" name="setor">
-						<option value="">Selecione</option>
+						Requisitante</label> <select name="setor"
+						class="selectpicker show-tick form-control"
+						data-live-search="true" multiple data-max-options="1"
+						title="Selecione um setor"
+						data-live-search-placeholder="Pesquisar">
 						<c:forEach var="setor" items="${setores}">
 							<option value="${setor.id}">${setor.nome}</option>
 						</c:forEach>

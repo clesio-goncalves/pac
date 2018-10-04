@@ -128,7 +128,7 @@ public class ItemDao {
 		}
 
 		// Setor
-		if (!filtro_item.getSetor().equals("")) {
+		if (filtro_item.getSetor() != null) {
 			sql = sql + " and i.usuario.setor.id = " + filtro_item.getSetor();
 		}
 
